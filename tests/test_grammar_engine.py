@@ -1,7 +1,8 @@
 import unittest
+
 from greenideas.grammar_engine import GrammarEngine
-from greenideas.exceptions import RuleNotFoundError
 from greenideas.pos_types import POSType
+
 
 class TestGrammarEngine(unittest.TestCase):
 
@@ -15,5 +16,6 @@ class TestGrammarEngine(unittest.TestCase):
         self.assertIn(POSType.NP, tree[POSType.S])
         self.assertIn(POSType.VP, tree[POSType.S])
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     unittest.main()
