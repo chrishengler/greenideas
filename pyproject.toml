@@ -1,18 +1,26 @@
-[tool.poetry]
-name = "green-ideas"
+[project]
+name = "greenideas"
 version = "0.1.0"
 description = "A package to generate grammatically valid but semantically nonsensical English sentences."
-authors = ["Your Name <youremail@example.com>"]
-license = "MIT"
+authors = [
+    {name = "Chris Hengler",email = "chrysics@gmail.com"}
+]
+license = {text = "MIT"}
 readme = "README.md"
-homepage = "https://github.com/yourusername/green-ideas"
-repository = "https://github.com/yourusername/green-ideas"
-keywords = ["grammar", "sentence generation", "nonsense", "twaddle"]
+requires-python = ">=3.11"
+dependencies = [
+    "pytest (>=7.2.0)"
+]
+keywords = ["grammar", "sentence generation", "placeholder text", "twaddle"]
+    
+[project.urls]
+repository = "https://github.com/chrishengler/greenideas"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
 
 [tool.poetry.dependencies]
 python = "^3.11"
 pytest = "^8.4.1"
-
-[build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"

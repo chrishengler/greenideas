@@ -1,15 +1,16 @@
-# green-ideas/green-ideas/README.md
-
 # Green Ideas
 
 Green Ideas is a Python package designed to generate grammatically valid but semantically nonsensical English sentences using a generative grammar approach. The package employs recursive rewrite rules to create sentence structures and converts these structures into templates compatible with the `twaddle` package for language templating.
 
 ## Features
 
-- Generates trees describing valid English sentence structures
-- Supports recursive rewrite rules for sentence structure generation.
-- Converts sentence trees into twaddle-compatible templates.
-- Modular design allows for easy extension and modification of grammar rules.
+The project is in early development and currently does very little indeed. Once completed, core features
+will include:
+
+- Generation of trees describing valid English sentence structures
+- Support for recursive rewrite rules for sentence structure generation.
+- Converting sentence trees into twaddle-compatible templates.
+- Modular design allowing for easy extension and modification of grammar rules.
 
 ## Installation
 
@@ -24,11 +25,11 @@ poetry install
 
 ## Usage
 
-To use the `green-ideas` package, you can import the main classes from the package and start generating sentences. Here’s a simple example:
+To use the `greenideas` package, you can (or at least you will be able to, at some point) import the main classes from the package and start generating sentences. Here’s a simple example:
 
 ```python
-from green_ideas.grammar_engine import GrammarEngine
-from green_ideas.tree_to_twaddle import TreeToTwaddle
+from greenideas.grammar_engine import GrammarEngine
+from greenideas.tree_to_twaddle import TreeToTwaddle
 
 # Initialize the grammar engine
 grammar_engine = GrammarEngine()
