@@ -2,7 +2,7 @@ from greenideas.pos_node import POSNode
 
 
 class TreeToTwaddle:
-    def convert_tree(self, tree):
+    def convert_tree(self, tree) -> str:
         # Accepts a POSNode or dict
         if isinstance(tree, POSNode):
             return tree.resolve()

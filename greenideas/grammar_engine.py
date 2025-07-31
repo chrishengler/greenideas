@@ -3,6 +3,7 @@ import random
 
 from greenideas.exceptions import RuleNotFoundError
 from greenideas.grammar import Grammar
+from greenideas.grammar_rule import GrammarRule
 from greenideas.pos_node import POSNode
 from greenideas.pos_types import POSType
 
@@ -11,25 +12,27 @@ class GrammarEngine:
     def __init__(self):
         self.grammar = Grammar()
 
-    def add_rule(self, rule_name, rule_definition, weight=1.0):
-        self.grammar.add_rule(rule_name, rule_definition, weight)
+    def add_rule(self, rule: GrammarRule):
+        self.grammar.add_rule(rule)
 
-    def generate_tree(self, start_symbol):
-        if not self.grammar.has_rule(start_symbol):
+    def clear_rules(self):
+        self.grammar.clear_rules()
+
+    def generate_tree(self, start_symbol: POSType) -> POSNode:
+        if not self.grammar.has_expansion(start_symbol):
             raise RuleNotFoundError(f"Rule '{start_symbol}' not found.")
         return self._expand_to_tree(start_symbol)
 
-    def _expand_to_tree(self, symbol):
+    def _expand_to_tree(self, part_of_speech) -> POSNode:
         # Always return a POSNode
-        rules = self.grammar.get_rules(symbol)
+        rules = self.grammar.get_rules(part_of_speech)
         if not rules:
-            # Terminal: treat as string or POSType
-            return POSNode(type_=symbol, children=[], value=None)
+            return POSNode(type_=part_of_speech, children=[], value=None)
         # For now, always use the first rule
         rule = rules[0]
         children = []
-        for elem in rule.rhs:
-            if self.grammar.has_rule(elem):
+        for elem in rule.expansion:
+            if self.grammar.has_expansion(elem):
                 children.append(self._expand_to_tree(elem))
             else:
                 # Terminal: could be POSType or str
@@ -37,8 +40,11 @@ class GrammarEngine:
                     children.append(POSNode(type_=elem, children=[], value=None))
                 else:
                     # Terminal string (e.g., 'the')
-                    children.append(POSNode(type_=symbol, children=[], value=elem))
-        return POSNode(type_=symbol, children=children)
+                    children.append(
+                        POSNode(type_=part_of_speech, children=[], value=elem)
+                    )
+
+        return POSNode(type_=part_of_speech, children=children)
 
     def annotate_top_down(self, node: POSNode, context: dict):
         """

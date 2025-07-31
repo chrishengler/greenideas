@@ -5,6 +5,14 @@ class POSNode:
         self.value = value
         self.attributes = {}
 
+    def __str__(self):
+        children = (
+            f"[{", ".join(str(child) for child in self.children)}]"
+            if self.children
+            else None
+        )
+        return f"{self.type.name}{children if children else ""}"
+
     def resolve(self):
         # If terminal, return the twaddle tag or value
         if self.type.twaddle_name:

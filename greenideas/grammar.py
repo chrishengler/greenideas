@@ -1,19 +1,23 @@
 from greenideas.grammar_rule import GrammarRule
+from greenideas.pos_types import POSType
 
 
 class Grammar:
     def __init__(self):
         self.rules = {}  # {POSType: [GrammarRule, ...]}
 
-    def add_rule(self, lhs, rhs, weight=1.0):
-        rule = GrammarRule(lhs, rhs, weight)
-        if lhs in self.rules:
-            self.rules[lhs].append(rule)
+    def add_rule(self, rule: GrammarRule):
+        part_of_speech = rule.part_of_speech
+        if part_of_speech in self.rules:
+            self.rules[part_of_speech].append(rule)
         else:
-            self.rules[lhs] = [rule]
+            self.rules[part_of_speech] = [rule]
 
-    def get_rules(self, lhs):
-        return self.rules.get(lhs, [])
+    def clear_rules(self):
+        self.rules = {}
 
-    def has_rule(self, lhs):
-        return lhs in self.rules
+    def get_rules(self, part_of_speech: POSType) -> list[GrammarRule]:
+        return self.rules.get(part_of_speech, [])
+
+    def has_expansion(self, part_of_speech: POSType) -> bool:
+        return part_of_speech in self.rules

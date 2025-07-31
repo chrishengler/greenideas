@@ -13,7 +13,7 @@ class POSType(Enum):
     Prep = auto()
 
     @property
-    def twaddle_name(self):
+    def twaddle_name(self) -> str:
         # Only terminal types have twaddle names
         mapping = {
             POSType.Noun: "noun",
