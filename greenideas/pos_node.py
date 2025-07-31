@@ -3,6 +3,7 @@ class POSNode:
         self.type = type_
         self.children = children or []
         self.value = value
+        self.attributes = {}
 
     def resolve(self):
         # If terminal, return the twaddle tag or value

@@ -11,11 +11,14 @@ Important constraints:
 - A central feature is the mapping from parse trees to fully specified twaddle templates, including resolving features like subject-verb agreement and determiner-noun agreement.
 - It must support expanding multiple grammars (e.g., different S rules, NP rules, etc.).
 - The system must be modular, so grammars can be extended or modified easily.
-- The output must be a valid twaddle string (e.g., "the <adj> <noun> <verb.ed> <prep> the <adj> <noun>").
+- The output must be a valid twaddle string (e.g., "<det> <adj> <noun> <verb.ed> <prep> <det> <adj> <noun>").
+- The package is not concerned with vocabulary. It operates purely on the grammatical level, producing a 
+sentence tree with annotations to indicate relevant properties like number, tense, animacy, such that the 
+appropriate twaddle output can be produced.
 
 What you should generate:
-- A well-structured Python package scaffold (using `src/` layout).
-- A core grammar engine that uses rewrite rules to produce derivation trees.
+- A well-structured Python package scaffold (using the `greenideas` folder for implementation and the `tests` folder for tests).
+- A core grammar engine that uses rewrite rules to produce derivation trees with appropriate annotations to allow for agreement between elements.
 - A converter that turns those trees into twaddle-compatible templates.
 - A basic grammar with rules for NP, VP, PP, etc.
 - Meaningful unit tests (in `tests/`) that test:
