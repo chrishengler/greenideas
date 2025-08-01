@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Any, Dict, Optional
+from typing import Any, Dict, Optional, Self
 
 from greenideas.attributes.attribute_type import AttributeType
 
@@ -20,7 +20,7 @@ class AttributeSet:
             )
         self._values[attr] = value
 
-    def merge(self, other: "AttributeSet", overwrite: bool = False) -> "AttributeSet":
+    def merge(self, other: Self, overwrite: bool = False) -> Self:
         """Create a new AttributeSet by merging this one with another."""
         result = AttributeSet()
         for attr, value in self._values.items():
