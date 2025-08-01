@@ -17,7 +17,7 @@ class TestGrammarEngineAnnotationAgreement(unittest.TestCase):
 
     def test_subject_verb_agreement(self):
         tree = self.engine.generate_tree(POSType.S)
-        self.engine.annotate_top_down(tree, {})
+        self.engine.annotate_top_down(tree)
         subj_np = tree.children[0]
         verb = tree.children[1].children[0]
         self.assertEqual(

@@ -1,6 +1,8 @@
-import copy
 import random
 
+from greenideas.attributes.attribute_set import AttributeSet
+from greenideas.attributes.attribute_type import AttributeType
+from greenideas.attributes.propagation import AttributePropagator
 from greenideas.exceptions import RuleNotFoundError
 from greenideas.grammar import Grammar
 from greenideas.grammar_rule import GrammarRule
@@ -27,7 +29,7 @@ class GrammarEngine:
         # Always return a POSNode
         rules = self.grammar.get_rules(part_of_speech)
         if not rules:
-            return POSNode(type_=part_of_speech, children=[], value=None)
+            return POSNode(type=part_of_speech, children=[], value=None)
         # For now, always use the first rule
         rule = rules[0]
         children = []
@@ -37,58 +39,58 @@ class GrammarEngine:
             else:
                 # Terminal: could be POSType or str
                 if isinstance(elem, POSType):
-                    children.append(POSNode(type_=elem, children=[], value=None))
+                    children.append(POSNode(type=elem, children=[], value=None))
                 else:
                     # Terminal string (e.g., 'the')
                     children.append(
-                        POSNode(type_=part_of_speech, children=[], value=elem)
+                        POSNode(type=part_of_speech, children=[], value=elem)
                     )
 
-        return POSNode(type_=part_of_speech, children=children)
+        return POSNode(type=part_of_speech, children=children)
 
-    def annotate_top_down(self, node: POSNode, context: dict):
+    def _assign_random_attributes(self, node: POSNode) -> None:
+        """
+        Assign random values to any attributes that haven't been set by propagation.
+        ALL attributes are assigned to ALL nodes, optimization will happen later.
+
+        Args:
+            node: The node to assign attributes to
+        """
+        # Get all possible attributes from AttributeType enum
+        all_attributes = list(AttributeType)
+
+        # For any attribute not already set, assign a random value
+        for attr_type in all_attributes:
+            if attr_type not in node.attributes:
+                possible_values = list(attr_type.value_type)
+                node.attributes.set(attr_type, random.choice(possible_values))
+
+    def annotate_top_down(self, node: POSNode) -> None:
         """
         Recursively annotate the tree with grammatical features.
-        - node: the current POSNode
-        - context: dict of inherited features (e.g., {'number': 'singular', 'person': 3, 'tense': 'past'})
+        First propagates existing attributes according to rules,
+        then randomly assigns any missing attributes.
+        ALL nodes receive ALL attributes - optimization will happen later.
+
+        Args:
+            node: The root node of the tree to annotate
         """
-        # Merge context into node.attributes, but don't overwrite existing
-        for k, v in context.items():
-            if k not in node.attributes:
-                node.attributes[k] = v
-
-        # Decide new features at this node if needed
+        # Step 1: Start with the sentence node
         if node.type == POSType.S:
-            if "person" not in node.attributes:
-                node.attributes["person"] = random.choice([1, 2, 3])
-            if "number" not in node.attributes:
-                node.attributes["number"] = random.choice(["singular", "plural"])
-            if "tense" not in node.attributes:
-                node.attributes["tense"] = random.choice(["present", "past"])
+            attrs = AttributeSet()
+            # Set ALL attributes on the root node
+            for attr_type in AttributeType:
+                possible_values = list(attr_type.value_type)
+                attrs.set(attr_type, random.choice(possible_values))
+            node.attributes = attrs
 
-        # Pass down relevant features
+        # Step 2: Propagate attributes according to rules
+        propagator = AttributePropagator()
+        propagator.propagate(node)
+
+        # Step 3: Assign random values to any unset attributes
+        self._assign_random_attributes(node)
+
+        # Step 4: Recursively process all children
         for child in node.children:
-            child_context = copy.deepcopy(node.attributes)
-            if node.type == POSType.S:
-                if child.type == POSType.NP:
-                    keys = ["person", "number"]
-                    child_context = {
-                        k: node.attributes[k] for k in keys if k in node.attributes
-                    }
-                elif child.type == POSType.VP:
-                    keys = ["person", "number", "tense"]
-                    child_context = {
-                        k: node.attributes[k] for k in keys if k in node.attributes
-                    }
-            elif node.type == POSType.VP:
-                if child.type == POSType.Verb:
-                    keys = ["person", "number", "tense"]
-                    child_context = {
-                        k: node.attributes[k] for k in keys if k in node.attributes
-                    }
-            elif node.type == POSType.NP:
-                if child.type == POSType.NP and not child.attributes:
-                    child_context = {}
-                    child_context["number"] = random.choice(["singular", "plural"])
-                    child_context["person"] = random.choice([1, 2, 3])
-            self.annotate_top_down(child, child_context)
+            self.annotate_top_down(child)

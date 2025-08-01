@@ -1,9 +1,25 @@
+from dataclasses import dataclass, field
+from typing import List, Optional
+
+from .attributes.attribute_set import AttributeSet
+from .pos_types import POSType
+
+
+@dataclass
 class POSNode:
-    def __init__(self, type_, children=None, value=None):
-        self.type = type_
-        self.children = children or []
-        self.value = value
-        self.attributes = {}
+    type: POSType
+    children: List["POSNode"] = field(default_factory=list)
+    value: Optional[str] = None
+    attributes: AttributeSet = field(default_factory=AttributeSet)
+
+    def is_subject(self) -> bool:
+        """Determine if this NP is a subject (based on position under S)"""
+        if self.type != POSType.NP:
+            return False
+        parent = self._get_parent()  # You'll need to implement parent tracking
+        if not parent or parent.type_ != POSType.S:
+            return False
+        return parent.children.index(self) == 0  # First NP under S is subject
 
     def __str__(self):
         children = (
