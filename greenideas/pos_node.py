@@ -18,7 +18,7 @@ class POSNode:
             if self.children
             else None
         )
-        return f"{self.type.name}{children if children else ""}"
+        return f"{self.type.name}{children if children else ''}"
 
     def resolve(self):
         # If terminal, return the twaddle tag or value
