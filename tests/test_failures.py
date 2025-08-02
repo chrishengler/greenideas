@@ -2,6 +2,7 @@ import pytest
 
 from greenideas.exceptions import RuleNotFoundError
 from greenideas.grammar_engine import GrammarEngine
+from greenideas.pos_types import POSType
 
 
 def test_grammar_engine_initialization():
@@ -14,7 +15,7 @@ def test_tree_generation_failure():
     # Assuming generate_tree can fail if no rules are defined
     engine.rules = {}  # Clear rules to simulate failure
     with pytest.raises(RuleNotFoundError):
-        engine.generate_tree("S")  # Attempt to generate a tree with no rules
+        engine.generate_tree(POSType.S)  # Attempt to generate a tree with no rules
 
 
 def test_twaddle_template_failure():

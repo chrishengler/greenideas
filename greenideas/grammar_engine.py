@@ -1,9 +1,8 @@
 import random
 
-from greenideas.attributes.attribute_set import AttributeSet
 from greenideas.attributes.attribute_type import AttributeType
-from greenideas.attributes.propagation import AttributePropagator
 from greenideas.exceptions import RuleNotFoundError
+from greenideas.expansion_spec import INHERIT, ExpansionSpec
 from greenideas.grammar import Grammar
 from greenideas.grammar_rule import GrammarRule
 from greenideas.pos_node import POSNode
@@ -20,33 +19,52 @@ class GrammarEngine:
     def clear_rules(self):
         self.grammar.clear_rules()
 
-    def generate_tree(self, start_symbol: POSType) -> POSNode:
-        if not self.grammar.has_expansion(start_symbol):
-            raise RuleNotFoundError(f"Rule '{start_symbol}' not found.")
-        return self._expand_to_tree(start_symbol)
+    def generate_tree(self, start) -> POSNode:
+        """
+        Accepts a POSType or a POSNode. If a POSNode, respects any attributes already set.
+        If a POSType, creates a POSNode with all attributes set at random.
+        """
+        if isinstance(start, POSNode):
+            node = start
+            # Set any missing attributes at random
+            self._assign_random_attributes(node)
+        elif isinstance(start, POSType):
+            node = POSNode(type=start)
+            self._assign_random_attributes(node)
+        else:
+            raise ValueError("start must be a POSType or POSNode")
+        if len(self.grammar.get_rules(node.type)) == 0:
+            raise RuleNotFoundError(f"No rule found to expand type {node.type}")
+        return self._expand_to_tree(node)
 
-    def _expand_to_tree(self, part_of_speech) -> POSNode:
+    def _expand_to_tree(self, node: POSNode) -> POSNode:
         # Always return a POSNode
-        rules = self.grammar.get_rules(part_of_speech)
+        rules = self.grammar.get_rules(node.type)
         if not rules:
-            return POSNode(type=part_of_speech, children=[], value=None)
-        # For now, always use the first rule
+            return node
         rule = rules[0]
         children = []
-        for elem in rule.expansion:
-            if self.grammar.has_expansion(elem):
-                children.append(self._expand_to_tree(elem))
-            else:
-                # Terminal: could be POSType or str
-                if isinstance(elem, POSType):
-                    children.append(POSNode(type=elem, children=[], value=None))
-                else:
-                    # Terminal string (e.g., 'the')
-                    children.append(
-                        POSNode(type=part_of_speech, children=[], value=elem)
-                    )
-
-        return POSNode(type=part_of_speech, children=children)
+        for _, spec in enumerate(rule.expansion):
+            if isinstance(spec, ExpansionSpec):
+                # Create child node
+                child = POSNode(type=spec.pos_type)
+                # Propagate/inherit/set attributes according to spec
+                for attr_type, constraint in spec.attribute_constraints.items():
+                    if constraint is not None:
+                        print(f"{constraint=}")
+                        if constraint == INHERIT:
+                            child.attributes.set(
+                                attr_type, node.attributes.get(attr_type)
+                            )
+                        else:
+                            # Set required value
+                            child.attributes.set(attr_type, constraint)
+                # Set any missing attributes at random
+                self._assign_random_attributes(child)
+                # Recursively expand
+                children.append(self._expand_to_tree(child))
+        node.children = children
+        return node
 
     def _assign_random_attributes(self, node: POSNode) -> None:
         """
@@ -64,33 +82,3 @@ class GrammarEngine:
             if attr_type not in node.attributes:
                 possible_values = list(attr_type.value_type)
                 node.attributes.set(attr_type, random.choice(possible_values))
-
-    def annotate_top_down(self, node: POSNode) -> None:
-        """
-        Recursively annotate the tree with grammatical features.
-        First propagates existing attributes according to rules,
-        then randomly assigns any missing attributes.
-        ALL nodes receive ALL attributes - optimization will happen later.
-
-        Args:
-            node: The root node of the tree to annotate
-        """
-        # Step 1: Start with the sentence node
-        if node.type == POSType.S:
-            attrs = AttributeSet()
-            # Set ALL attributes on the root node
-            for attr_type in AttributeType:
-                possible_values = list(attr_type.value_type)
-                attrs.set(attr_type, random.choice(possible_values))
-            node.attributes = attrs
-
-        # Step 2: Propagate attributes according to rules
-        propagator = AttributePropagator()
-        propagator.propagate(node)
-
-        # Step 3: Assign random values to any unset attributes
-        self._assign_random_attributes(node)
-
-        # Step 4: Recursively process all children
-        for child in node.children:
-            self.annotate_top_down(child)

@@ -11,6 +11,23 @@ class POSNode:
     children: List["POSNode"] = field(default_factory=list)
     value: Optional[str] = None
     attributes: AttributeSet = field(default_factory=AttributeSet)
+    required_attributes: set = field(default_factory=set)
+    permitted_attributes: set = field(default_factory=set)
+
+    def set_constraints(self, required: set, permitted: set):
+        self.required_attributes = required
+        self.permitted_attributes = permitted
+
+    def check_constraints(self) -> bool:
+        # Required attributes must be present
+        for attr in self.required_attributes:
+            if attr not in self.attributes:
+                return False
+        # Only permitted attributes should be present
+        for attr in self.attributes._values:
+            if self.permitted_attributes and attr not in self.permitted_attributes:
+                return False
+        return True
 
     def is_subject(self) -> bool:
         """Determine if this NP is a subject (based on position under S)"""
