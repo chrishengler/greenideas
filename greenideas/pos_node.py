@@ -14,7 +14,7 @@ class POSNode:
 
     def __str__(self):
         children = (
-            f"[{", ".join(str(child) for child in self.children)}]"
+            f"[{', '.join(str(child) for child in self.children)}]"
             if self.children
             else None
         )
