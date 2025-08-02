@@ -1,7 +1,8 @@
-import copy
 import random
 
+from greenideas.attributes.attribute_type import AttributeType
 from greenideas.exceptions import RuleNotFoundError
+from greenideas.expansion_spec import INHERIT, ExpansionSpec
 from greenideas.grammar import Grammar
 from greenideas.grammar_rule import GrammarRule
 from greenideas.pos_node import POSNode
@@ -18,77 +19,46 @@ class GrammarEngine:
     def clear_rules(self):
         self.grammar.clear_rules()
 
-    def generate_tree(self, start_symbol: POSType) -> POSNode:
-        if not self.grammar.has_expansion(start_symbol):
-            raise RuleNotFoundError(f"Rule '{start_symbol}' not found.")
-        return self._expand_to_tree(start_symbol)
+    def generate_tree(self, start: POSNode | POSType) -> POSNode:
+        if isinstance(start, POSNode):
+            node = start
+            self._assign_random_attributes(node)
+        elif isinstance(start, POSType):
+            node = POSNode(type=start)
+            self._assign_random_attributes(node)
+        else:
+            raise ValueError("start must be a POSType or POSNode")
+        if len(self.grammar.get_rules(node.type)) == 0:
+            raise RuleNotFoundError(f"No rule found to expand type {node.type}")
+        return self._expand_to_tree(node)
 
-    def _expand_to_tree(self, part_of_speech) -> POSNode:
-        # Always return a POSNode
-        rules = self.grammar.get_rules(part_of_speech)
+    def _expand_to_tree(self, node: POSNode) -> POSNode:
+        rules = self.grammar.get_rules(node.type)
         if not rules:
-            return POSNode(type_=part_of_speech, children=[], value=None)
-        # For now, always use the first rule
+            return node
         rule = rules[0]
         children = []
-        for elem in rule.expansion:
-            if self.grammar.has_expansion(elem):
-                children.append(self._expand_to_tree(elem))
-            else:
-                # Terminal: could be POSType or str
-                if isinstance(elem, POSType):
-                    children.append(POSNode(type_=elem, children=[], value=None))
-                else:
-                    # Terminal string (e.g., 'the')
-                    children.append(
-                        POSNode(type_=part_of_speech, children=[], value=elem)
-                    )
+        for _, spec in enumerate(rule.expansion):
+            if isinstance(spec, ExpansionSpec):
+                child = POSNode(type=spec.pos_type)
+                for attr_type, constraint in spec.attribute_constraints.items():
+                    if constraint is not None:
+                        print(f"{constraint=}")
+                        if constraint == INHERIT:
+                            child.attributes.set(
+                                attr_type, node.attributes.get(attr_type)
+                            )
+                        else:
+                            child.attributes.set(attr_type, constraint)
+                self._assign_random_attributes(child)
+                children.append(self._expand_to_tree(child))
+        node.children = children
+        return node
 
-        return POSNode(type_=part_of_speech, children=children)
+    def _assign_random_attributes(self, node: POSNode) -> None:
+        all_attributes = list(AttributeType)
 
-    def annotate_top_down(self, node: POSNode, context: dict):
-        """
-        Recursively annotate the tree with grammatical features.
-        - node: the current POSNode
-        - context: dict of inherited features (e.g., {'number': 'singular', 'person': 3, 'tense': 'past'})
-        """
-        # Merge context into node.attributes, but don't overwrite existing
-        for k, v in context.items():
-            if k not in node.attributes:
-                node.attributes[k] = v
-
-        # Decide new features at this node if needed
-        if node.type == POSType.S:
-            if "person" not in node.attributes:
-                node.attributes["person"] = random.choice([1, 2, 3])
-            if "number" not in node.attributes:
-                node.attributes["number"] = random.choice(["singular", "plural"])
-            if "tense" not in node.attributes:
-                node.attributes["tense"] = random.choice(["present", "past"])
-
-        # Pass down relevant features
-        for child in node.children:
-            child_context = copy.deepcopy(node.attributes)
-            if node.type == POSType.S:
-                if child.type == POSType.NP:
-                    keys = ["person", "number"]
-                    child_context = {
-                        k: node.attributes[k] for k in keys if k in node.attributes
-                    }
-                elif child.type == POSType.VP:
-                    keys = ["person", "number", "tense"]
-                    child_context = {
-                        k: node.attributes[k] for k in keys if k in node.attributes
-                    }
-            elif node.type == POSType.VP:
-                if child.type == POSType.Verb:
-                    keys = ["person", "number", "tense"]
-                    child_context = {
-                        k: node.attributes[k] for k in keys if k in node.attributes
-                    }
-            elif node.type == POSType.NP:
-                if child.type == POSType.NP and not child.attributes:
-                    child_context = {}
-                    child_context["number"] = random.choice(["singular", "plural"])
-                    child_context["person"] = random.choice([1, 2, 3])
-            self.annotate_top_down(child, child_context)
+        for attr_type in all_attributes:
+            if attr_type not in node.attributes:
+                possible_values = list(attr_type.value_type)
+                node.attributes.set(attr_type, random.choice(possible_values))
