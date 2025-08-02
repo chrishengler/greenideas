@@ -22,5 +22,5 @@ class GrammarRule:
     def get_child_spec(self, idx: int) -> ExpansionSpec:
         return self.expansion[idx]
 
-    def __str__(self):
+    def __repr__(self):
         return f"{self.part_of_speech} -> [{"; ".join(str(item) for item in self.expansion)}]"

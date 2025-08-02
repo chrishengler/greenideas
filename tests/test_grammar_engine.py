@@ -103,7 +103,7 @@ class TestGrammarEngine(unittest.TestCase):
             tree.attributes.get(AttributeType.PERSON),
         )
 
-    def test_expand_to_tree_returns_posnode(self):
+    def test_expand_to_tree_returns_posnode_with_posnode_children(self):
         self.engine.add_rule(self.s_rule)
         self.engine.add_rule(self.simple_np_rule)
         self.engine.add_rule(self.simple_vp_rule)

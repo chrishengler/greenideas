@@ -19,7 +19,7 @@ class GrammarEngine:
     def clear_rules(self):
         self.grammar.clear_rules()
 
-    def generate_tree(self, start) -> POSNode:
+    def generate_tree(self, start: POSNode | POSType) -> POSNode:
         """
         Accepts a POSType or a POSNode. If a POSNode, respects any attributes already set.
         If a POSType, creates a POSNode with all attributes set at random.

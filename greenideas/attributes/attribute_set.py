@@ -12,7 +12,7 @@ class AttributeSet:
         """Get the value of an attribute, returning None if not set."""
         return self._values.get(attr)
 
-    def set(self, attr: AttributeType, value: Any) -> None:
+    def set(self, attr: AttributeType, value: Any):
         """Set an attribute value, validating its type."""
         if not isinstance(value, attr.value_type):
             raise TypeError(
