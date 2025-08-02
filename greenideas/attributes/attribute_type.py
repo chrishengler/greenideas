@@ -14,10 +14,10 @@ class AttributeType(Enum):
     CASE = ("case", Case)
 
     def __init__(self, attr_name: str, value_type: Type):
-        self.attr_name = attr_name  # Changed from name to attr_name
+        self.name = attr_name  # Changed from name to attr_name
         self.value_type = (
             value_type  # No need for lazy loading since we're using direct references
         )
 
     def __str__(self) -> str:
-        return self.attr_name
+        return self.name

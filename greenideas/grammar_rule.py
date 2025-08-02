@@ -9,14 +9,8 @@ class GrammarRule:
         expansion: list[ExpansionSpec],
         weight: float = 1.0,
     ):
-        """
-        Args:
-            part_of_speech: The parent POS type
-            expansion: List of ExpansionSpec objects for each child
-            weight: Rule weight
-        """
         self.part_of_speech = part_of_speech
-        self.expansion = expansion  # List of ExpansionSpec
+        self.expansion = expansion
         self.weight = weight
 
     def get_child_spec(self, idx: int) -> ExpansionSpec:

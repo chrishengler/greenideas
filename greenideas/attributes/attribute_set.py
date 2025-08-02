@@ -9,19 +9,16 @@ class AttributeSet:
     _values: Dict[AttributeType, Any] = field(default_factory=dict)
 
     def get(self, attr: AttributeType) -> Optional[Any]:
-        """Get the value of an attribute, returning None if not set."""
         return self._values.get(attr)
 
     def set(self, attr: AttributeType, value: Any):
-        """Set an attribute value, validating its type."""
         if not isinstance(value, attr.value_type):
             raise TypeError(
-                f"Value for {attr.attr_name} must be of type {attr.value_type.__name__}"
+                f"Value for {attr.name} must be of type {attr.value_type.__name__}"
             )
         self._values[attr] = value
 
     def merge(self, other: Self, overwrite: bool = False) -> Self:
-        """Create a new AttributeSet by merging this one with another."""
         result = AttributeSet()
         for attr, value in self._values.items():
             result._values[attr] = value

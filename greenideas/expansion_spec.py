@@ -16,11 +16,6 @@ class ExpansionSpec:
     def __init__(
         self, pos_type: POSType, attribute_constraints: dict[AttributeType, Any] = None
     ):
-        """
-        Args:
-            pos_type: The POS type for this child
-            attribute_constraints: Dict of AttributeType to value, INHERIT, or None
-        """
         self.pos_type = pos_type
         self.attribute_constraints = (
             attribute_constraints or {}

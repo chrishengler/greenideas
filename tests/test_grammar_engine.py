@@ -14,6 +14,7 @@ class TestGrammarEngine(unittest.TestCase):
     def setUp(self):
         self.engine = GrammarEngine()
         # Define rules but do not add them yet
+        # Added in tests as required
         self.s_rule = GrammarRule(
             POSType.S,
             [
@@ -77,7 +78,6 @@ class TestGrammarEngine(unittest.TestCase):
         )
 
     def test_case_constraint(self):
-        # S -> NP.Gen NP, first child must be genitive, second child must inherit number and person
         rule = GrammarRule(
             part_of_speech=POSType.S,
             expansion=[

@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import List, Optional
+from typing import List
 
 from .attributes.attribute_set import AttributeSet
 from .pos_types import POSType
@@ -9,7 +9,6 @@ from .pos_types import POSType
 class POSNode:
     type: POSType
     children: List["POSNode"] = field(default_factory=list)
-    value: Optional[str] = None
     attributes: AttributeSet = field(default_factory=AttributeSet)
 
     def __str__(self):
@@ -21,10 +20,6 @@ class POSNode:
         return f"{self.type.name}{children if children else ''}"
 
     def resolve(self):
-        # If terminal, return the twaddle tag or value
         if self.type.twaddle_name:
             return f"<{self.type.twaddle_name}>"
-        if self.value is not None:
-            return str(self.value)
-        # Otherwise, recursively resolve children
         return " ".join(child.resolve() for child in self.children)

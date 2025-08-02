@@ -4,7 +4,7 @@ from greenideas.pos_types import POSType
 
 class Grammar:
     def __init__(self):
-        self.rules = {}  # {POSType: [GrammarRule, ...]}
+        self.rules = {}
 
     def add_rule(self, rule: GrammarRule):
         part_of_speech = rule.part_of_speech
