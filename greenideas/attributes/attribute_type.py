@@ -14,8 +14,8 @@ class AttributeType(Enum):
     CASE = ("case", Case)
 
     def __init__(self, attr_name: str, value_type: Type):
-        self.name = attr_name
+        self.attr_name = attr_name
         self.value_type = value_type
 
     def __str__(self) -> str:
-        return self.name
+        return self.attr_name
