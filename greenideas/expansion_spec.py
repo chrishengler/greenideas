@@ -17,9 +17,7 @@ class ExpansionSpec:
         self, pos_type: POSType, attribute_constraints: dict[AttributeType, Any] = None
     ):
         self.pos_type = pos_type
-        self.attribute_constraints = (
-            attribute_constraints or {}
-        )  # e.g. {AttributeType.NUMBER: INHERIT, AttributeType.CASE: Case.GENITIVE}
+        self.attribute_constraints = attribute_constraints or {}
 
     def get_constraint(self, attr_type: AttributeType) -> Optional[dict]:
         return self.attribute_constraints.get(attr_type, None)
