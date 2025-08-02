@@ -23,4 +23,4 @@ class GrammarRule:
         return self.expansion[idx]
 
     def __repr__(self):
-        return f"{self.part_of_speech} -> [{"; ".join(str(item) for item in self.expansion)}]"
+        return f"{self.part_of_speech} -> [{'; '.join(str(item) for item in self.expansion)}]"
