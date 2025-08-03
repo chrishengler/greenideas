@@ -4,9 +4,10 @@ from greenideas.attributes.attribute_type import AttributeType
 from greenideas.exceptions import RuleNotFoundError
 from greenideas.expansion_spec import INHERIT, ExpansionSpec
 from greenideas.grammar import Grammar
-from greenideas.grammar_rule import GrammarRule
 from greenideas.pos_node import POSNode
 from greenideas.pos_types import POSType
+from greenideas.rules.grammar_rule import GrammarRule
+from greenideas.rules.grammar_ruleset import GrammarRuleset
 
 
 class GrammarEngine:
@@ -15,6 +16,10 @@ class GrammarEngine:
 
     def add_rule(self, rule: GrammarRule):
         self.grammar.add_rule(rule)
+
+    def add_ruleset(self, ruleset: GrammarRuleset):
+        for rule in ruleset.rules:
+            self.add_rule(rule)
 
     def clear_rules(self):
         self.grammar.clear_rules()
@@ -36,14 +41,13 @@ class GrammarEngine:
         rules = self.grammar.get_rules(node.type)
         if not rules:
             return node
-        rule = rules[0]
+        rule = random.choices(rules, weights=[r.weight for r in rules])[0]
         children = []
         for _, spec in enumerate(rule.expansion):
             if isinstance(spec, ExpansionSpec):
                 child = POSNode(type=spec.pos_type)
                 for attr_type, constraint in spec.attribute_constraints.items():
                     if constraint is not None:
-                        print(f"{constraint=}")
                         if constraint == INHERIT:
                             child.attributes.set(
                                 attr_type, node.attributes.get(attr_type)

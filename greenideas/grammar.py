@@ -1,5 +1,5 @@
-from greenideas.grammar_rule import GrammarRule
 from greenideas.pos_types import POSType
+from greenideas.rules.grammar_rule import GrammarRule
 
 
 class Grammar:

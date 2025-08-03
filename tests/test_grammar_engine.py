@@ -5,9 +5,9 @@ from greenideas.attributes.case import Case
 from greenideas.exceptions import RuleNotFoundError
 from greenideas.expansion_spec import INHERIT, ExpansionSpec
 from greenideas.grammar_engine import GrammarEngine
-from greenideas.grammar_rule import GrammarRule
 from greenideas.pos_node import POSNode
 from greenideas.pos_types import POSType
+from greenideas.rules.grammar_rule import GrammarRule
 
 
 class TestGrammarEngine(unittest.TestCase):
