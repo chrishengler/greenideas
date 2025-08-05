@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import List
+from typing import List, Self
 
 from greenideas.attributes.attribute_set import AttributeSet
 from greenideas.parts_of_speech.pos_types import POSType
@@ -8,7 +8,7 @@ from greenideas.parts_of_speech.pos_types import POSType
 @dataclass
 class POSNode:
     type: POSType
-    children: List["POSNode"] = field(default_factory=list)
+    children: List[Self] = field(default_factory=list)
     attributes: AttributeSet = field(default_factory=AttributeSet)
 
     def __str__(self):
