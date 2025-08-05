@@ -7,15 +7,14 @@ from greenideas.parts_of_speech.pos_node import POSNode
 from greenideas.parts_of_speech.pos_types import POSType
 
 
-class VerbFormattingHandler:
+class AuxDoFormattingHandler:
     @staticmethod
     def format(node: POSNode) -> str:
-        if node.type != POSType.Verb:
+        if node.type != POSType.Aux_do:
             raise TwaddleConversionError(
-                f"Tried to use VerbFormattingHandler on {node.type}"
+                f"Tried to use AuxDoFormattingHandler on {node.type}"
             )
-        name = "verb"
-        form = ""
+        name = "aux-do"
         number = node.attributes.get(AttributeType.NUMBER)
         person = node.attributes.get(AttributeType.PERSON)
         tense = node.attributes.get(AttributeType.TENSE)
