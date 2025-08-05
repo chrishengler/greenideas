@@ -37,7 +37,7 @@ class TestTwaddleFormatter(unittest.TestCase):
         noun_phrase = POSNode(type=POSType.NP, children=[det, noun])
         verb_phrase = POSNode(type=POSType.VP, children=[verb, det, noun])
         sentence = POSNode(type=POSType.S, children=[noun_phrase, verb_phrase])
-        expected_template = "<det.sg> <noun.sg> <verb.3sgpres> <det.sg> <noun.sg>"
+        expected_template = "<det.sg> <noun.sg> <verb.s> <det.sg> <noun.sg>"
         result = self.formatter.format(sentence)
         self.assertEqual(result, expected_template)
 

@@ -23,9 +23,9 @@ class TestDefaultTwaddleFormatters(unittest.TestCase):
         node = POSNode(type=POSType.Verb)
         node.attributes.set(AttributeType.NUMBER, Number.SINGULAR)
         node.attributes.set(AttributeType.PERSON, Person.FIRST)
-        node.attributes.set(AttributeType.TENSE, Tense.PRESENT)
+        node.attributes.set(AttributeType.TENSE, Tense.PAST)
         tag = self.formatter.format_node(node)
-        self.assertEqual(tag, "<verb.1sgpres>")
+        self.assertEqual(tag, "<verb.past>")
 
     def test_noun_tag(self):
         node = POSNode(type=POSType.Noun)

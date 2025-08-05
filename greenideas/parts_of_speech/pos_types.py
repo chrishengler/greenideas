@@ -18,19 +18,3 @@ class POSType(Enum):
     Prep = auto()
     Verb = auto()
     Verb_Bare = auto()
-
-    @property
-    def twaddle_name(self) -> str:
-        # Only terminal types have twaddle names
-        mapping = {
-            POSType.Adj: "adj",
-            POSType.Adv: "adv",
-            POSType.Aux_do: "aux",
-            POSType.Aux_finite: "aux",
-            POSType.Det: "det",
-            POSType.Noun: "noun",
-            POSType.Prep: "prep",
-            POSType.Verb: "verb",
-            POSType.Verb_Bare: "verb",
-        }
-        return mapping.get(self)
