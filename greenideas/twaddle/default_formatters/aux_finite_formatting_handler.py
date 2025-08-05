@@ -15,6 +15,7 @@ class AuxFiniteFormattingHandler:
                 f"Tried to use AuxFiniteFormattingHandler on {node.type}"
             )
         name = "aux-do"
+        form = ""
         number = node.attributes.get(AttributeType.NUMBER)
         person = node.attributes.get(AttributeType.PERSON)
         tense = node.attributes.get(AttributeType.TENSE)

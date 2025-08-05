@@ -32,6 +32,7 @@ def main():
 
     twaddle_string = formatter.format(tree)
     print(twaddle_string)
+    twaddle_runner.run_sentence("<det>")
     print(twaddle_runner.run_sentence(twaddle_string))
 
 
