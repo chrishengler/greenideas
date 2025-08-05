@@ -1,8 +1,10 @@
 import pytest
 
-from greenideas.exceptions import RuleNotFoundError
+from greenideas.exceptions import RuleNotFoundError, TwaddleConversionError
 from greenideas.grammar_engine import GrammarEngine
-from greenideas.pos_types import POSType
+from greenideas.parts_of_speech.pos_node import POSNode
+from greenideas.parts_of_speech.pos_types import POSType
+from greenideas.twaddle.twaddle_formatter import TwaddleFormatter
 
 
 def test_grammar_engine_initialization():
@@ -18,9 +20,14 @@ def test_tree_generation_failure():
 
 
 def test_twaddle_template_failure():
-    from greenideas.tree_to_twaddle import TreeToTwaddle
+    tree = "not_a_pos_node"
+    formatter = TwaddleFormatter()
+    with pytest.raises(TwaddleConversionError):
+        formatter.format(tree)
 
-    converter = TreeToTwaddle()
-    tree = "invalid_tree_structure"
-    with pytest.raises(ValueError):
-        converter.convert_tree(tree)
+
+def test_twaddle_conversion_error():
+    node = POSNode(POSType.S)
+    formatter = TwaddleFormatter()
+    with pytest.raises(TwaddleConversionError):
+        formatter.format(node)

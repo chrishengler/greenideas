@@ -5,8 +5,8 @@ from greenideas.attributes.case import Case
 from greenideas.exceptions import RuleNotFoundError
 from greenideas.expansion_spec import INHERIT, ExpansionSpec
 from greenideas.grammar_engine import GrammarEngine
-from greenideas.pos_node import POSNode
-from greenideas.pos_types import POSType
+from greenideas.parts_of_speech.pos_node import POSNode
+from greenideas.parts_of_speech.pos_types import POSType
 from greenideas.rules.grammar_rule import GrammarRule
 
 

@@ -1,5 +1,5 @@
 from greenideas.expansion_spec import ExpansionSpec
-from greenideas.pos_types import POSType
+from greenideas.parts_of_speech.pos_types import POSType
 
 
 class GrammarRule:

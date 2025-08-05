@@ -33,4 +33,4 @@ class POSType(Enum):
             POSType.Verb: "verb",
             POSType.Verb_Bare: "verb",
         }
-        return mapping.get(self, None)
+        return mapping.get(self)

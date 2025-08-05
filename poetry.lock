@@ -90,7 +90,22 @@ pygments = ">=2.7.2"
 [package.extras]
 dev = ["argcomplete", "attrs (>=19.2)", "hypothesis (>=3.56)", "mock", "requests", "setuptools", "xmlschema"]
 
+[[package]]
+name = "twaddle"
+version = "1.0.0"
+description = "Text generation and templating"
+optional = false
+python-versions = ">=3.11"
+groups = ["main"]
+files = [
+    {file = "twaddle-1.0.0-py3-none-any.whl", hash = "sha256:0129db9ad0c96735f4765289aa6d1d89fbd40d06196022246c8ade068789d2af"},
+    {file = "twaddle-1.0.0.tar.gz", hash = "sha256:0f9a6038d75fd9b24c1d54b1c2e17b6e3d47c5b07c1c9381a4e15e6766f96e3f"},
+]
+
+[package.dependencies]
+pytest = ">=7.2.0"
+
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.11"
-content-hash = "9176bf00b46f76d54383d5a865696d203930e4c75c2c604b2a697ffe030d0172"
+content-hash = "5c1eba3d99c2d1a4bdcebc74d4b2558d52cb5e150ccc911287b1fb6ae98252f6"

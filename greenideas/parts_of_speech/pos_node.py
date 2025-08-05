@@ -1,8 +1,8 @@
 from dataclasses import dataclass, field
 from typing import List
 
-from .attributes.attribute_set import AttributeSet
-from .pos_types import POSType
+from greenideas.attributes.attribute_set import AttributeSet
+from greenideas.parts_of_speech.pos_types import POSType
 
 
 @dataclass

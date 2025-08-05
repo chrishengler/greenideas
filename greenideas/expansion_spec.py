@@ -1,7 +1,7 @@
 from typing import Any, Optional
 
 from greenideas.attributes.attribute_type import AttributeType
-from greenideas.pos_types import POSType
+from greenideas.parts_of_speech.pos_types import POSType
 
 
 class InheritSentinel:
