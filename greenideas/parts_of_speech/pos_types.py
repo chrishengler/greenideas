@@ -16,5 +16,6 @@ class POSType(Enum):
     Det = auto()
     Noun = auto()
     Prep = auto()
+    Pron = auto()
     Verb = auto()
     Verb_Bare = auto()

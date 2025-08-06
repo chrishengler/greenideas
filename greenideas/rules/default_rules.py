@@ -1,20 +1,26 @@
 from greenideas.attributes.attribute_type import AttributeType
 from greenideas.attributes.case import Case
-from greenideas.expansion_spec import INHERIT, ExpansionSpec
+from greenideas.attributes.person import Person
 from greenideas.parts_of_speech.pos_types import POSType
+from greenideas.rules.expansion_spec import INHERIT, ExpansionSpec
 from greenideas.rules.grammar_rule import GrammarRule
 from greenideas.rules.grammar_ruleset import GrammarRuleset
+from greenideas.rules.source_spec import SourceSpec
 
 default_rules = GrammarRuleset()
 
 # S -> NP VP
 default_rules.add(
     GrammarRule(
-        POSType.S,
+        SourceSpec(POSType.S),
         [
             ExpansionSpec(
                 POSType.NP,
-                {AttributeType.NUMBER: INHERIT, AttributeType.PERSON: INHERIT},
+                {
+                    AttributeType.NUMBER: INHERIT,
+                    AttributeType.PERSON: INHERIT,
+                    AttributeType.CASE: Case.NOMINATIVE,
+                },
             ),
             ExpansionSpec(
                 POSType.VP,
@@ -27,7 +33,10 @@ default_rules.add(
 # NP -> Det NP_NoDet
 default_rules.add(
     GrammarRule(
-        POSType.NP,
+        SourceSpec(
+            POSType.NP,
+            {AttributeType.PERSON: Person.THIRD},
+        ),
         [
             ExpansionSpec(
                 POSType.Det,
@@ -41,15 +50,28 @@ default_rules.add(
     )
 )
 
+default_rules.add(
+    GrammarRule(
+        SourceSpec(POSType.NP),
+        [
+            ExpansionSpec(
+                POSType.Pron,
+                {
+                    AttributeType.NUMBER: INHERIT,
+                    AttributeType.PERSON: INHERIT,
+                    AttributeType.CASE: INHERIT,
+                },
+            )
+        ],
+    )
+)
+
 # NP_NoDet -> Adj NP_NoDet
 default_rules.add(
     GrammarRule(
-        POSType.NP_NoDet,
+        SourceSpec(POSType.NP_NoDet),
         [
-            ExpansionSpec(
-                POSType.Adj,
-                {AttributeType.NUMBER: INHERIT, AttributeType.CASE: INHERIT},
-            ),
+            ExpansionSpec(POSType.Adj),
             ExpansionSpec(
                 POSType.NP_NoDet,
                 {AttributeType.NUMBER: INHERIT, AttributeType.CASE: INHERIT},
@@ -62,7 +84,7 @@ default_rules.add(
 # NP_NoDet -> Adj N
 default_rules.add(
     GrammarRule(
-        POSType.NP_NoDet,
+        SourceSpec(POSType.NP_NoDet),
         [
             ExpansionSpec(POSType.Adj),
             ExpansionSpec(
@@ -77,7 +99,7 @@ default_rules.add(
 # NP_NoDet -> N
 default_rules.add(
     GrammarRule(
-        POSType.NP_NoDet,
+        SourceSpec(POSType.NP_NoDet),
         [
             ExpansionSpec(
                 POSType.Noun,
@@ -90,17 +112,21 @@ default_rules.add(
 # VP -> V NP.Acc
 default_rules.add(
     GrammarRule(
-        POSType.VP,
+        SourceSpec(POSType.VP),
         [
             ExpansionSpec(
                 POSType.Verb,
-                {AttributeType.NUMBER: INHERIT, AttributeType.CASE: INHERIT},
+                {
+                    AttributeType.NUMBER: INHERIT,
+                    AttributeType.TENSE: INHERIT,
+                    AttributeType.PERSON: INHERIT,
+                },
             ),
             ExpansionSpec(
                 POSType.NP,
                 {
                     AttributeType.NUMBER: INHERIT,
-                    AttributeType.CASE: Case.ACCUSATIVE,
+                    AttributeType.CASE: Case.OBJECTIVE,
                 },
             ),
         ],
@@ -110,11 +136,15 @@ default_rules.add(
 # VP -> Aux_do VP(bare)
 default_rules.add(
     GrammarRule(
-        POSType.VP,
+        SourceSpec(POSType.VP),
         [
             ExpansionSpec(
                 POSType.Aux_do,
-                {AttributeType.NUMBER: INHERIT, AttributeType.TENSE: INHERIT},
+                {
+                    AttributeType.NUMBER: INHERIT,
+                    AttributeType.TENSE: INHERIT,
+                    AttributeType.PERSON: INHERIT,
+                },
             ),
             ExpansionSpec(POSType.VP_Bare),
         ],
@@ -124,20 +154,21 @@ default_rules.add(
 # VP_Bare -> Adv VP(bare)
 default_rules.add(
     GrammarRule(
-        POSType.VP_Bare,
+        SourceSpec(POSType.VP_Bare),
         [
             ExpansionSpec(POSType.Adv),
             ExpansionSpec(
                 POSType.VP_Bare,
             ),
         ],
+        weight=0.2,
     )
 )
 
 # VP_Bare -> Verb(bare)
 default_rules.add(
     GrammarRule(
-        POSType.VP_Bare,
+        SourceSpec(POSType.VP_Bare),
         [
             ExpansionSpec(
                 POSType.Verb_Bare,
@@ -151,5 +182,7 @@ default_rules.add(
 
 # PP -> Prep NP
 default_rules.add(
-    GrammarRule(POSType.PP, [ExpansionSpec(POSType.Prep), ExpansionSpec(POSType.NP)])
+    GrammarRule(
+        SourceSpec(POSType.PP), [ExpansionSpec(POSType.Prep), ExpansionSpec(POSType.NP)]
+    )
 )

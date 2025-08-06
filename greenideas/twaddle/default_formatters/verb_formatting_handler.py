@@ -24,4 +24,7 @@ class VerbFormattingHandler:
         elif person == Person.THIRD and number == Number.SINGULAR:
             form = "s"
         # past and present participles to be added later
+        print(
+            f"Formatting verb: number: {number}, person: {person}, tense: {tense}:\n{form=}"
+        )
         return f"<{name}{('.' + form if form else '')}>"

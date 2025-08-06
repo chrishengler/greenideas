@@ -1,15 +1,17 @@
-from greenideas.expansion_spec import ExpansionSpec
-from greenideas.parts_of_speech.pos_types import POSType
+from greenideas.parts_of_speech.pos_node import POSNode
+from greenideas.rules.expansion_spec import ExpansionSpec
 
 
 class GrammarRule:
     def __init__(
         self,
-        part_of_speech: POSType,
+        source: ExpansionSpec,
         expansion: list[ExpansionSpec],
         weight: float = 1.0,
     ):
-        self.part_of_speech = part_of_speech
+        self.source = source
+        self.pos = source.pos_type
+        self.source_constraints = source.attribute_constraints
         self.expansion = expansion
         self.weight = weight
 
@@ -17,4 +19,13 @@ class GrammarRule:
         return self.expansion[idx]
 
     def __repr__(self):
-        return f"{self.part_of_speech} -> [{('; '.join(str(item) for item in self.expansion))}]"
+        return f"{self.pos}({self.source_constraints}) -> [{('; '.join(str(item) for item in self.expansion))}]"
+
+    def is_applicable_to_node(self, node: POSNode) -> bool:
+        for attr_type, constraint in self.source_constraints.items():
+            if isinstance(constraint, list):
+                if node.attributes.get(attr_type) not in constraint:
+                    return False
+            elif node.attributes.get(attr_type) != constraint:
+                return False
+        return True

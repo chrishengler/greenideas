@@ -14,7 +14,7 @@ class AttributeSet:
     def set(self, attr: AttributeType, value: Any):
         if not isinstance(value, attr.value_type):
             raise TypeError(
-                f"Value for {attr.name} must be of type {attr.value_type.__name__}"
+                f"Value for {attr.name} must be of type {attr.value_type.__name__}, got {type(value).__name__}  "
             )
         self._values[attr] = value
 

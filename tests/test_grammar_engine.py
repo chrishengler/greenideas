@@ -3,10 +3,10 @@ import unittest
 from greenideas.attributes.attribute_type import AttributeType
 from greenideas.attributes.case import Case
 from greenideas.exceptions import RuleNotFoundError
-from greenideas.expansion_spec import INHERIT, ExpansionSpec
 from greenideas.grammar_engine import GrammarEngine
 from greenideas.parts_of_speech.pos_node import POSNode
 from greenideas.parts_of_speech.pos_types import POSType
+from greenideas.rules.expansion_spec import INHERIT, ExpansionSpec
 from greenideas.rules.grammar_rule import GrammarRule
 
 
@@ -46,13 +46,13 @@ class TestGrammarEngine(unittest.TestCase):
             [
                 ExpansionSpec(
                     POSType.Verb,
-                    {AttributeType.NUMBER: INHERIT, AttributeType.CASE: INHERIT},
+                    {AttributeType.NUMBER: INHERIT},
                 ),
                 ExpansionSpec(
                     POSType.NP,
                     {
                         AttributeType.NUMBER: INHERIT,
-                        AttributeType.CASE: Case.ACCUSATIVE,
+                        AttributeType.CASE: Case.OBJECTIVE,
                     },
                 ),
             ],
@@ -112,6 +112,11 @@ class TestGrammarEngine(unittest.TestCase):
         self.assertEqual(tree.type, POSType.S)
         self.assertEqual(tree.children[0].type, POSType.NP)
         self.assertEqual(tree.children[1].type, POSType.VP)
+        for child in tree.children:
+            self.assertIsInstance(child, POSNode)
+            print(f"{child.type=}")
+            for attr in child.attributes._values.keys():
+                self.assertIn(attr, child.relevant_attributes)
 
     def test_grammar_class_add_and_get(self):
         self.engine.add_rule(self.pp_rule)
