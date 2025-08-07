@@ -3,6 +3,7 @@ import random
 from greenideas.exceptions import RuleNotFoundError
 from greenideas.grammar import Grammar
 from greenideas.parts_of_speech.pos_node import POSNode
+from greenideas.parts_of_speech.pos_type_attributes import relevant_attributes
 from greenideas.parts_of_speech.pos_types import POSType
 from greenideas.rules.expansion_spec import INHERIT, ExpansionSpec
 from greenideas.rules.grammar_rule import GrammarRule
@@ -42,6 +43,7 @@ class GrammarEngine:
         if not rules:
             return node
         rule = random.choices(rules, weights=[r.weight for r in rules])[0]
+        print(f"expanding {node.type} with rule {rule}\n\n\n")
         children = []
         for _, spec in enumerate(rule.expansion):
             if isinstance(spec, ExpansionSpec):
@@ -49,6 +51,7 @@ class GrammarEngine:
                 for attr_type, constraint in spec.attribute_constraints.items():
                     if constraint is not None:
                         if constraint == INHERIT:
+                            # print(f"Inheriting {attr_type} from parent node from {node.type} to {child.type}")
                             child.attributes.set(
                                 attr_type, node.attributes.get(attr_type)
                             )
@@ -62,7 +65,7 @@ class GrammarEngine:
         return node
 
     def _assign_random_attributes(self, node: POSNode) -> None:
-        for attr_type in node.relevant_attributes:
+        for attr_type in relevant_attributes(node.type):
             if attr_type not in node.attributes:
                 possible_values = list(attr_type.value_type)
                 node.attributes.set(attr_type, random.choice(possible_values))

@@ -11,6 +11,12 @@ from greenideas.twaddle.default_formatters.aux_do_formatting_handler import (
 from greenideas.twaddle.default_formatters.aux_finite_formatting_handler import (
     AuxFiniteFormattingHandler,
 )
+from greenideas.twaddle.default_formatters.be_finite_formatting_handler import (
+    BeFormattingHandler,
+)
+from greenideas.twaddle.default_formatters.conj_formatting_handler import (
+    ConjFormattingHandler,
+)
 from greenideas.twaddle.default_formatters.det_formatting_handler import (
     DetFormattingHandler,
 )
@@ -36,6 +42,8 @@ default_formatting_handlers: dict[POSType, TwaddleFormattingHandler] = {
     POSType.Adv: AdvFormattingHandler,
     POSType.Aux_do: AuxDoFormattingHandler,
     POSType.Aux_finite: AuxFiniteFormattingHandler,
+    POSType.Be: BeFormattingHandler,
+    POSType.Conj: ConjFormattingHandler,
     POSType.Det: DetFormattingHandler,
     POSType.Noun: NounFormattingHandler,
     POSType.Prep: PrepFormattingHandler,

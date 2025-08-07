@@ -15,11 +15,15 @@ class SourceSpec:
         for attr, val in self.attribute_constraints.items():
             if attr not in POSTYPE_ATTRIBUTE_MAP[pos_type]:
                 raise InvalidGrammarRule(
-                    f"SourceSpec includes constraints on {attr}, not defined as relevant attribute for {pos_type}"
+                    f"SourceSpec includes constraints on {str(attr)}, not defined as relevant attribute for {pos_type}"
                 )
             if not isinstance(val, attr.value_type):
+                if isinstance(val, list) and all(
+                    isinstance(v, attr.value_type) for v in val
+                ):
+                    continue
                 raise TypeError(
-                    f"Value for {attr.name} must be of type {attr.value_type.__name__}, got {type(val).__name__}"
+                    f"Value for {attr.name} must be of type {str(attr)} (or list of), got {type(val)}"
                 )
 
     def get_constraint(self, attr_type: AttributeType) -> Optional[dict]:

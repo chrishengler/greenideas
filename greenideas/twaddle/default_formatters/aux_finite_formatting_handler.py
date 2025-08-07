@@ -14,7 +14,7 @@ class AuxFiniteFormattingHandler:
             raise TwaddleConversionError(
                 f"Tried to use AuxFiniteFormattingHandler on {node.type}"
             )
-        name = "aux-do"
+        name = "aux-finite"
         form = ""
         number = node.attributes.get(AttributeType.NUMBER)
         person = node.attributes.get(AttributeType.PERSON)

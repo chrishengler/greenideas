@@ -8,29 +8,36 @@ from greenideas.parts_of_speech.pos_node import POSNode
 from greenideas.parts_of_speech.pos_types import POSType
 
 
-class VerbFormattingHandler:
+class BeFormattingHandler:
     @staticmethod
     def format(node: POSNode) -> str:
-        if node.type != POSType.Verb:
+        if node.type != POSType.Be:
             raise TwaddleConversionError(
-                f"Tried to use VerbFormattingHandler on {node.type}"
+                f"Tried to use BeFormattingHandler on {node.type}"
             )
-        name = "verb"
+        name = "be"
         form = ""
+        aspect = node.attributes.get(AttributeType.ASPECT)
         number = node.attributes.get(AttributeType.NUMBER)
         person = node.attributes.get(AttributeType.PERSON)
         tense = node.attributes.get(AttributeType.TENSE)
-        aspect = node.attributes.get(AttributeType.ASPECT)
-        if aspect == Aspect.PROGRESSIVE or aspect == Aspect.PERFECT_PROGRESSIVE:
+        if aspect == Aspect.PROGRESSIVE:
             form = "gerund"
         elif aspect == Aspect.PERFECT:
             form = "pastpart"
-        elif tense == Tense.PAST:
-            form = "past"
-        elif person == Person.THIRD and number == Number.SINGULAR:
-            form = "s"
+        else:
+            if number == Number.SINGULAR:
+                if person == Person.FIRST:
+                    form = "1sg"
+                elif person == Person.THIRD:
+                    form = "3sg"
+                else:
+                    form = "other"
+            else:
+                form = "other"
+            if tense == Tense.PRESENT:
+                form += "pres"
+            else:
+                form += "past"
         # past and present participles to be added later
-        print(
-            f"Formatting verb: aspect: {aspect}, number: {number}, person: {person}, tense: {tense}:\n{form=}"
-        )
         return f"<{name}{('.' + form if form else '')}>"

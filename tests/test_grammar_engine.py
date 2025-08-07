@@ -5,9 +5,11 @@ from greenideas.attributes.case import Case
 from greenideas.exceptions import RuleNotFoundError
 from greenideas.grammar_engine import GrammarEngine
 from greenideas.parts_of_speech.pos_node import POSNode
+from greenideas.parts_of_speech.pos_type_attributes import relevant_attributes
 from greenideas.parts_of_speech.pos_types import POSType
 from greenideas.rules.expansion_spec import INHERIT, ExpansionSpec
 from greenideas.rules.grammar_rule import GrammarRule
+from greenideas.rules.source_spec import SourceSpec
 
 
 class TestGrammarEngine(unittest.TestCase):
@@ -16,7 +18,7 @@ class TestGrammarEngine(unittest.TestCase):
         # Define rules but do not add them yet
         # Added in tests as required
         self.s_rule = GrammarRule(
-            POSType.S,
+            SourceSpec(POSType.S),
             [
                 ExpansionSpec(
                     POSType.NP,
@@ -29,7 +31,7 @@ class TestGrammarEngine(unittest.TestCase):
             ],
         )
         self.np_rule = GrammarRule(
-            POSType.NP,
+            SourceSpec(POSType.NP),
             [
                 ExpansionSpec(
                     POSType.Det,
@@ -42,7 +44,7 @@ class TestGrammarEngine(unittest.TestCase):
             ],
         )
         self.vp_rule = GrammarRule(
-            POSType.VP,
+            SourceSpec(POSType.VP),
             [
                 ExpansionSpec(
                     POSType.Verb,
@@ -58,10 +60,15 @@ class TestGrammarEngine(unittest.TestCase):
             ],
         )
         self.pp_rule = GrammarRule(
-            POSType.PP, [ExpansionSpec(POSType.Prep), ExpansionSpec(POSType.NP)]
+            SourceSpec(POSType.PP),
+            [ExpansionSpec(POSType.Prep), ExpansionSpec(POSType.NP)],
         )
-        self.simple_np_rule = GrammarRule(POSType.NP, [POSType.Det, POSType.Noun])
-        self.simple_vp_rule = GrammarRule(POSType.VP, [POSType.Verb, POSType.NP])
+        self.simple_np_rule = GrammarRule(
+            SourceSpec(POSType.NP), [POSType.Det, POSType.Noun]
+        )
+        self.simple_vp_rule = GrammarRule(
+            SourceSpec(POSType.VP), [POSType.Verb, POSType.NP]
+        )
 
     def test_agreement(self):
         self.engine.add_rule(self.s_rule)
@@ -79,8 +86,8 @@ class TestGrammarEngine(unittest.TestCase):
 
     def test_case_constraint(self):
         rule = GrammarRule(
-            part_of_speech=POSType.S,
-            expansion=[
+            SourceSpec(POSType.S),
+            [
                 ExpansionSpec(POSType.NP, {AttributeType.CASE: Case.GENITIVE}),
                 ExpansionSpec(
                     POSType.NP,
@@ -116,7 +123,7 @@ class TestGrammarEngine(unittest.TestCase):
             self.assertIsInstance(child, POSNode)
             print(f"{child.type=}")
             for attr in child.attributes._values.keys():
-                self.assertIn(attr, child.relevant_attributes)
+                self.assertIn(attr, relevant_attributes(child.type))
 
     def test_grammar_class_add_and_get(self):
         self.engine.add_rule(self.pp_rule)

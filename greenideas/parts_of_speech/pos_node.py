@@ -2,8 +2,6 @@ from dataclasses import dataclass, field
 from typing import List, Self
 
 from greenideas.attributes.attribute_set import AttributeSet
-from greenideas.exceptions import RelevantAttributesNotSpecified
-from greenideas.parts_of_speech.pos_type_attributes import POSTYPE_ATTRIBUTE_MAP
 from greenideas.parts_of_speech.pos_types import POSType
 
 
@@ -20,12 +18,3 @@ class POSNode:
             else None
         )
         return f"{self.type.name}{children if children else ''}"
-
-    @property
-    def relevant_attributes(self) -> AttributeSet:
-        """Return attributes that are relevant for this node."""
-        if self.type not in POSTYPE_ATTRIBUTE_MAP:
-            raise RelevantAttributesNotSpecified(
-                f"No relevant attributes specified for POSType: {self.type}"
-            )
-        return POSTYPE_ATTRIBUTE_MAP.get(self.type, set())

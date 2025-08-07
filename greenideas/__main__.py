@@ -5,7 +5,7 @@ from twaddle.runner import TwaddleRunner
 
 from greenideas.grammar_engine import GrammarEngine
 from greenideas.parts_of_speech.pos_types import POSType
-from greenideas.rules.default_rules import default_rules
+from greenideas.rules.default_english_rules.default_rules import default_rules
 from greenideas.twaddle.default_formatters.default_formatting_handlers import (
     default_formatting_handlers,
 )
