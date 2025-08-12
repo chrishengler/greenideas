@@ -11,7 +11,7 @@ from greenideas.twaddle.default_formatters.aux_do_formatting_handler import (
 from greenideas.twaddle.default_formatters.aux_finite_formatting_handler import (
     AuxFiniteFormattingHandler,
 )
-from greenideas.twaddle.default_formatters.be_finite_formatting_handler import (
+from greenideas.twaddle.default_formatters.be_formatting_handler import (
     BeFormattingHandler,
 )
 from greenideas.twaddle.default_formatters.conj_formatting_handler import (

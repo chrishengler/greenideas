@@ -32,7 +32,7 @@ class GrammarRule:
         return self.expansion[idx]
 
     def __repr__(self):
-        return f"{self.pos}({self.source_constraints}) -> [{(';\n\n '.join(str(item) for item in self.expansion))}]"
+        return f"{self.pos}({self.source_constraints}) -> [{';\n\n '.join(str(item) for item in self.expansion)}]"
 
     def is_applicable_to_node(self, node: POSNode) -> bool:
         for attr_type, constraint in self.source_constraints.items():

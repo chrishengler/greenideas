@@ -58,7 +58,7 @@ auxPerfprog__auxFinite_vpParticiple = GrammarRule(
         ExpansionSpec(
             POSType.Be,
             {
-                AttributeType.ASPECT: Aspect.PROGRESSIVE,
+                AttributeType.ASPECT: Aspect.PERFECT,
                 AttributeType.NUMBER: INHERIT,
                 AttributeType.TENSE: INHERIT,
                 AttributeType.PERSON: INHERIT,
