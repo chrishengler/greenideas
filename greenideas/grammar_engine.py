@@ -1,11 +1,11 @@
 import random
 
-from greenideas.attributes.attribute_type import AttributeType
 from greenideas.exceptions import RuleNotFoundError
-from greenideas.expansion_spec import INHERIT, ExpansionSpec
 from greenideas.grammar import Grammar
-from greenideas.pos_node import POSNode
-from greenideas.pos_types import POSType
+from greenideas.parts_of_speech.pos_node import POSNode
+from greenideas.parts_of_speech.pos_type_attributes import relevant_attributes
+from greenideas.parts_of_speech.pos_types import POSType
+from greenideas.rules.expansion_spec import INHERIT, ExpansionSpec
 from greenideas.rules.grammar_rule import GrammarRule
 from greenideas.rules.grammar_ruleset import GrammarRuleset
 
@@ -33,15 +33,17 @@ class GrammarEngine:
             self._assign_random_attributes(node)
         else:
             raise ValueError("start must be a POSType or POSNode")
-        if len(self.grammar.get_rules(node.type)) == 0:
+        if len(self.grammar.get_applicable_rules(node)) == 0:
             raise RuleNotFoundError(f"No rule found to expand type {node.type}")
+        print(node.attributes)
         return self._expand_to_tree(node)
 
     def _expand_to_tree(self, node: POSNode) -> POSNode:
-        rules = self.grammar.get_rules(node.type)
+        rules = self.grammar.get_applicable_rules(node)
         if not rules:
             return node
         rule = random.choices(rules, weights=[r.weight for r in rules])[0]
+        print(f"expanding {node.type} with rule {rule}\n\n\n")
         children = []
         for _, spec in enumerate(rule.expansion):
             if isinstance(spec, ExpansionSpec):
@@ -49,9 +51,12 @@ class GrammarEngine:
                 for attr_type, constraint in spec.attribute_constraints.items():
                     if constraint is not None:
                         if constraint == INHERIT:
+                            # print(f"Inheriting {attr_type} from parent node from {node.type} to {child.type}")
                             child.attributes.set(
                                 attr_type, node.attributes.get(attr_type)
                             )
+                        elif isinstance(constraint, list):
+                            child.attributes.set(attr_type, random.choice(constraint))
                         else:
                             child.attributes.set(attr_type, constraint)
                 self._assign_random_attributes(child)
@@ -60,9 +65,7 @@ class GrammarEngine:
         return node
 
     def _assign_random_attributes(self, node: POSNode) -> None:
-        all_attributes = list(AttributeType)
-
-        for attr_type in all_attributes:
+        for attr_type in relevant_attributes(node.type):
             if attr_type not in node.attributes:
                 possible_values = list(attr_type.value_type)
                 node.attributes.set(attr_type, random.choice(possible_values))

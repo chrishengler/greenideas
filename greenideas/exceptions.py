@@ -1,4 +1,14 @@
 class RuleNotFoundError(Exception):
-    """Exception raised when a grammar rule is not found."""
+    pass
 
+
+class RelevantAttributesNotSpecified(Exception):
+    pass
+
+
+class InvalidGrammarRule(Exception):
+    pass
+
+
+class TwaddleConversionError(Exception):
     pass
