@@ -30,9 +30,8 @@ def main():
     for type, handler in default_formatting_handlers.items():
         formatter.register_formatting_handler(type, handler)
 
-    twaddle_string = formatter.format(tree)
+    twaddle_string = formatter.format_as_sentence(tree)
     print(twaddle_string)
-    twaddle_runner.run_sentence("<det>")
     print(twaddle_runner.run_sentence(twaddle_string))
 
 
