@@ -32,3 +32,9 @@ class TwaddleFormatter:
             child_tags = [self.format(child) for child in tree.children]
             twaddle_string = " ".join(filter(None, [twaddle_string, *child_tags]))
         return twaddle_string
+
+    def format_as_sentence(self, tree: POSNode) -> str:
+        if not isinstance(tree, POSNode):
+            raise TwaddleConversionError("Input must be a POSNode")
+        twaddle_string = self.format(tree)
+        return f"[case:sentence]{twaddle_string}."

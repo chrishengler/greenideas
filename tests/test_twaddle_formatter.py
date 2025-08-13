@@ -41,6 +41,30 @@ class TestTwaddleFormatter(unittest.TestCase):
         result = self.formatter.format(sentence)
         self.assertEqual(result, expected_template)
 
+    def test_format_as_sentence(self):
+        det = POSNode(
+            type=POSType.Det, attributes={AttributeType.NUMBER: Number.SINGULAR}
+        )
+        noun = POSNode(
+            type=POSType.Noun, attributes={AttributeType.NUMBER: Number.SINGULAR}
+        )
+        verb = POSNode(
+            type=POSType.Verb,
+            attributes={
+                AttributeType.NUMBER: Number.SINGULAR,
+                AttributeType.PERSON: Person.THIRD,
+                AttributeType.TENSE: Tense.PRESENT,
+            },
+        )
+        noun_phrase = POSNode(type=POSType.NP, children=[det, noun])
+        verb_phrase = POSNode(type=POSType.VP, children=[verb, det, noun])
+        sentence = POSNode(type=POSType.S, children=[noun_phrase, verb_phrase])
+        expected_template = (
+            "[case:sentence]<det.sg> <noun.sg> <verb.s> <det.sg> <noun.sg>."
+        )
+        result = self.formatter.format_as_sentence(sentence)
+        self.assertEqual(result, expected_template)
+
 
 if __name__ == "__main__":
     unittest.main()
