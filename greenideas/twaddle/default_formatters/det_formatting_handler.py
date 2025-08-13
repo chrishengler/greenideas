@@ -3,6 +3,7 @@ from greenideas.attributes.number import Number
 from greenideas.exceptions import TwaddleConversionError
 from greenideas.parts_of_speech.pos_node import POSNode
 from greenideas.parts_of_speech.pos_types import POSType
+from greenideas.twaddle.twaddle_tag import build_twaddle_tag
 
 
 class DetFormattingHandler:
@@ -15,4 +16,4 @@ class DetFormattingHandler:
         name = "det"
         number = node.attributes.get(AttributeType.NUMBER)
         form = "pl" if number == Number.PLURAL else "sg"
-        return f"<{name}{('.' + form if form else '')}>"
+        return build_twaddle_tag(name, form=form)

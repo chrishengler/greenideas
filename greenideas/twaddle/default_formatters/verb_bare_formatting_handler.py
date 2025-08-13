@@ -1,6 +1,7 @@
 from greenideas.exceptions import TwaddleConversionError
 from greenideas.parts_of_speech.pos_node import POSNode
 from greenideas.parts_of_speech.pos_types import POSType
+from greenideas.twaddle.twaddle_tag import build_twaddle_tag
 
 
 class VerbBareFormattingHandler:
@@ -10,4 +11,4 @@ class VerbBareFormattingHandler:
             raise TwaddleConversionError(
                 f"Tried to use VerbBareFormattingHandler on {node.type}"
             )
-        return "<verb>"
+        return build_twaddle_tag("verb")

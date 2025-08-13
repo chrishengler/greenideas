@@ -6,6 +6,7 @@ from greenideas.attributes.tense import Tense
 from greenideas.exceptions import TwaddleConversionError
 from greenideas.parts_of_speech.pos_node import POSNode
 from greenideas.parts_of_speech.pos_types import POSType
+from greenideas.twaddle.twaddle_tag import build_twaddle_tag
 
 
 class VerbFormattingHandler:
@@ -16,7 +17,7 @@ class VerbFormattingHandler:
                 f"Tried to use VerbFormattingHandler on {node.type}"
             )
         name = "verb"
-        form = ""
+        form = None
         number = node.attributes.get(AttributeType.NUMBER)
         person = node.attributes.get(AttributeType.PERSON)
         tense = node.attributes.get(AttributeType.TENSE)
@@ -29,8 +30,4 @@ class VerbFormattingHandler:
             form = "past"
         elif person == Person.THIRD and number == Number.SINGULAR:
             form = "s"
-        # past and present participles to be added later
-        print(
-            f"Formatting verb: aspect: {aspect}, number: {number}, person: {person}, tense: {tense}:\n{form=}"
-        )
-        return f"<{name}{('.' + form if form else '')}>"
+        return build_twaddle_tag(name, form=form)
