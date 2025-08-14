@@ -5,6 +5,7 @@ from greenideas.attributes.tense import Tense
 from greenideas.exceptions import TwaddleConversionError
 from greenideas.parts_of_speech.pos_node import POSNode
 from greenideas.parts_of_speech.pos_types import POSType
+from greenideas.twaddle.twaddle_tag import build_twaddle_tag
 
 
 class AuxDoFormattingHandler:
@@ -15,7 +16,7 @@ class AuxDoFormattingHandler:
                 f"Tried to use AuxDoFormattingHandler on {node.type}"
             )
         name = "aux-do"
-        form = ""
+        form = None
         number = node.attributes.get(AttributeType.NUMBER)
         person = node.attributes.get(AttributeType.PERSON)
         tense = node.attributes.get(AttributeType.TENSE)
@@ -23,5 +24,4 @@ class AuxDoFormattingHandler:
             form = "past"
         elif person == Person.THIRD and number == Number.SINGULAR:
             form = "s"
-        # past and present participles to be added later
-        return f"<{name}{('.' + form if form else '')}>"
+        return build_twaddle_tag(name, form=form)

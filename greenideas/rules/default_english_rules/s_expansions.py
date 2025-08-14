@@ -52,19 +52,46 @@ s__np_auxp = GrammarRule(
     ],
 )
 
+# S -> NP ModalP
+s__np_modalp = GrammarRule(
+    SourceSpec(POSType.S),
+    [
+        ExpansionSpec(
+            POSType.NP,
+            {
+                AttributeType.NUMBER: INHERIT,
+                AttributeType.PERSON: INHERIT,
+                AttributeType.CASE: Case.NOMINATIVE,
+            },
+        ),
+        ExpansionSpec(
+            POSType.ModalP,
+            {
+                AttributeType.TENSE: INHERIT,
+            },
+        ),
+    ],
+)
+
 # S -> S Conj S
 s__s_conj_s = GrammarRule(
     SourceSpec(POSType.S),
     [
         ExpansionSpec(POSType.S),
-        ExpansionSpec(POSType.Conj),
+        ExpansionSpec(POSType.CoordConj),
         ExpansionSpec(POSType.S),
     ],
-    weight=0.05,
+    weight=0.2,
 )
 
-s_expansions = [
-    s__np_vp,
-    s__np_auxp,
-    s__s_conj_s,
-]
+s__s_sub_s = GrammarRule(
+    SourceSpec(POSType.S),
+    [
+        ExpansionSpec(POSType.S),
+        ExpansionSpec(POSType.Subordinator),
+        ExpansionSpec(POSType.S),
+    ],
+    weight=0.2,
+)
+
+s_expansions = [s__np_vp, s__np_auxp, s__np_modalp, s__s_conj_s, s__s_sub_s]

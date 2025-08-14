@@ -1,11 +1,15 @@
 from greenideas.rules.default_english_rules.adjP_expansions import adjP_expansions
 from greenideas.rules.default_english_rules.advP_expansions import advP_expansions
 from greenideas.rules.default_english_rules.auxP_expansions import auxP_expansions
+from greenideas.rules.default_english_rules.modalP_expansions import modalP_expansions
 from greenideas.rules.default_english_rules.np_expansions import np_expansions
 from greenideas.rules.default_english_rules.npNodet_expansions import npNodet_expansions
 from greenideas.rules.default_english_rules.pp_expansions import pp_expansions
 from greenideas.rules.default_english_rules.s_expansions import s_expansions
 from greenideas.rules.default_english_rules.vp_expansions import vp_expansions
+from greenideas.rules.default_english_rules.vpAfterModal_expansions import (
+    vpAfterModal_expansions,
+)
 from greenideas.rules.default_english_rules.vpBare_expansions import vpBare_expansions
 from greenideas.rules.grammar_ruleset import GrammarRuleset
 
@@ -13,11 +17,13 @@ default_rules = GrammarRuleset()
 
 
 default_rules.add_rules(s_expansions)
+default_rules.add_rules(adjP_expansions)
+default_rules.add_rules(advP_expansions)
+default_rules.add_rules(auxP_expansions)
+default_rules.add_rules(modalP_expansions)
 default_rules.add_rules(np_expansions)
 default_rules.add_rules(npNodet_expansions)
-default_rules.add_rules(adjP_expansions)
-default_rules.add_rules(vp_expansions)
-default_rules.add_rules(vpBare_expansions)
-default_rules.add_rules(auxP_expansions)
 default_rules.add_rules(pp_expansions)
-default_rules.add_rules(advP_expansions)
+default_rules.add_rules(vp_expansions)
+default_rules.add_rules(vpAfterModal_expansions)
+default_rules.add_rules(vpBare_expansions)

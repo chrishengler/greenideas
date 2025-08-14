@@ -17,10 +17,8 @@ POSTYPE_ATTRIBUTE_MAP = {
         AttributeType.PERSON,
         AttributeType.ASPECT,
     },
-    POSType.VP: {
+    POSType.ModalP: {
         AttributeType.TENSE,
-        AttributeType.NUMBER,
-        AttributeType.PERSON,
         AttributeType.ASPECT,
     },
     POSType.NP: {AttributeType.CASE, AttributeType.NUMBER, AttributeType.PERSON},
@@ -30,6 +28,9 @@ POSTYPE_ATTRIBUTE_MAP = {
         AttributeType.TENSE,
         AttributeType.NUMBER,
         AttributeType.PERSON,
+        AttributeType.ASPECT,
+    },
+    POSType.VP_AfterModal: {
         AttributeType.ASPECT,
     },
     POSType.VP_Bare: {},
@@ -47,15 +48,23 @@ POSTYPE_ATTRIBUTE_MAP = {
         AttributeType.PERSON,
         AttributeType.ASPECT,
     },
-    POSType.Conj: set(),
+    POSType.CoordConj: set(),
     POSType.Det: {AttributeType.NUMBER, AttributeType.CASE},
+    POSType.Modal: {
+        AttributeType.TENSE,
+        AttributeType.ASPECT,
+    },
     POSType.Noun: {AttributeType.NUMBER, AttributeType.CASE},
     POSType.Prep: set(),
     POSType.Pron: {AttributeType.NUMBER, AttributeType.PERSON, AttributeType.CASE},
+    POSType.Subordinator: set(),
     POSType.Verb: {
         AttributeType.TENSE,
         AttributeType.PERSON,
         AttributeType.NUMBER,
+        AttributeType.ASPECT,
+    },
+    POSType.Verb_AfterModal: {
         AttributeType.ASPECT,
     },
     POSType.Verb_Bare: {},

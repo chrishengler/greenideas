@@ -18,7 +18,7 @@ adjP__adjP_conj_adjP = GrammarRule(
     SourceSpec(POSType.AdjP),
     [
         ExpansionSpec(POSType.AdjP),
-        ExpansionSpec(POSType.Conj),
+        ExpansionSpec(POSType.CoordConj),
         ExpansionSpec(POSType.AdjP),
     ],
     weight=0.1,

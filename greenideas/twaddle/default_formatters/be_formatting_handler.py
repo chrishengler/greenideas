@@ -6,6 +6,7 @@ from greenideas.attributes.tense import Tense
 from greenideas.exceptions import TwaddleConversionError
 from greenideas.parts_of_speech.pos_node import POSNode
 from greenideas.parts_of_speech.pos_types import POSType
+from greenideas.twaddle.twaddle_tag import build_twaddle_tag
 
 
 class BeFormattingHandler:
@@ -16,7 +17,7 @@ class BeFormattingHandler:
                 f"Tried to use BeFormattingHandler on {node.type}"
             )
         name = "be"
-        form = ""
+        form = None
         aspect = node.attributes.get(AttributeType.ASPECT)
         number = node.attributes.get(AttributeType.NUMBER)
         person = node.attributes.get(AttributeType.PERSON)
@@ -39,5 +40,4 @@ class BeFormattingHandler:
                 form += "pres"
             else:
                 form += "past"
-        # past and present participles to be added later
-        return f"<{name}{('.' + form if form else '')}>"
+        return build_twaddle_tag(name, form=form)

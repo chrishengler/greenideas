@@ -4,11 +4,11 @@ from greenideas.parts_of_speech.pos_types import POSType
 from greenideas.twaddle.twaddle_tag import build_twaddle_tag
 
 
-class VerbBareFormattingHandler:
+class SubordinatorFormattingHandler:
     @staticmethod
     def format(node: POSNode) -> str:
-        if node.type != POSType.Verb_Bare:
+        if node.type != POSType.Subordinator:
             raise TwaddleConversionError(
-                f"Tried to use VerbBareFormattingHandler on {node.type}"
+                f"Tried to use SubordinatorFormattingHandler on {node.type}"
             )
-        return build_twaddle_tag("verb")
+        return build_twaddle_tag("conj", class_specifier="subordinator")

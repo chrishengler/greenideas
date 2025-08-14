@@ -7,10 +7,12 @@ class POSType(Enum):
     AdjP = auto()
     AdvP = auto()
     AuxP = auto()
+    ModalP = auto()
     NP = auto()
     NP_NoDet = auto()
     PP = auto()
     VP = auto()
+    VP_AfterModal = auto()
     VP_Bare = auto()
 
     Adj = auto()
@@ -18,10 +20,13 @@ class POSType(Enum):
     Aux_do = auto()  # do support
     Aux_finite = auto()  # tensed auxiliaries, have/be
     Be = auto()
-    Conj = auto()
+    CoordConj = auto()
     Det = auto()
+    Modal = auto()
     Noun = auto()
     Prep = auto()
     Pron = auto()
+    Subordinator = auto()
     Verb = auto()
+    Verb_AfterModal = auto()
     Verb_Bare = auto()

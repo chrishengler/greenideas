@@ -5,6 +5,7 @@ from greenideas.attributes.person import Person
 from greenideas.exceptions import TwaddleConversionError
 from greenideas.parts_of_speech.pos_node import POSNode
 from greenideas.parts_of_speech.pos_types import POSType
+from greenideas.twaddle.twaddle_tag import build_twaddle_tag
 
 
 class PronFormattingHandler:
@@ -15,14 +16,14 @@ class PronFormattingHandler:
                 f"Tried to use PronFormattingHandler on {node.type}"
             )
         name = "pron"
-        label = ""
+        class_specifier = None
         person = node.attributes.get(AttributeType.PERSON)
         if person == Person.FIRST:
-            label = "firstperson"
+            class_specifier = "firstperson"
         elif person == Person.SECOND:
-            label = "secondperson"
+            class_specifier = "secondperson"
         elif person == Person.THIRD:
-            label = "thirdperson"
+            class_specifier = "thirdperson"
         number = node.attributes.get(AttributeType.NUMBER)
         case = node.attributes.get(AttributeType.CASE)
         form = "pl" if number == Number.PLURAL else "sg"
@@ -30,4 +31,4 @@ class PronFormattingHandler:
             form += "gen"
         elif case == Case.OBJECTIVE:
             form += "obj"
-        return f"<{name}-{label}{('.' + form if form else '')}>"
+        return build_twaddle_tag(name, class_specifier=class_specifier, form=form)

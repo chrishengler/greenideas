@@ -14,11 +14,14 @@ from greenideas.twaddle.default_formatters.aux_finite_formatting_handler import 
 from greenideas.twaddle.default_formatters.be_formatting_handler import (
     BeFormattingHandler,
 )
-from greenideas.twaddle.default_formatters.conj_formatting_handler import (
-    ConjFormattingHandler,
+from greenideas.twaddle.default_formatters.coordconj_formatting_handler import (
+    CoordconjFormattingHandler,
 )
 from greenideas.twaddle.default_formatters.det_formatting_handler import (
     DetFormattingHandler,
+)
+from greenideas.twaddle.default_formatters.modal_formatting_handler import (
+    ModalFormattingHandler,
 )
 from greenideas.twaddle.default_formatters.noun_formatting_handler import (
     NounFormattingHandler,
@@ -28,6 +31,12 @@ from greenideas.twaddle.default_formatters.prep_formatting_handler import (
 )
 from greenideas.twaddle.default_formatters.pron_formatting_handler import (
     PronFormattingHandler,
+)
+from greenideas.twaddle.default_formatters.subordinator_formatting_handler import (
+    SubordinatorFormattingHandler,
+)
+from greenideas.twaddle.default_formatters.verb_after_modal_formatting_handler import (
+    VerbAfterModalFormattingHandler,
 )
 from greenideas.twaddle.default_formatters.verb_bare_formatting_handler import (
     VerbBareFormattingHandler,
@@ -43,11 +52,14 @@ default_formatting_handlers: dict[POSType, TwaddleFormattingHandler] = {
     POSType.Aux_do: AuxDoFormattingHandler,
     POSType.Aux_finite: AuxFiniteFormattingHandler,
     POSType.Be: BeFormattingHandler,
-    POSType.Conj: ConjFormattingHandler,
+    POSType.CoordConj: CoordconjFormattingHandler,
     POSType.Det: DetFormattingHandler,
+    POSType.Modal: ModalFormattingHandler,
     POSType.Noun: NounFormattingHandler,
     POSType.Prep: PrepFormattingHandler,
     POSType.Pron: PronFormattingHandler,
+    POSType.Subordinator: SubordinatorFormattingHandler,
     POSType.Verb: VerbFormattingHandler,
+    POSType.Verb_AfterModal: VerbAfterModalFormattingHandler,
     POSType.Verb_Bare: VerbBareFormattingHandler,
 }

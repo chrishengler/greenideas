@@ -11,8 +11,6 @@ from greenideas.twaddle.default_formatters.default_formatting_handlers import (
 )
 from greenideas.twaddle.twaddle_formatter import TwaddleFormatter
 
-# from twaddle.runner import TwaddleRunner
-
 
 def main():
     if len(sys.argv) < 2:
