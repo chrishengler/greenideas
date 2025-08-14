@@ -14,8 +14,11 @@ will include:
 
 ## Installation
 
-For now, just download the repository from Github and handle the package by hand. The package will
-be added to PyPi at a later date to allow installation via pip, etc.
+The package can be downloaded manually from Github or installed via pip:
+
+```bash
+pip install greenideas
+```
 
 The package uses Poetry for dependency management, dependencies can be installed by running
 
@@ -25,24 +28,46 @@ poetry install
 
 ## Usage
 
-To use the `greenideas` package, you can (or at least you will be able to, at some point) import the main classes from the package and start generating sentences. Here’s a simple example:
+To use the `greenideas` package, you can (or at least you will be able to, at some point) import the main classes from the package, provide the location of your twaddle dictionaries, and start generating sentences. The __main__.py file offers a simple example:
 
 ```python
+import readline  # noqa: F401
+import sys
+
+from twaddle.runner import TwaddleRunner
+
 from greenideas.grammar_engine import GrammarEngine
-from greenideas.tree_to_twaddle import TreeToTwaddle
+from greenideas.parts_of_speech.pos_types import POSType
+from greenideas.rules.default_english_rules.default_rules import default_rules
+from greenideas.twaddle.default_formatters.default_formatting_handlers import (
+    default_formatting_handlers,
+)
+from greenideas.twaddle.twaddle_formatter import TwaddleFormatter
 
-# Initialize the grammar engine
-grammar_engine = GrammarEngine()
 
-# Generate a derivation tree
-tree = grammar_engine.generate_tree()
+def main():
+    if len(sys.argv) < 2:
+        print("argument required: path to directory containing dictionary files")
+        return
+    dictionary_path = sys.argv[1]
+    twaddle_runner = TwaddleRunner(dictionary_path)
 
-# Convert the tree to a twaddle template
-converter = TreeToTwaddle()
-template = converter.convert_tree(tree)
+    engine = GrammarEngine()
+    engine.add_ruleset(default_rules)
+    tree = engine.generate_tree(POSType.S)
+    print(tree)
 
-print(template)
+    formatter = TwaddleFormatter()
+    for type, handler in default_formatting_handlers.items():
+        formatter.register_formatting_handler(type, handler)
+
+    twaddle_string = formatter.format_as_sentence(tree)
+    print(twaddle_string)
+    print(twaddle_runner.run_sentence(twaddle_string))
 ```
+
+An official set of twaddle dictionaries for use with the default English language rules is
+available at https://github.com/chrishengler/greenideas-dict
 
 ## Contributing
 

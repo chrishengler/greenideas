@@ -1,6 +1,6 @@
 [project]
 name = "greenideas"
-version = "0.1.0"
+version = "0.2.0"
 description = "A package to generate grammatically valid but semantically nonsensical English sentences."
 authors = [
     {name = "Chris Hengler",email = "chrysics@gmail.com"}
@@ -12,7 +12,7 @@ dependencies = [
     "pytest (>=7.2.0)",
     "twaddle (>=1.0.0,<2.0.0)"
 ]
-keywords = ["grammar", "sentence generation", "placeholder text", "twaddle"]
+keywords = ["grammar", "procedural generation", "sentence generation", "placeholder text", "twaddle"]
     
 [project.urls]
 repository = "https://github.com/chrishengler/greenideas"
