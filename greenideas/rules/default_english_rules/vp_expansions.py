@@ -62,6 +62,7 @@ vp__vp_pp = GrammarRule(
         ),
         ExpansionSpec(POSType.PP),
     ],
+    weight=0.2,
 )
 
 # VP -> VP Conj VP
