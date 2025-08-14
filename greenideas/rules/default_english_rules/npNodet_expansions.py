@@ -10,7 +10,11 @@ npNodet__n = GrammarRule(
     [
         ExpansionSpec(
             POSType.Noun,
-            {AttributeType.NUMBER: INHERIT, AttributeType.CASE: INHERIT},
+            {
+                AttributeType.ANIMACY: INHERIT,
+                AttributeType.CASE: INHERIT,
+                AttributeType.NUMBER: INHERIT,
+            },
         ),
     ],
 )
@@ -22,7 +26,11 @@ np_nodet__adjp_np_nodet = GrammarRule(
         ExpansionSpec(POSType.AdjP),
         ExpansionSpec(
             POSType.NP_NoDet,
-            {AttributeType.NUMBER: INHERIT, AttributeType.CASE: INHERIT},
+            {
+                AttributeType.ANIMACY: INHERIT,
+                AttributeType.CASE: INHERIT,
+                AttributeType.NUMBER: INHERIT,
+            },
         ),
     ],
     weight=0.2,
@@ -35,7 +43,11 @@ npNodet__adjp_n = GrammarRule(
         ExpansionSpec(POSType.AdjP),
         ExpansionSpec(
             POSType.Noun,
-            {AttributeType.NUMBER: INHERIT, AttributeType.CASE: INHERIT},
+            {
+                AttributeType.ANIMACY: INHERIT,
+                AttributeType.CASE: INHERIT,
+                AttributeType.NUMBER: INHERIT,
+            },
         ),
     ],
     weight=0.2,
