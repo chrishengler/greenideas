@@ -53,8 +53,31 @@ npNodet__adjp_n = GrammarRule(
     weight=0.2,
 )
 
+# NP_NoDet -> N RelClause
+npNodet__n_relclause = GrammarRule(
+    SourceSpec(POSType.NP_NoDet),
+    [
+        ExpansionSpec(
+            POSType.Noun,
+            {
+                AttributeType.ANIMACY: INHERIT,
+                AttributeType.CASE: INHERIT,
+                AttributeType.NUMBER: INHERIT,
+            },
+        ),
+        ExpansionSpec(
+            POSType.RelClause,
+            {
+                AttributeType.ANIMACY: INHERIT,
+            },
+        ),
+    ],
+    weight=0.2,
+)
+
 npNodet_expansions = [
     npNodet__n,
     np_nodet__adjp_np_nodet,
     npNodet__adjp_n,
+    npNodet__n_relclause,
 ]

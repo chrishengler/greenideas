@@ -5,6 +5,7 @@ from greenideas.rules.default_english_rules.modalP_expansions import modalP_expa
 from greenideas.rules.default_english_rules.np_expansions import np_expansions
 from greenideas.rules.default_english_rules.npNodet_expansions import npNodet_expansions
 from greenideas.rules.default_english_rules.pp_expansions import pp_expansions
+from greenideas.rules.default_english_rules.relClause_expansions import relC_expansions
 from greenideas.rules.default_english_rules.s_expansions import s_expansions
 from greenideas.rules.default_english_rules.vp_expansions import vp_expansions
 from greenideas.rules.default_english_rules.vpAfterModal_expansions import (
@@ -24,6 +25,7 @@ default_rules.add_rules(modalP_expansions)
 default_rules.add_rules(np_expansions)
 default_rules.add_rules(npNodet_expansions)
 default_rules.add_rules(pp_expansions)
+default_rules.add_rules(relC_expansions)
 default_rules.add_rules(vp_expansions)
 default_rules.add_rules(vpAfterModal_expansions)
 default_rules.add_rules(vpBare_expansions)

@@ -32,6 +32,9 @@ from greenideas.twaddle.default_formatters.prep_formatting_handler import (
 from greenideas.twaddle.default_formatters.pron_formatting_handler import (
     PronFormattingHandler,
 )
+from greenideas.twaddle.default_formatters.relative_pronoun_formatting_handler import (
+    RelativePronounFormattingHandler,
+)
 from greenideas.twaddle.default_formatters.subordinator_formatting_handler import (
     SubordinatorFormattingHandler,
 )
@@ -58,6 +61,7 @@ default_formatting_handlers: dict[POSType, TwaddleFormattingHandler] = {
     POSType.Noun: NounFormattingHandler,
     POSType.Prep: PrepFormattingHandler,
     POSType.Pron: PronFormattingHandler,
+    POSType.RelativePron: RelativePronounFormattingHandler,
     POSType.Subordinator: SubordinatorFormattingHandler,
     POSType.Verb: VerbFormattingHandler,
     POSType.Verb_AfterModal: VerbAfterModalFormattingHandler,

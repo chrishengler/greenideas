@@ -39,6 +39,9 @@ POSTYPE_ATTRIBUTE_MAP = {
         AttributeType.PERSON,
     },
     POSType.PP: {},
+    POSType.RelClause: {
+        AttributeType.ANIMACY,
+    },
     POSType.VP: {
         AttributeType.ANIMACY,
         AttributeType.ASPECT,
@@ -84,6 +87,9 @@ POSTYPE_ATTRIBUTE_MAP = {
         AttributeType.CASE,
         AttributeType.NUMBER,
         AttributeType.PERSON,
+    },
+    POSType.RelativePron: {
+        AttributeType.ANIMACY,
     },
     POSType.Subordinator: set(),
     POSType.Verb: {

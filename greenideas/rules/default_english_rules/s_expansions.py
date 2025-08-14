@@ -98,4 +98,10 @@ s__s_sub_s = GrammarRule(
     weight=0.2,
 )
 
-s_expansions = [s__np_vp, s__np_auxp, s__np_modalp, s__s_conj_s, s__s_sub_s]
+s_expansions = [
+    s__np_vp,
+    s__np_auxp,
+    s__np_modalp,
+    s__s_conj_s,
+    s__s_sub_s,
+]
