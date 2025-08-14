@@ -15,7 +15,7 @@ class AuxFiniteFormattingHandler:
             raise TwaddleConversionError(
                 f"Tried to use AuxFiniteFormattingHandler on {node.type}"
             )
-        name = "aux-finite"
+        name = "aux"
         form = None
         number = node.attributes.get(AttributeType.NUMBER)
         person = node.attributes.get(AttributeType.PERSON)
@@ -24,5 +24,4 @@ class AuxFiniteFormattingHandler:
             form = "past"
         elif person == Person.THIRD and number == Number.SINGULAR:
             form = "s"
-
-        return build_twaddle_tag(name, form=form)
+        return build_twaddle_tag(name, class_specifier="finite", form=form)
