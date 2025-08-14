@@ -40,5 +40,4 @@ class BeFormattingHandler:
                 form += "pres"
             else:
                 form += "past"
-        # past and present participles to be added later
         return build_twaddle_tag(name, form=form)

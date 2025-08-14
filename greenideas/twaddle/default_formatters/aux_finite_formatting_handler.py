@@ -24,5 +24,5 @@ class AuxFiniteFormattingHandler:
             form = "past"
         elif person == Person.THIRD and number == Number.SINGULAR:
             form = "s"
-        # past and present participles to be added later
+
         return build_twaddle_tag(name, form=form)
