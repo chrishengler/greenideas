@@ -36,6 +36,7 @@ np__pron = GrammarRule(
             },
         )
     ],
+    weight=0.2,
 )
 
 np_expansions = [
