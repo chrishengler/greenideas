@@ -1,3 +1,4 @@
+import logging
 import readline  # noqa: F401
 import sys
 
@@ -13,6 +14,7 @@ from greenideas.twaddle.twaddle_formatter import TwaddleFormatter
 
 
 def main():
+    logging.basicConfig(filename="greenideas.log", level=logging.INFO)
     if len(sys.argv) < 2:
         print("argument required: path to directory containing dictionary files")
         return

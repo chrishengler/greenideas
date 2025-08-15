@@ -121,7 +121,6 @@ class TestGrammarEngine(unittest.TestCase):
         self.assertEqual(tree.children[1].type, POSType.VP)
         for child in tree.children:
             self.assertIsInstance(child, POSNode)
-            print(f"{child.type=}")
             for attr in child.attributes._values.keys():
                 self.assertIn(attr, relevant_attributes(child.type))
 
