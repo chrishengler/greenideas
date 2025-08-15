@@ -1,3 +1,4 @@
+import logging
 import random
 
 from greenideas.attributes.grammatical_attribute import GrammaticalAttribute
@@ -9,6 +10,8 @@ from greenideas.parts_of_speech.pos_types import POSType
 from greenideas.rules.expansion_spec import INHERIT, ExpansionSpec
 from greenideas.rules.grammar_rule import GrammarRule
 from greenideas.rules.grammar_ruleset import GrammarRuleset
+
+logger = logging.getLogger(__name__)
 
 
 class GrammarEngine:
@@ -36,7 +39,7 @@ class GrammarEngine:
             raise ValueError("start must be a POSType or POSNode")
         if len(self.grammar.get_applicable_rules(node)) == 0:
             raise RuleNotFoundError(f"No rule found to expand type {node.type}")
-        print(node.attributes)
+        logger.info(node.attributes)
         return self._expand_to_tree(node)
 
     def _expand_to_tree(self, node: POSNode) -> POSNode:
@@ -44,7 +47,7 @@ class GrammarEngine:
         if not rules:
             return node
         rule = random.choices(rules, weights=[r.weight for r in rules])[0]
-        print(f"expanding {node.type} with rule {rule}\n\n\n")
+        logger.info(f"expanding {node.type} with rule {rule}\n\n\n")
         children = []
         for _, spec in enumerate(rule.expansion):
             if isinstance(spec, ExpansionSpec):
