@@ -1,7 +1,9 @@
-from enum import Enum, auto
+from enum import auto
+
+from greenideas.attributes.grammatical_attribute import GrammaticalAttribute
 
 
-class Animacy(Enum):
+class Animacy(GrammaticalAttribute):
     ANIMATE = auto()
     INANIMATE = auto()
 

@@ -1,7 +1,9 @@
-from enum import Enum, auto
+from enum import auto
+
+from greenideas.attributes.grammatical_attribute import GrammaticalAttribute
 
 
-class Valency(Enum):
+class Valency(GrammaticalAttribute):
     MONOVALENT = auto()
     DIVALENT = auto()
     # TRIVALENT = auto()  # handling trivalent verbs will require twaddle labels
