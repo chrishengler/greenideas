@@ -48,9 +48,11 @@ POSTYPE_ATTRIBUTE_MAP = {
         AttributeType.NUMBER,
         AttributeType.PERSON,
         AttributeType.TENSE,
+        AttributeType.VALENCY,
     },
     POSType.VP_AfterModal: {
         AttributeType.ASPECT,
+        AttributeType.VALENCY,
     },
     POSType.VP_Bare: {},
     POSType.Adj: set(),
@@ -98,6 +100,7 @@ POSTYPE_ATTRIBUTE_MAP = {
         AttributeType.NUMBER,
         AttributeType.PERSON,
         AttributeType.TENSE,
+        AttributeType.VALENCY,
     },
     POSType.Verb_AfterModal: {
         AttributeType.ASPECT,
