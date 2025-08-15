@@ -1,3 +1,4 @@
+from greenideas.attributes.animacy import Animacy
 from greenideas.attributes.attribute_type import AttributeType
 from greenideas.attributes.case import Case
 from greenideas.attributes.number import Number
@@ -16,14 +17,22 @@ class PronFormattingHandler:
                 f"Tried to use PronFormattingHandler on {node.type}"
             )
         name = "pron"
-        class_specifier = None
+        class_specifiers = list()
         person = node.attributes.get(AttributeType.PERSON)
-        if person == Person.FIRST:
-            class_specifier = "firstperson"
-        elif person == Person.SECOND:
-            class_specifier = "secondperson"
-        elif person == Person.THIRD:
-            class_specifier = "thirdperson"
+        animacy = node.attributes.get(AttributeType.ANIMACY)
+        match person:
+            case Person.FIRST:
+                class_specifiers.append("firstperson")
+            case Person.SECOND:
+                class_specifiers.append("secondperson")
+            case Person.THIRD:
+                class_specifiers.append("thirdperson")
+                # animacy only relevant in third person
+                match animacy:
+                    case Animacy.ANIMATE:
+                        class_specifiers.append("animate")
+                    case Animacy.INANIMATE:
+                        class_specifiers.append("inanimate")
         number = node.attributes.get(AttributeType.NUMBER)
         case = node.attributes.get(AttributeType.CASE)
         form = "pl" if number == Number.PLURAL else "sg"
@@ -31,4 +40,4 @@ class PronFormattingHandler:
             form += "gen"
         elif case == Case.OBJECTIVE:
             form += "obj"
-        return build_twaddle_tag(name, class_specifier=class_specifier, form=form)
+        return build_twaddle_tag(name, class_specifier=class_specifiers, form=form)

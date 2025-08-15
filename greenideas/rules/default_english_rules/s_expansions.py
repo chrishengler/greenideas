@@ -13,14 +13,16 @@ s__np_vp = GrammarRule(
         ExpansionSpec(
             POSType.NP,
             {
+                AttributeType.ANIMACY: INHERIT,
+                AttributeType.CASE: Case.NOMINATIVE,
                 AttributeType.NUMBER: INHERIT,
                 AttributeType.PERSON: INHERIT,
-                AttributeType.CASE: Case.NOMINATIVE,
             },
         ),
         ExpansionSpec(
             POSType.VP,
             {
+                AttributeType.ANIMACY: INHERIT,
                 AttributeType.ASPECT: Aspect.SIMPLE,
                 AttributeType.NUMBER: INHERIT,
                 AttributeType.PERSON: INHERIT,
@@ -36,6 +38,7 @@ s__np_auxp = GrammarRule(
         ExpansionSpec(
             POSType.NP,
             {
+                AttributeType.ANIMACY: INHERIT,
                 AttributeType.NUMBER: INHERIT,
                 AttributeType.PERSON: INHERIT,
                 AttributeType.CASE: Case.NOMINATIVE,
@@ -59,6 +62,7 @@ s__np_modalp = GrammarRule(
         ExpansionSpec(
             POSType.NP,
             {
+                AttributeType.ANIMACY: INHERIT,
                 AttributeType.NUMBER: INHERIT,
                 AttributeType.PERSON: INHERIT,
                 AttributeType.CASE: Case.NOMINATIVE,
@@ -94,4 +98,10 @@ s__s_sub_s = GrammarRule(
     weight=0.2,
 )
 
-s_expansions = [s__np_vp, s__np_auxp, s__np_modalp, s__s_conj_s, s__s_sub_s]
+s_expansions = [
+    s__np_vp,
+    s__np_auxp,
+    s__np_modalp,
+    s__s_conj_s,
+    s__s_sub_s,
+]

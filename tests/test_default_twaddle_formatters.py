@@ -5,6 +5,7 @@ from greenideas.attributes.case import Case
 from greenideas.attributes.number import Number
 from greenideas.attributes.person import Person
 from greenideas.attributes.tense import Tense
+from greenideas.attributes.valency import Valency
 from greenideas.parts_of_speech.pos_node import POSNode
 from greenideas.parts_of_speech.pos_types import POSType
 from greenideas.twaddle.default_formatters.default_formatting_handlers import (
@@ -24,8 +25,9 @@ class TestDefaultTwaddleFormatters(unittest.TestCase):
         node.attributes.set(AttributeType.NUMBER, Number.SINGULAR)
         node.attributes.set(AttributeType.PERSON, Person.FIRST)
         node.attributes.set(AttributeType.TENSE, Tense.PAST)
+        node.attributes.set(AttributeType.VALENCY, Valency.DIVALENT)
         tag = self.formatter.format_node(node)
-        self.assertEqual(tag, "<verb.past>")
+        self.assertEqual(tag, "<verb-divalent.past>")
 
     def test_noun_tag(self):
         node = POSNode(type=POSType.Noun)
@@ -57,8 +59,9 @@ class TestDefaultTwaddleFormatters(unittest.TestCase):
 
     def test_verb_bare_tag(self):
         node = POSNode(type=POSType.Verb_Bare)
+        node.attributes.set(AttributeType.VALENCY, Valency.MONOVALENT)
         tag = self.formatter.format_node(node)
-        self.assertEqual(tag, "<verb>")
+        self.assertEqual(tag, "<verb-monovalent>")
 
 
 if __name__ == "__main__":

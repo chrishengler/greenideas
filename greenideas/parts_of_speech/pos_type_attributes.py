@@ -2,38 +2,61 @@ from greenideas.attributes.attribute_type import AttributeType
 from greenideas.parts_of_speech.pos_types import POSType
 
 POSTYPE_ATTRIBUTE_MAP = {
-    POSType.S: {AttributeType.TENSE, AttributeType.NUMBER, AttributeType.PERSON},
+    POSType.S: {
+        AttributeType.ANIMACY,
+        AttributeType.NUMBER,
+        AttributeType.PERSON,
+        AttributeType.TENSE,
+    },
     POSType.AdjP: set(),
     POSType.AdvP: set(),
     POSType.AuxP: {
-        AttributeType.TENSE,
+        AttributeType.ASPECT,
         AttributeType.NUMBER,
         AttributeType.PERSON,
-        AttributeType.ASPECT,
+        AttributeType.TENSE,
     },
     POSType.Be: {
-        AttributeType.TENSE,
+        AttributeType.ASPECT,
         AttributeType.NUMBER,
         AttributeType.PERSON,
-        AttributeType.ASPECT,
+        AttributeType.TENSE,
     },
     POSType.ModalP: {
-        AttributeType.TENSE,
         AttributeType.ASPECT,
-    },
-    POSType.NP: {AttributeType.CASE, AttributeType.NUMBER, AttributeType.PERSON},
-    POSType.NP_NoDet: {AttributeType.CASE, AttributeType.NUMBER, AttributeType.PERSON},
-    POSType.PP: {},
-    POSType.VP: {
         AttributeType.TENSE,
+    },
+    POSType.NP: {
+        AttributeType.ANIMACY,
+        AttributeType.CASE,
         AttributeType.NUMBER,
         AttributeType.PERSON,
+    },
+    POSType.NP_NoDet: {
+        AttributeType.ANIMACY,
+        AttributeType.CASE,
+        AttributeType.NUMBER,
+        AttributeType.PERSON,
+    },
+    POSType.PP: {},
+    POSType.RelClause: {
+        AttributeType.ANIMACY,
+    },
+    POSType.VP: {
+        AttributeType.ANIMACY,
         AttributeType.ASPECT,
+        AttributeType.NUMBER,
+        AttributeType.PERSON,
+        AttributeType.TENSE,
+        AttributeType.VALENCY,
     },
     POSType.VP_AfterModal: {
         AttributeType.ASPECT,
+        AttributeType.VALENCY,
     },
-    POSType.VP_Bare: {},
+    POSType.VP_Bare: {
+        AttributeType.VALENCY,
+    },
     POSType.Adj: set(),
     POSType.Adv: set(),
     POSType.Aux_do: {
@@ -49,25 +72,43 @@ POSTYPE_ATTRIBUTE_MAP = {
         AttributeType.ASPECT,
     },
     POSType.CoordConj: set(),
-    POSType.Det: {AttributeType.NUMBER, AttributeType.CASE},
-    POSType.Modal: {
-        AttributeType.TENSE,
-        AttributeType.ASPECT,
+    POSType.Det: {
+        AttributeType.CASE,
+        AttributeType.NUMBER,
     },
-    POSType.Noun: {AttributeType.NUMBER, AttributeType.CASE},
+    POSType.Modal: {
+        AttributeType.ASPECT,
+        AttributeType.TENSE,
+    },
+    POSType.Noun: {
+        AttributeType.ANIMACY,
+        AttributeType.CASE,
+        AttributeType.NUMBER,
+    },
     POSType.Prep: set(),
-    POSType.Pron: {AttributeType.NUMBER, AttributeType.PERSON, AttributeType.CASE},
+    POSType.Pron: {
+        AttributeType.ANIMACY,
+        AttributeType.CASE,
+        AttributeType.NUMBER,
+        AttributeType.PERSON,
+    },
+    POSType.RelativePron: {
+        AttributeType.ANIMACY,
+    },
     POSType.Subordinator: set(),
     POSType.Verb: {
-        AttributeType.TENSE,
-        AttributeType.PERSON,
-        AttributeType.NUMBER,
+        AttributeType.ANIMACY,
         AttributeType.ASPECT,
+        AttributeType.NUMBER,
+        AttributeType.PERSON,
+        AttributeType.TENSE,
+        AttributeType.VALENCY,
     },
     POSType.Verb_AfterModal: {
         AttributeType.ASPECT,
+        AttributeType.VALENCY,
     },
-    POSType.Verb_Bare: {},
+    POSType.Verb_Bare: {AttributeType.VALENCY},
 }
 
 
