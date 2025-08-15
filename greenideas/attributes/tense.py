@@ -1,6 +1,8 @@
-from enum import Enum, auto
+from enum import auto
+
+from greenideas.attributes.grammatical_attribute import GrammaticalAttribute
 
 
-class Tense(Enum):
+class Tense(GrammaticalAttribute):
     PRESENT = auto()
     PAST = auto()

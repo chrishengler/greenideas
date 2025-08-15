@@ -1,5 +1,6 @@
 import random
 
+from greenideas.attributes.grammatical_attribute import GrammaticalAttribute
 from greenideas.exceptions import RuleNotFoundError
 from greenideas.grammar import Grammar
 from greenideas.parts_of_speech.pos_node import POSNode
@@ -51,12 +52,13 @@ class GrammarEngine:
                 for attr_type, constraint in spec.attribute_constraints.items():
                     if constraint is not None:
                         if constraint == INHERIT:
-                            # print(f"Inheriting {attr_type} from parent node from {node.type} to {child.type}")
                             child.attributes.set(
                                 attr_type, node.attributes.get(attr_type)
                             )
                         elif isinstance(constraint, list):
-                            child.attributes.set(attr_type, random.choice(constraint))
+                            child.attributes.set(
+                                attr_type, GrammaticalAttribute.random_from(constraint)
+                            )
                         else:
                             child.attributes.set(attr_type, constraint)
                 self._assign_random_attributes(child)
@@ -68,4 +70,6 @@ class GrammarEngine:
         for attr_type in relevant_attributes(node.type):
             if attr_type not in node.attributes:
                 possible_values = list(attr_type.value_type)
-                node.attributes.set(attr_type, random.choice(possible_values))
+                node.attributes.set(
+                    attr_type, GrammaticalAttribute.random_from(possible_values)
+                )

@@ -1,7 +1,7 @@
-from enum import Enum, auto
+from greenideas.attributes.grammatical_attribute import GrammaticalAttribute
 
 
-class Person(Enum):
-    FIRST = auto()
-    SECOND = auto()
-    THIRD = auto()
+class Person(GrammaticalAttribute):
+    FIRST = ("1stP", 0.1)
+    SECOND = ("2ndP", 0.1)
+    THIRD = ("3rdP", 0.8)
