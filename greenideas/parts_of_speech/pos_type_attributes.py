@@ -54,7 +54,9 @@ POSTYPE_ATTRIBUTE_MAP = {
         AttributeType.ASPECT,
         AttributeType.VALENCY,
     },
-    POSType.VP_Bare: {},
+    POSType.VP_Bare: {
+        AttributeType.VALENCY,
+    },
     POSType.Adj: set(),
     POSType.Adv: set(),
     POSType.Aux_do: {
@@ -104,8 +106,9 @@ POSTYPE_ATTRIBUTE_MAP = {
     },
     POSType.Verb_AfterModal: {
         AttributeType.ASPECT,
+        AttributeType.VALENCY,
     },
-    POSType.Verb_Bare: {},
+    POSType.Verb_Bare: {AttributeType.VALENCY},
 }
 
 

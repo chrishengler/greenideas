@@ -1,3 +1,5 @@
+from greenideas.attributes.attribute_type import AttributeType
+from greenideas.attributes.valency import Valency
 from greenideas.exceptions import TwaddleConversionError
 from greenideas.parts_of_speech.pos_node import POSNode
 from greenideas.parts_of_speech.pos_types import POSType
@@ -11,4 +13,13 @@ class VerbBareFormattingHandler:
             raise TwaddleConversionError(
                 f"Tried to use VerbBareFormattingHandler on {node.type}"
             )
-        return build_twaddle_tag("verb")
+
+        valency = node.attributes.get(AttributeType.VALENCY)
+        match valency:
+            case Valency.MONOVALENT:
+                class_specifier = "monovalent"
+            case Valency.DIVALENT:
+                class_specifier = "divalent"
+            case _:
+                raise TwaddleConversionError(f"Invalid valency: {valency}")
+        return build_twaddle_tag("verb", class_specifier=class_specifier)
