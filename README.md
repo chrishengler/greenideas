@@ -1,11 +1,15 @@
+[![Python application](https://github.com/chrishengler/greenideas/actions/workflows/python-app.yml/badge.svg)](https://github.com/chrishengler/greenideas/actions/workflows/python-app.yml)
+
 # Green Ideas
 
-Green Ideas is a Python package designed to generate grammatically valid but semantically nonsensical English sentences using a generative grammar approach. The package employs recursive rewrite rules to create sentence structures and converts these structures into templates compatible with the `twaddle` package for language templating.
+Green Ideas is a Python package designed to generate grammatically valid but semantically nonsensical sentences. It is effectively a generative grammar engine, employing recursive rewrite rules to create sentence structures. It can then convert these structures into templates compatible with the `twaddle` package for language templating.
 
 ## Features
 
-The project is in early development and currently does very little indeed. Once completed, core features
-will include:
+Greenideas defines a grammar engine which expands a root sentence node into a full sentence
+tree, according to a variety of user-defined rules. Documentation for defining these rules will come at a later date. The package includes a pre-written set of rules which produce (mostly) grammatically valid English sentences. 
+
+The key features of the package are:
 
 - Generation of trees describing valid English sentence structures
 - Support for recursive rewrite rules for sentence structure generation.
