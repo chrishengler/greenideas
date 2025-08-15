@@ -4,6 +4,7 @@ from greenideas.attributes.attribute_type import AttributeType
 from greenideas.attributes.number import Number
 from greenideas.attributes.person import Person
 from greenideas.attributes.tense import Tense
+from greenideas.attributes.valency import Valency
 from greenideas.parts_of_speech.pos_node import POSNode
 from greenideas.parts_of_speech.pos_types import POSType
 from greenideas.twaddle.default_formatters.default_formatting_handlers import (
@@ -32,12 +33,13 @@ class TestTwaddleFormatter(unittest.TestCase):
                 AttributeType.NUMBER: Number.SINGULAR,
                 AttributeType.PERSON: Person.THIRD,
                 AttributeType.TENSE: Tense.PRESENT,
+                AttributeType.VALENCY: Valency.MONOVALENT,
             },
         )
         noun_phrase = POSNode(type=POSType.NP, children=[det, noun])
         verb_phrase = POSNode(type=POSType.VP, children=[verb, det, noun])
         sentence = POSNode(type=POSType.S, children=[noun_phrase, verb_phrase])
-        expected_template = "<det.sg> <noun.sg> <verb.s> <det.sg> <noun.sg>"
+        expected_template = "<det.sg> <noun.sg> <verb-monovalent.s> <det.sg> <noun.sg>"
         result = self.formatter.format(sentence)
         self.assertEqual(result, expected_template)
 
@@ -54,13 +56,14 @@ class TestTwaddleFormatter(unittest.TestCase):
                 AttributeType.NUMBER: Number.SINGULAR,
                 AttributeType.PERSON: Person.THIRD,
                 AttributeType.TENSE: Tense.PRESENT,
+                AttributeType.VALENCY: Valency.MONOVALENT,
             },
         )
         noun_phrase = POSNode(type=POSType.NP, children=[det, noun])
         verb_phrase = POSNode(type=POSType.VP, children=[verb, det, noun])
         sentence = POSNode(type=POSType.S, children=[noun_phrase, verb_phrase])
         expected_template = (
-            "[case:sentence]<det.sg> <noun.sg> <verb.s> <det.sg> <noun.sg>."
+            "[case:sentence]<det.sg> <noun.sg> <verb-monovalent.s> <det.sg> <noun.sg>."
         )
         result = self.formatter.format_as_sentence(sentence)
         self.assertEqual(result, expected_template)
