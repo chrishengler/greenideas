@@ -47,7 +47,7 @@ vp1__v = GrammarRule(
     ],
 )
 
-# VP2 -> V NP.Acc
+# VP2 -> V NP.Obj
 vp2__v_npAcc = GrammarRule(
     SourceSpec(POSType.VP, {AttributeType.VALENCY: Valency.DIVALENT}),
     [
@@ -66,6 +66,36 @@ vp2__v_npAcc = GrammarRule(
             {
                 AttributeType.NUMBER: INHERIT,
                 AttributeType.CASE: Case.OBJECTIVE,
+            },
+        ),
+    ],
+)
+
+# VP3 -> V NP.Obj NP.Nom
+vp3__v_npAcc_npNom = GrammarRule(
+    SourceSpec(POSType.VP, {AttributeType.VALENCY: Valency.TRIVALENT}),
+    [
+        ExpansionSpec(
+            POSType.Verb,
+            {
+                AttributeType.ASPECT: INHERIT,
+                AttributeType.NUMBER: INHERIT,
+                AttributeType.TENSE: INHERIT,
+                AttributeType.PERSON: INHERIT,
+                AttributeType.VALENCY: INHERIT,
+            },
+        ),
+        ExpansionSpec(
+            POSType.NP,
+            {
+                AttributeType.NUMBER: INHERIT,
+                AttributeType.CASE: Case.OBJECTIVE,
+            },
+        ),
+        ExpansionSpec(
+            POSType.NP,
+            {
+                AttributeType.CASE: Case.NOMINATIVE,
             },
         ),
     ],
@@ -126,4 +156,5 @@ vp_expansions = [
     vp__vp_conj_vp,
     vp1__v,
     vp2__v_npAcc,
+    vp3__v_npAcc_npNom,
 ]
