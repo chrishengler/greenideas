@@ -41,6 +41,8 @@ POSTYPE_ATTRIBUTE_MAP = {
     POSType.PP: {},
     POSType.RelClause: {
         AttributeType.ANIMACY,
+        AttributeType.NUMBER,
+        AttributeType.PERSON,
     },
     POSType.VP: {
         AttributeType.ANIMACY,

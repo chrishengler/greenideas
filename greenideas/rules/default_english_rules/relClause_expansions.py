@@ -13,6 +13,8 @@ relC__relPron_VP = GrammarRule(
             POSType.VP,
             {
                 AttributeType.ASPECT: [Aspect.SIMPLE, Aspect.PERFECT],
+                AttributeType.NUMBER: INHERIT,
+                AttributeType.PERSON: INHERIT,
             },
         ),
     ],
