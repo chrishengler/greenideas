@@ -40,7 +40,9 @@ class GrammarEngine:
         if len(self.grammar.get_applicable_rules(node)) == 0:
             raise RuleNotFoundError(f"No rule found to expand type {node.type}")
         logger.info(node.attributes)
-        return self._expand_to_tree(node)
+        result = self._expand_to_tree(node)
+        logger.info(result)
+        return result
 
     def _expand_to_tree(self, node: POSNode) -> POSNode:
         rules = self.grammar.get_applicable_rules(node)

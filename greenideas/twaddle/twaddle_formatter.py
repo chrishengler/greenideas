@@ -1,7 +1,11 @@
+import logging
+
 from greenideas.exceptions import TwaddleConversionError
 from greenideas.parts_of_speech.pos_node import POSNode
 from greenideas.parts_of_speech.pos_types import POSType
 from greenideas.twaddle.twaddle_formatting_handler import TwaddleFormattingHandler
+
+logger = logging.getLogger(__file__)
 
 
 class TwaddleFormatter:
@@ -37,4 +41,6 @@ class TwaddleFormatter:
         if not isinstance(tree, POSNode):
             raise TwaddleConversionError("Input must be a POSNode")
         twaddle_string = self.format(tree)
-        return f"[case:sentence]{twaddle_string}."
+        result = f"[case:sentence]{twaddle_string}."
+        logger.info(result)
+        return result
