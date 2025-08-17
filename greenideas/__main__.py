@@ -17,7 +17,7 @@ from greenideas.twaddle.twaddle_formatter import TwaddleFormatter
 def main():
     logging.basicConfig(filename="greenideas.log", level=logging.INFO)
     if len(sys.argv) < 2:
-        dictionary_path = files("greenideas.greenideas.default_dictionary")
+        dictionary_path = files("greenideas.default_dictionary")
     else:
         dictionary_path = sys.argv[1]
     twaddle_runner = TwaddleRunner(dictionary_path)
