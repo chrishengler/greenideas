@@ -69,6 +69,8 @@ npNodet__n_relclause = GrammarRule(
             POSType.RelClause,
             {
                 AttributeType.ANIMACY: INHERIT,
+                AttributeType.NUMBER: INHERIT,
+                AttributeType.PERSON: INHERIT,
             },
         ),
     ],

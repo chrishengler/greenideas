@@ -1,5 +1,6 @@
 # NP -> Det NP_NoDet
 from greenideas.attributes.attribute_type import AttributeType
+from greenideas.attributes.number import Number
 from greenideas.attributes.person import Person
 from greenideas.parts_of_speech.pos_types import POSType
 from greenideas.rules.expansion_spec import INHERIT, ExpansionSpec
@@ -25,8 +26,25 @@ np__det_npNodet = GrammarRule(
                 AttributeType.ANIMACY: INHERIT,
                 AttributeType.CASE: INHERIT,
                 AttributeType.NUMBER: INHERIT,
+                AttributeType.PERSON: INHERIT,
             },
         ),
+    ],
+)
+
+# NP_Pl -> NPNoDet
+npPl__npNoDet = GrammarRule(
+    SourceSpec(POSType.NP, {AttributeType.NUMBER: Number.PLURAL}),
+    [
+        ExpansionSpec(
+            POSType.NP_NoDet,
+            {
+                AttributeType.ANIMACY: INHERIT,
+                AttributeType.CASE: INHERIT,
+                AttributeType.NUMBER: INHERIT,
+                AttributeType.PERSON: INHERIT,
+            },
+        )
     ],
 )
 
@@ -49,5 +67,6 @@ np__pron = GrammarRule(
 
 np_expansions = [
     np__det_npNodet,
+    npPl__npNoDet,
     np__pron,
 ]
