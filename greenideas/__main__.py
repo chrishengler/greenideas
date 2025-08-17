@@ -1,6 +1,7 @@
 import logging
 import readline  # noqa: F401
 import sys
+from importlib.resources import files
 
 from twaddle.runner import TwaddleRunner
 
@@ -16,9 +17,9 @@ from greenideas.twaddle.twaddle_formatter import TwaddleFormatter
 def main():
     logging.basicConfig(filename="greenideas.log", level=logging.INFO)
     if len(sys.argv) < 2:
-        print("argument required: path to directory containing dictionary files")
-        return
-    dictionary_path = sys.argv[1]
+        dictionary_path = files("greenideas.greenideas.default_dictionary")
+    else:
+        dictionary_path = sys.argv[1]
     twaddle_runner = TwaddleRunner(dictionary_path)
 
     engine = GrammarEngine()

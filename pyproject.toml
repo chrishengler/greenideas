@@ -10,7 +10,7 @@ readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
     "pytest (>=7.2.0)",
-    "twaddle (>=1.0.0,<2.0.0)"
+    "twaddle (>=1.1.0)"
 ]
 keywords = ["grammar", "procedural generation", "sentence generation", "placeholder text", "twaddle"]
     

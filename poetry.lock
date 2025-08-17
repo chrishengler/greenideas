@@ -92,14 +92,14 @@ dev = ["argcomplete", "attrs (>=19.2)", "hypothesis (>=3.56)", "mock", "requests
 
 [[package]]
 name = "twaddle"
-version = "1.0.0"
+version = "1.1.0"
 description = "Text generation and templating"
 optional = false
 python-versions = ">=3.11"
 groups = ["main"]
 files = [
-    {file = "twaddle-1.0.0-py3-none-any.whl", hash = "sha256:0129db9ad0c96735f4765289aa6d1d89fbd40d06196022246c8ade068789d2af"},
-    {file = "twaddle-1.0.0.tar.gz", hash = "sha256:0f9a6038d75fd9b24c1d54b1c2e17b6e3d47c5b07c1c9381a4e15e6766f96e3f"},
+    {file = "twaddle-1.1.0-py3-none-any.whl", hash = "sha256:c4bf75a5e789d17728a5060fa277b6f03e8cadeefade5b6e9607c2b6c200ec08"},
+    {file = "twaddle-1.1.0.tar.gz", hash = "sha256:d25a119cb7a50386a8bc6dd5649a3265256e73f1ded9bb9a211126cb27ba756a"},
 ]
 
 [package.dependencies]
@@ -108,4 +108,4 @@ pytest = ">=7.2.0"
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.11"
-content-hash = "5c1eba3d99c2d1a4bdcebc74d4b2558d52cb5e150ccc911287b1fb6ae98252f6"
+content-hash = "49a68720f38e2d7016b96a0731decb2d3c1a5f079a56eda9c853b9367329d44c"
