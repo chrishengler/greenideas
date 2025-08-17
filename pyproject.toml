@@ -1,6 +1,6 @@
 [project]
 name = "greenideas"
-version = "0.3.0"
+version = "0.4.0"
 description = "A package to generate grammatically valid but semantically nonsensical English sentences."
 authors = [
     {name = "Chris Hengler",email = "chrysics@gmail.com"}
