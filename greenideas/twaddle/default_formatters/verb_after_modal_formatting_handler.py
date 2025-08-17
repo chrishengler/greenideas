@@ -23,6 +23,8 @@ class VerbAfterModalFormattingHandler:
                 class_specifier = "monovalent"
             case Valency.DIVALENT:
                 class_specifier = "divalent"
+            case Valency.TRIVALENT:
+                class_specifier = "trivalent"
             case _:
                 raise TwaddleConversionError(f"Invalid valency: {valency}")
         match aspect:

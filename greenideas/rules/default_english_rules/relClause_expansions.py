@@ -12,7 +12,7 @@ relC__relPron_VP = GrammarRule(
         ExpansionSpec(
             POSType.VP,
             {
-                AttributeType.ASPECT: [Aspect.SIMPLE, Aspect.PERFECT],
+                AttributeType.ASPECT: [Aspect.SIMPLE],
                 AttributeType.NUMBER: INHERIT,
                 AttributeType.PERSON: INHERIT,
             },
