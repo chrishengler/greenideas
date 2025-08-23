@@ -1,5 +1,6 @@
 from greenideas.attributes.attribute_type import AttributeType
 from greenideas.attributes.case import Case
+from greenideas.attributes.npform import NPForm
 from greenideas.attributes.valency import Valency
 from greenideas.parts_of_speech.pos_types import POSType
 from greenideas.rules.expansion_spec import INHERIT, ExpansionSpec
@@ -88,13 +89,14 @@ vp3__v_npAcc_npNom = GrammarRule(
         ExpansionSpec(
             POSType.NP,
             {
-                AttributeType.NUMBER: INHERIT,
+                AttributeType.NPFORM: NPForm.PRONOMINAL,
                 AttributeType.CASE: Case.OBJECTIVE,
             },
         ),
         ExpansionSpec(
             POSType.NP,
             {
+                AttributeType.NPFORM: NPForm.LEXICAL,
                 AttributeType.CASE: Case.OBJECTIVE,
             },
         ),

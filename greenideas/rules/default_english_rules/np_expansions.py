@@ -1,5 +1,6 @@
 # NP -> Det NP_NoDet
 from greenideas.attributes.attribute_type import AttributeType
+from greenideas.attributes.npform import NPForm
 from greenideas.attributes.number import Number
 from greenideas.attributes.person import Person
 from greenideas.parts_of_speech.pos_types import POSType
@@ -10,7 +11,10 @@ from greenideas.rules.source_spec import SourceSpec
 np__det_npNodet = GrammarRule(
     SourceSpec(
         POSType.NP,
-        {AttributeType.PERSON: Person.THIRD},
+        {
+            AttributeType.NPFORM: [NPForm.FREE, NPForm.LEXICAL],
+            AttributeType.PERSON: Person.THIRD,
+        },
     ),
     [
         ExpansionSpec(
@@ -34,7 +38,13 @@ np__det_npNodet = GrammarRule(
 
 # NP_Pl -> NPNoDet
 npPl__npNoDet = GrammarRule(
-    SourceSpec(POSType.NP, {AttributeType.NUMBER: Number.PLURAL}),
+    SourceSpec(
+        POSType.NP,
+        {
+            AttributeType.NUMBER: Number.PLURAL,
+            AttributeType.NPFORM: [NPForm.FREE, NPForm.LEXICAL],
+        },
+    ),
     [
         ExpansionSpec(
             POSType.NP_NoDet,
@@ -50,7 +60,7 @@ npPl__npNoDet = GrammarRule(
 
 # NP -> Pron
 np__pron = GrammarRule(
-    SourceSpec(POSType.NP),
+    SourceSpec(POSType.NP, {AttributeType.NPFORM: [NPForm.FREE, NPForm.PRONOMINAL]}),
     [
         ExpansionSpec(
             POSType.Pron,
