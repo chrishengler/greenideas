@@ -41,14 +41,9 @@ class GrammarRule:
         for attr_type, constraint in self.source_constraints.items():
             if isinstance(constraint, list):
                 if node.attributes.get(attr_type) not in constraint:
-                    print(f"{node.attributes.get(attr_type)} not in {constraint}")
                     return False
             elif node.attributes.get(attr_type) != constraint:
-                print(f"{node.attributes.get(attr_type)} != {constraint}")
                 return False
         if self.ignore_after_depth and node.depth >= self.ignore_after_depth:
-            print(
-                f"node depth {node.depth} >= ignore after depth {self.ignore_after_depth}"
-            )
             return False
         return True
