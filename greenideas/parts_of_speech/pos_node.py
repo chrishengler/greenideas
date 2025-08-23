@@ -10,6 +10,7 @@ class POSNode:
     type: POSType
     children: List[Self] = field(default_factory=list)
     attributes: AttributeSet = field(default_factory=AttributeSet)
+    depth: int = 0
 
     def __str__(self):
         children = (
@@ -17,4 +18,4 @@ class POSNode:
             if self.children
             else None
         )
-        return f"{self.type.name}{children if children else ''}"
+        return f"{self.type.name}:{children if children else ''}"

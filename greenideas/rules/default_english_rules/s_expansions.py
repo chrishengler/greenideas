@@ -86,6 +86,7 @@ s__s_conj_s = GrammarRule(
         ExpansionSpec(POSType.S),
     ],
     weight=0.2,
+    ignore_after_depth=1,
 )
 
 s__s_sub_s = GrammarRule(
@@ -96,6 +97,7 @@ s__s_sub_s = GrammarRule(
         ExpansionSpec(POSType.S),
     ],
     weight=0.2,
+    ignore_after_depth=1,
 )
 
 s_expansions = [
