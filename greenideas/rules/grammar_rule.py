@@ -12,12 +12,14 @@ class GrammarRule:
         source: ExpansionSpec,
         expansion: list[ExpansionSpec],
         weight: float = 1.0,
+        ignore_after_depth: int = 0,
     ):
         self.source = source
         self.pos = source.pos_type
         self.source_constraints = source.attribute_constraints
         self.expansion = expansion
         self.weight = weight
+        self.ignore_after_depth = ignore_after_depth
 
     def validate_attribute_constraint(
         self, pos_type: POSType, attr: AttributeType, value
@@ -39,7 +41,14 @@ class GrammarRule:
         for attr_type, constraint in self.source_constraints.items():
             if isinstance(constraint, list):
                 if node.attributes.get(attr_type) not in constraint:
+                    print(f"{node.attributes.get(attr_type)} not in {constraint}")
                     return False
             elif node.attributes.get(attr_type) != constraint:
+                print(f"{node.attributes.get(attr_type)} != {constraint}")
                 return False
+        if self.ignore_after_depth and node.depth >= self.ignore_after_depth:
+            print(
+                f"node depth {node.depth} >= ignore after depth {self.ignore_after_depth}"
+            )
+            return False
         return True

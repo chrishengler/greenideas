@@ -71,7 +71,7 @@ vp2__v_npAcc = GrammarRule(
     ],
 )
 
-# VP3 -> V NP.Obj NP.Nom
+# VP3 -> V NP.Obj NP.Obj
 vp3__v_npAcc_npNom = GrammarRule(
     SourceSpec(POSType.VP, {AttributeType.VALENCY: Valency.TRIVALENT}),
     [
@@ -95,7 +95,7 @@ vp3__v_npAcc_npNom = GrammarRule(
         ExpansionSpec(
             POSType.NP,
             {
-                AttributeType.CASE: Case.NOMINATIVE,
+                AttributeType.CASE: Case.OBJECTIVE,
             },
         ),
     ],
