@@ -29,6 +29,7 @@ POSTYPE_ATTRIBUTE_MAP = {
     POSType.NP: {
         AttributeType.ANIMACY,
         AttributeType.CASE,
+        AttributeType.NPFORM,
         AttributeType.NUMBER,
         AttributeType.PERSON,
     },
