@@ -77,7 +77,6 @@ vp2__v_npAcc = GrammarRule(
         ExpansionSpec(
             POSType.NP,
             {
-                AttributeType.NUMBER: INHERIT,
                 AttributeType.CASE: Case.OBJECTIVE,
             },
         ),

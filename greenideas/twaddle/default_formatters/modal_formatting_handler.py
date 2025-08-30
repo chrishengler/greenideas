@@ -17,6 +17,7 @@ class ModalFormattingHandler:
         name = "modal"
         tense = node.attributes.get(AttributeType.TENSE)
         aspect = node.attributes.get(AttributeType.ASPECT)
+
         match tense:
             case Tense.PAST:
                 form = "past"
