@@ -1,4 +1,7 @@
 from greenideas.attributes.attribute_type import AttributeType
+from greenideas.attributes.case import Case
+from greenideas.attributes.npform import NPForm
+from greenideas.attributes.person import Person
 from greenideas.parts_of_speech.pos_types import POSType
 from greenideas.rules.expansion_spec import INHERIT, ExpansionSpec
 from greenideas.rules.grammar_rule import GrammarRule
@@ -10,15 +13,31 @@ vpAfterModal__adv_vAfterModal = GrammarRule(
     [
         ExpansionSpec(POSType.Adv),
         ExpansionSpec(
-            POSType.Verb_AfterModal,
+            POSType.VP_AfterModal,
             {
                 AttributeType.ASPECT: INHERIT,
             },
         ),
     ],
+    weight=0.3,
 )
 
-# VPAfterModal -> VAfterModal
+# VPAfterModal -> VAfterModal AdvP
+vpAfterModal__vAfterModal_advP = GrammarRule(
+    SourceSpec(POSType.VP_AfterModal),
+    [
+        ExpansionSpec(
+            POSType.VP_AfterModal,
+            {
+                AttributeType.ASPECT: INHERIT,
+            },
+        ),
+        ExpansionSpec(POSType.AdvP),
+    ],
+    weight=0.2,
+)
+
+# VPAfterModal -> VAfterModal_1
 vpAfterModal__vAfterModal = GrammarRule(
     SourceSpec(POSType.VP_AfterModal),
     [
@@ -31,8 +50,8 @@ vpAfterModal__vAfterModal = GrammarRule(
     ],
 )
 
-# VPAfterModal -> VAfterModal AdvP
-vpAfterModal__vAfterModal_advP = GrammarRule(
+# VPAfterModal -> VAfterModal_1
+vpAfterModal__vAfterModal = GrammarRule(
     SourceSpec(POSType.VP_AfterModal),
     [
         ExpansionSpec(
@@ -41,9 +60,56 @@ vpAfterModal__vAfterModal_advP = GrammarRule(
                 AttributeType.ASPECT: INHERIT,
             },
         ),
-        ExpansionSpec(POSType.AdvP),
     ],
 )
+
+# VPAfterModal -> VAfterModal_2
+vpAfterModal__vAfterModal2 = GrammarRule(
+    SourceSpec(POSType.VP_AfterModal),
+    [
+        ExpansionSpec(
+            POSType.Verb_AfterModal,
+            {
+                AttributeType.ASPECT: INHERIT,
+            },
+        ),
+        ExpansionSpec(
+            POSType.NP,
+            {
+                AttributeType.CASE: Case.OBJECTIVE,
+            },
+        ),
+    ],
+)
+
+# VPAfterModal -> VAfterModal_3 NP.Obj NP.Obj
+vpAfterModal__vAfterModal3 = GrammarRule(
+    SourceSpec(POSType.VP_AfterModal),
+    [
+        ExpansionSpec(
+            POSType.Verb_AfterModal,
+            {
+                AttributeType.ASPECT: INHERIT,
+            },
+        ),
+        ExpansionSpec(
+            POSType.NP,
+            {
+                AttributeType.NPFORM: NPForm.PRONOMINAL,
+                AttributeType.CASE: Case.OBJECTIVE,
+            },
+        ),
+        ExpansionSpec(
+            POSType.NP,
+            {
+                AttributeType.NPFORM: NPForm.LEXICAL,
+                AttributeType.CASE: Case.OBJECTIVE,
+                AttributeType.PERSON: Person.THIRD,
+            },
+        ),
+    ],
+)
+
 
 vpAfterModal_expansions = [
     vpAfterModal__adv_vAfterModal,

@@ -57,7 +57,6 @@ POSTYPE_ATTRIBUTE_MAP = {
     },
     POSType.VP_AfterModal: {
         AttributeType.ASPECT,
-        AttributeType.VALENCY,
     },
     POSType.VP_Bare: {
         AttributeType.VALENCY,
@@ -121,7 +120,6 @@ POSTYPE_ATTRIBUTE_MAP = {
     POSType.Verb_AfterModal: {
         AttributeType.ASPECT,
         AttributeType.VALENCY,
-        AttributeType.VOICE,
     },
     POSType.Verb_Bare: {AttributeType.VALENCY},
 }
