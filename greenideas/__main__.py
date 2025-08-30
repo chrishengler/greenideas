@@ -26,14 +26,18 @@ def main():
     engine.add_ruleset(default_rules)
     tree = engine.generate_tree(POSType.S)
     print(tree)
+    logging.info(tree)
 
     formatter = TwaddleFormatter()
     for type, handler in default_formatting_handlers.items():
         formatter.register_formatting_handler(type, handler)
 
     twaddle_string = formatter.format_as_sentence(tree)
+    logging.info(twaddle_string)
     print(twaddle_string)
-    print(twaddle_runner.run_sentence(twaddle_string))
+    sentence = twaddle_runner.run_sentence(twaddle_string)
+    logging.info(sentence)
+    print(sentence)
 
 
 if __name__ == "__main__":
