@@ -2,6 +2,7 @@ from greenideas.attributes.attribute_type import AttributeType
 from greenideas.attributes.case import Case
 from greenideas.attributes.npform import NPForm
 from greenideas.attributes.person import Person
+from greenideas.attributes.valency import Valency
 from greenideas.parts_of_speech.pos_types import POSType
 from greenideas.rules.expansion_spec import INHERIT, ExpansionSpec
 from greenideas.rules.grammar_rule import GrammarRule
@@ -56,9 +57,7 @@ vpAfterModal__vAfterModal = GrammarRule(
     [
         ExpansionSpec(
             POSType.Verb_AfterModal,
-            {
-                AttributeType.ASPECT: INHERIT,
-            },
+            {AttributeType.ASPECT: INHERIT, AttributeType.VALENCY: Valency.MONOVALENT},
         ),
     ],
 )
@@ -69,9 +68,7 @@ vpAfterModal__vAfterModal2 = GrammarRule(
     [
         ExpansionSpec(
             POSType.Verb_AfterModal,
-            {
-                AttributeType.ASPECT: INHERIT,
-            },
+            {AttributeType.ASPECT: INHERIT, AttributeType.VALENCY: Valency.DIVALENT},
         ),
         ExpansionSpec(
             POSType.NP,
@@ -88,9 +85,7 @@ vpAfterModal__vAfterModal3 = GrammarRule(
     [
         ExpansionSpec(
             POSType.Verb_AfterModal,
-            {
-                AttributeType.ASPECT: INHERIT,
-            },
+            {AttributeType.ASPECT: INHERIT, AttributeType.VALENCY: Valency.TRIVALENT},
         ),
         ExpansionSpec(
             POSType.NP,
@@ -113,6 +108,8 @@ vpAfterModal__vAfterModal3 = GrammarRule(
 
 vpAfterModal_expansions = [
     vpAfterModal__adv_vAfterModal,
-    vpAfterModal__vAfterModal,
     vpAfterModal__vAfterModal_advP,
+    vpAfterModal__vAfterModal,
+    vpAfterModal__vAfterModal2,
+    vpAfterModal__vAfterModal3,
 ]
