@@ -7,6 +7,7 @@ POSTYPE_ATTRIBUTE_MAP = {
         AttributeType.NUMBER,
         AttributeType.PERSON,
         AttributeType.TENSE,
+        AttributeType.VOICE,
     },
     POSType.AdjP: set(),
     POSType.AdvP: set(),
@@ -52,12 +53,20 @@ POSTYPE_ATTRIBUTE_MAP = {
         AttributeType.PERSON,
         AttributeType.TENSE,
         AttributeType.VALENCY,
+        AttributeType.VOICE,
     },
     POSType.VP_AfterModal: {
         AttributeType.ASPECT,
         AttributeType.VALENCY,
     },
     POSType.VP_Bare: {
+        AttributeType.VALENCY,
+    },
+    POSType.VP_Passive: {
+        AttributeType.ASPECT,
+        AttributeType.NUMBER,
+        AttributeType.PERSON,
+        AttributeType.TENSE,
         AttributeType.VALENCY,
     },
     POSType.Adj: set(),
@@ -98,6 +107,7 @@ POSTYPE_ATTRIBUTE_MAP = {
     POSType.RelativePron: {
         AttributeType.ANIMACY,
     },
+    POSType.SimpleConj: set(),
     POSType.Subordinator: set(),
     POSType.Verb: {
         AttributeType.ANIMACY,
@@ -106,10 +116,12 @@ POSTYPE_ATTRIBUTE_MAP = {
         AttributeType.PERSON,
         AttributeType.TENSE,
         AttributeType.VALENCY,
+        AttributeType.VOICE,
     },
     POSType.Verb_AfterModal: {
         AttributeType.ASPECT,
         AttributeType.VALENCY,
+        AttributeType.VOICE,
     },
     POSType.Verb_Bare: {AttributeType.VALENCY},
 }

@@ -2,6 +2,7 @@
 from greenideas.attributes.aspect import Aspect
 from greenideas.attributes.attribute_type import AttributeType
 from greenideas.attributes.case import Case
+from greenideas.attributes.voice import Voice
 from greenideas.parts_of_speech.pos_types import POSType
 from greenideas.rules.expansion_spec import INHERIT, ExpansionSpec
 from greenideas.rules.grammar_rule import GrammarRule
@@ -26,6 +27,7 @@ s__np_vp = GrammarRule(
                 AttributeType.ASPECT: Aspect.SIMPLE,
                 AttributeType.NUMBER: INHERIT,
                 AttributeType.PERSON: INHERIT,
+                AttributeType.VOICE: INHERIT,
             },
         ),
     ],
@@ -33,7 +35,12 @@ s__np_vp = GrammarRule(
 
 # S -> NP AuxP
 s__np_auxp = GrammarRule(
-    SourceSpec(POSType.S),
+    SourceSpec(
+        POSType.S,
+        {
+            AttributeType.VOICE: Voice.ACTIVE,
+        },
+    ),
     [
         ExpansionSpec(
             POSType.NP,
@@ -86,7 +93,7 @@ s__s_conj_s = GrammarRule(
         ExpansionSpec(POSType.S),
     ],
     weight=0.2,
-    ignore_after_depth=1,
+    ignore_after_depth=2,
 )
 
 s__s_sub_s = GrammarRule(
@@ -97,7 +104,7 @@ s__s_sub_s = GrammarRule(
         ExpansionSpec(POSType.S),
     ],
     weight=0.2,
-    ignore_after_depth=1,
+    ignore_after_depth=2,
 )
 
 s_expansions = [

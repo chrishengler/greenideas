@@ -1,5 +1,6 @@
 from greenideas.attributes.aspect import Aspect
 from greenideas.attributes.attribute_type import AttributeType
+from greenideas.attributes.voice import Voice
 from greenideas.parts_of_speech.pos_types import POSType
 from greenideas.rules.expansion_spec import INHERIT, ExpansionSpec
 from greenideas.rules.grammar_rule import GrammarRule
@@ -71,6 +72,7 @@ auxPerfprog__auxFinite_vpParticiple = GrammarRule(
                 AttributeType.NUMBER: INHERIT,
                 AttributeType.TENSE: INHERIT,
                 AttributeType.PERSON: INHERIT,
+                AttributeType.VOICE: Voice.ACTIVE,
             },
         ),
     ],
@@ -101,6 +103,7 @@ auxpProg__auxFinite_vpGerund = GrammarRule(
                 AttributeType.NUMBER: INHERIT,
                 AttributeType.TENSE: INHERIT,
                 AttributeType.PERSON: INHERIT,
+                AttributeType.VOICE: Voice.ACTIVE,
             },
         ),
     ],

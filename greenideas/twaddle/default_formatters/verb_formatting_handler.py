@@ -4,6 +4,7 @@ from greenideas.attributes.number import Number
 from greenideas.attributes.person import Person
 from greenideas.attributes.tense import Tense
 from greenideas.attributes.valency import Valency
+from greenideas.attributes.voice import Voice
 from greenideas.exceptions import TwaddleConversionError
 from greenideas.parts_of_speech.pos_node import POSNode
 from greenideas.parts_of_speech.pos_types import POSType
@@ -24,6 +25,8 @@ class VerbFormattingHandler:
         tense = node.attributes.get(AttributeType.TENSE)
         aspect = node.attributes.get(AttributeType.ASPECT)
         valency = node.attributes.get(AttributeType.VALENCY)
+        voice = node.attributes.get(AttributeType.VOICE)
+
         match valency:
             case Valency.MONOVALENT:
                 class_specifier = "monovalent"
@@ -33,7 +36,9 @@ class VerbFormattingHandler:
                 class_specifier = "trivalent"
             case _:
                 raise TwaddleConversionError(f"Invalid valency: {valency}")
-        if aspect == Aspect.PROGRESSIVE or aspect == Aspect.PERFECT_PROGRESSIVE:
+        if voice == Voice.PASSIVE:
+            form = "pastpart"
+        elif aspect == Aspect.PROGRESSIVE or aspect == Aspect.PERFECT_PROGRESSIVE:
             form = "gerund"
         elif aspect == Aspect.PERFECT:
             form = "pastpart"
