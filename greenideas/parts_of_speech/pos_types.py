@@ -15,6 +15,7 @@ class POSType(Enum):
     VP = auto()
     VP_AfterModal = auto()
     VP_Bare = auto()
+    VP_Passive = auto()
 
     Adj = auto()
     Adv = auto()
@@ -28,6 +29,7 @@ class POSType(Enum):
     Prep = auto()
     Pron = auto()
     RelativePron = auto()
+    SimpleConj = auto()
     Subordinator = auto()
     Verb = auto()
     Verb_AfterModal = auto()

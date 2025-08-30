@@ -9,6 +9,7 @@ from greenideas.attributes.number import Number
 from greenideas.attributes.person import Person
 from greenideas.attributes.tense import Tense
 from greenideas.attributes.valency import Valency
+from greenideas.attributes.voice import Voice
 
 
 class AttributeType(Enum):
@@ -20,6 +21,7 @@ class AttributeType(Enum):
     PERSON = ("person", Person)
     TENSE = ("tense", Tense)
     VALENCY = ("valency", Valency)
+    VOICE = ("voice", Voice)
 
     def __init__(self, attr_name: str, value_type: Type):
         self.attr_name = attr_name

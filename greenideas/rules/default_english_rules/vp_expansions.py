@@ -1,7 +1,9 @@
 from greenideas.attributes.attribute_type import AttributeType
 from greenideas.attributes.case import Case
 from greenideas.attributes.npform import NPForm
+from greenideas.attributes.person import Person
 from greenideas.attributes.valency import Valency
+from greenideas.attributes.voice import Voice
 from greenideas.parts_of_speech.pos_types import POSType
 from greenideas.rules.expansion_spec import INHERIT, ExpansionSpec
 from greenideas.rules.grammar_rule import GrammarRule
@@ -19,6 +21,7 @@ vp__vp_advp = GrammarRule(
                 AttributeType.TENSE: INHERIT,
                 AttributeType.PERSON: INHERIT,
                 AttributeType.VALENCY: INHERIT,
+                AttributeType.VOICE: INHERIT,
             },
         ),
         ExpansionSpec(POSType.AdvP),
@@ -32,6 +35,7 @@ vp1__v = GrammarRule(
         POSType.VP,
         {
             AttributeType.VALENCY: Valency.MONOVALENT,
+            AttributeType.VOICE: Voice.ACTIVE,
         },
     ),
     [
@@ -43,6 +47,7 @@ vp1__v = GrammarRule(
                 AttributeType.TENSE: INHERIT,
                 AttributeType.PERSON: INHERIT,
                 AttributeType.VALENCY: INHERIT,
+                AttributeType.VOICE: INHERIT,
             },
         ),
     ],
@@ -50,7 +55,13 @@ vp1__v = GrammarRule(
 
 # VP2 -> V NP.Obj
 vp2__v_npAcc = GrammarRule(
-    SourceSpec(POSType.VP, {AttributeType.VALENCY: Valency.DIVALENT}),
+    SourceSpec(
+        POSType.VP,
+        {
+            AttributeType.VALENCY: Valency.DIVALENT,
+            AttributeType.VOICE: Voice.ACTIVE,
+        },
+    ),
     [
         ExpansionSpec(
             POSType.Verb,
@@ -60,6 +71,7 @@ vp2__v_npAcc = GrammarRule(
                 AttributeType.TENSE: INHERIT,
                 AttributeType.PERSON: INHERIT,
                 AttributeType.VALENCY: INHERIT,
+                AttributeType.VOICE: INHERIT,
             },
         ),
         ExpansionSpec(
@@ -74,7 +86,10 @@ vp2__v_npAcc = GrammarRule(
 
 # VP3 -> V NP.Obj NP.Obj
 vp3__v_npAcc_npNom = GrammarRule(
-    SourceSpec(POSType.VP, {AttributeType.VALENCY: Valency.TRIVALENT}),
+    SourceSpec(
+        POSType.VP,
+        {AttributeType.VALENCY: Valency.TRIVALENT, AttributeType.VOICE: Voice.ACTIVE},
+    ),
     [
         ExpansionSpec(
             POSType.Verb,
@@ -84,6 +99,7 @@ vp3__v_npAcc_npNom = GrammarRule(
                 AttributeType.TENSE: INHERIT,
                 AttributeType.PERSON: INHERIT,
                 AttributeType.VALENCY: INHERIT,
+                AttributeType.VOICE: INHERIT,
             },
         ),
         ExpansionSpec(
@@ -98,6 +114,7 @@ vp3__v_npAcc_npNom = GrammarRule(
             {
                 AttributeType.NPFORM: NPForm.LEXICAL,
                 AttributeType.CASE: Case.OBJECTIVE,
+                AttributeType.PERSON: Person.THIRD,
             },
         ),
     ],
@@ -116,6 +133,7 @@ vp__vp_pp = GrammarRule(
                 AttributeType.TENSE: INHERIT,
                 AttributeType.PERSON: INHERIT,
                 AttributeType.VALENCY: INHERIT,
+                AttributeType.VOICE: INHERIT,
             },
         ),
         ExpansionSpec(POSType.PP),
@@ -135,9 +153,10 @@ vp__vp_conj_vp = GrammarRule(
                 AttributeType.TENSE: INHERIT,
                 AttributeType.PERSON: INHERIT,
                 AttributeType.VALENCY: INHERIT,
+                AttributeType.VOICE: INHERIT,
             },
         ),
-        ExpansionSpec(POSType.CoordConj),
+        ExpansionSpec(POSType.SimpleConj),
         ExpansionSpec(
             POSType.VP,
             {
@@ -145,10 +164,27 @@ vp__vp_conj_vp = GrammarRule(
                 AttributeType.NUMBER: INHERIT,
                 AttributeType.TENSE: INHERIT,
                 AttributeType.PERSON: INHERIT,
+                AttributeType.VOICE: INHERIT,
             },
         ),
     ],
     weight=0.2,
+)
+
+# vp_passive -> VP_Passive
+vp_pass__vpPass = GrammarRule(
+    SourceSpec(POSType.VP, {AttributeType.VOICE: Voice.PASSIVE}),
+    [
+        ExpansionSpec(
+            POSType.VP_Passive,
+            {
+                AttributeType.ASPECT: INHERIT,
+                AttributeType.NUMBER: INHERIT,
+                AttributeType.TENSE: INHERIT,
+                AttributeType.PERSON: INHERIT,
+            },
+        )
+    ],
 )
 
 
@@ -159,4 +195,5 @@ vp_expansions = [
     vp1__v,
     vp2__v_npAcc,
     vp3__v_npAcc_npNom,
+    vp_pass__vpPass,
 ]

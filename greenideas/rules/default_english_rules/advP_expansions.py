@@ -14,7 +14,7 @@ advp__adv_conj_adv = GrammarRule(
     SourceSpec(POSType.AdvP),
     [
         ExpansionSpec(POSType.Adv),
-        ExpansionSpec(POSType.CoordConj),
+        ExpansionSpec(POSType.SimpleConj),
         ExpansionSpec(POSType.Adv),
     ],
     weight=0.2,

@@ -12,6 +12,9 @@ from greenideas.rules.default_english_rules.vpAfterModal_expansions import (
     vpAfterModal_expansions,
 )
 from greenideas.rules.default_english_rules.vpBare_expansions import vpBare_expansions
+from greenideas.rules.default_english_rules.vpPassive_expansions import (
+    vp_passive_expansions,
+)
 from greenideas.rules.grammar_ruleset import GrammarRuleset
 
 default_rules = GrammarRuleset()
@@ -29,3 +32,4 @@ default_rules.add_rules(relC_expansions)
 default_rules.add_rules(vp_expansions)
 default_rules.add_rules(vpAfterModal_expansions)
 default_rules.add_rules(vpBare_expansions)
+default_rules.add_rules(vp_passive_expansions)

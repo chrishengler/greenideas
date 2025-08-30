@@ -29,6 +29,7 @@ class GrammarEngine:
         self.grammar.clear_rules()
 
     def generate_tree(self, start: POSNode | POSType) -> POSNode:
+        logger.info("\n\nNEW TREE")
         if isinstance(start, POSNode):
             node = start
             self._assign_random_attributes(node)

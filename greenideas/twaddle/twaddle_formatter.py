@@ -21,7 +21,7 @@ class TwaddleFormatter:
         handler = self.formatting_handlers.get(node.type)
         if handler is None:
             raise TwaddleConversionError(
-                f"No formatting handler registered for type {node.type}"
+                f"No formatting handler registered for type {node.type}\n"
                 f"Node has attributes: {node.attributes}"
             )
         return handler.format(node)
