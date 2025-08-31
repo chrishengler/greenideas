@@ -168,6 +168,7 @@ vp__vp_conj_vp = GrammarRule(
         ),
     ],
     weight=0.2,
+    ignore_after_depth=4,
 )
 
 # vp_passive -> VP_Passive
@@ -181,6 +182,7 @@ vp_pass__vpPass = GrammarRule(
                 AttributeType.NUMBER: INHERIT,
                 AttributeType.TENSE: INHERIT,
                 AttributeType.PERSON: INHERIT,
+                AttributeType.VALENCY: [Valency.DIVALENT, Valency.TRIVALENT],
             },
         )
     ],
