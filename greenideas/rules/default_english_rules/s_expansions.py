@@ -163,6 +163,7 @@ s__np_be_np = GrammarRule(
             },
         ),
     ],
+    weight=0.3,
 )
 
 s__np_be_pp = GrammarRule(
