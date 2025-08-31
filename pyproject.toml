@@ -1,6 +1,6 @@
 [project]
 name = "greenideas"
-version = "0.7.0"
+version = "0.8.0"
 description = "A package to generate grammatically valid but semantically nonsensical English sentences."
 authors = [
     {name = "Chris Hengler",email = "chrysics@gmail.com"}
@@ -10,7 +10,7 @@ readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
     "pytest (>=7.2.0)",
-    "twaddle (>=1.2.0)"
+    "twaddle (>=1.2.2)"
 ]
 keywords = ["grammar", "procedural generation", "sentence generation", "placeholder text", "twaddle"]
     
