@@ -2,6 +2,8 @@
 from greenideas.attributes.aspect import Aspect
 from greenideas.attributes.attribute_type import AttributeType
 from greenideas.attributes.case import Case
+from greenideas.attributes.npform import NPForm
+from greenideas.attributes.person import Person
 from greenideas.attributes.voice import Voice
 from greenideas.parts_of_speech.pos_types import POSType
 from greenideas.rules.expansion_spec import INHERIT, ExpansionSpec
@@ -107,10 +109,93 @@ s__s_sub_s = GrammarRule(
     ignore_after_depth=2,
 )
 
+s__np_be_adjp = GrammarRule(
+    SourceSpec(POSType.S),
+    [
+        ExpansionSpec(
+            POSType.NP,
+            {
+                AttributeType.CASE: Case.NOMINATIVE,
+                AttributeType.NUMBER: INHERIT,
+                AttributeType.PERSON: INHERIT,
+            },
+        ),
+        ExpansionSpec(
+            POSType.Be,
+            {
+                AttributeType.ASPECT: Aspect.SIMPLE,
+                AttributeType.NUMBER: INHERIT,
+                AttributeType.PERSON: INHERIT,
+                AttributeType.TENSE: INHERIT,
+            },
+        ),
+        ExpansionSpec(POSType.AdjP),
+    ],
+)
+
+s__np_be_np = GrammarRule(
+    SourceSpec(POSType.S),
+    [
+        ExpansionSpec(
+            POSType.NP,
+            {
+                AttributeType.CASE: Case.NOMINATIVE,
+                AttributeType.NUMBER: INHERIT,
+                AttributeType.PERSON: INHERIT,
+            },
+        ),
+        ExpansionSpec(
+            POSType.Be,
+            {
+                AttributeType.ASPECT: Aspect.SIMPLE,
+                AttributeType.NUMBER: INHERIT,
+                AttributeType.PERSON: INHERIT,
+                AttributeType.TENSE: INHERIT,
+            },
+        ),
+        ExpansionSpec(
+            POSType.NP,
+            {
+                AttributeType.CASE: Case.NOMINATIVE,
+                AttributeType.NPFORM: NPForm.LEXICAL,
+                AttributeType.NUMBER: INHERIT,
+                AttributeType.PERSON: Person.THIRD,
+            },
+        ),
+    ],
+)
+
+s__np_be_pp = GrammarRule(
+    SourceSpec(POSType.S),
+    [
+        ExpansionSpec(
+            POSType.NP,
+            {
+                AttributeType.CASE: Case.NOMINATIVE,
+                AttributeType.NUMBER: INHERIT,
+                AttributeType.PERSON: INHERIT,
+            },
+        ),
+        ExpansionSpec(
+            POSType.Be,
+            {
+                AttributeType.ASPECT: Aspect.SIMPLE,
+                AttributeType.NUMBER: INHERIT,
+                AttributeType.PERSON: INHERIT,
+                AttributeType.TENSE: INHERIT,
+            },
+        ),
+        ExpansionSpec(POSType.PP),
+    ],
+)
+
 s_expansions = [
     s__np_vp,
     s__np_auxp,
     s__np_modalp,
     s__s_conj_s,
     s__s_sub_s,
+    s__np_be_adjp,
+    s__np_be_np,
+    s__np_be_pp,
 ]
