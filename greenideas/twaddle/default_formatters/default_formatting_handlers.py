@@ -17,6 +17,9 @@ from greenideas.twaddle.default_formatters.be_formatting_handler import (
 from greenideas.twaddle.default_formatters.coordconj_formatting_handler import (
     CoordconjFormattingHandler,
 )
+from greenideas.twaddle.default_formatters.deg_formatting_handler import (
+    DegFormattingHandler,
+)
 from greenideas.twaddle.default_formatters.det_formatting_handler import (
     DetFormattingHandler,
 )
@@ -59,6 +62,7 @@ default_formatting_handlers: dict[POSType, TwaddleFormattingHandler] = {
     POSType.Aux_finite: AuxFiniteFormattingHandler,
     POSType.Be: BeFormattingHandler,
     POSType.CoordConj: CoordconjFormattingHandler,
+    POSType.Deg: DegFormattingHandler,
     POSType.Det: DetFormattingHandler,
     POSType.Modal: ModalFormattingHandler,
     POSType.Noun: NounFormattingHandler,
