@@ -24,4 +24,14 @@ adjP__adjP_conj_adjP = GrammarRule(
     weight=0.1,
 )
 
-adjP_expansions = [adjP__adj, adjP__adjP_conj_adjP]
+# adjP -> djP deg adjP
+adjP__deg_adj = GrammarRule(
+    SourceSpec(POSType.AdjP),
+    [
+        ExpansionSpec(POSType.Deg),
+        ExpansionSpec(POSType.Adj),
+    ],
+    # weight = 0.1,
+)
+
+adjP_expansions = [adjP__adj, adjP__adjP_conj_adjP, adjP__deg_adj]

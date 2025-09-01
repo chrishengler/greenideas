@@ -87,6 +87,7 @@ POSTYPE_ATTRIBUTE_MAP = {
         AttributeType.CASE,
         AttributeType.NUMBER,
     },
+    POSType.Deg: set(),
     POSType.Modal: {
         AttributeType.ASPECT,
         AttributeType.TENSE,

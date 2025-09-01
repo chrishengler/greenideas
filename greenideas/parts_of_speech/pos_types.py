@@ -24,6 +24,7 @@ class POSType(Enum):
     Be = auto()
     CoordConj = auto()
     Det = auto()
+    Deg = auto()
     Modal = auto()
     Noun = auto()
     Prep = auto()
