@@ -3,7 +3,7 @@ from greenideas.attributes.attribute_type import AttributeType
 from greenideas.attributes.case import Case
 from greenideas.attributes.valency import Valency
 from greenideas.attributes.voice import Voice
-from greenideas.parts_of_speech.pos_types import POSType
+from greenideas.parts_of_speech.default_english_pos_types import DefaultEnglishPOSType
 from greenideas.rules.expansion_spec import INHERIT, ExpansionSpec
 from greenideas.rules.grammar_rule import GrammarRule
 from greenideas.rules.source_spec import SourceSpec
@@ -11,12 +11,12 @@ from greenideas.rules.source_spec import SourceSpec
 # VP2_passive
 vp2__passive_simple = GrammarRule(
     SourceSpec(
-        POSType.VP_Passive,
+        DefaultEnglishPOSType.VP_Passive,
         {AttributeType.ASPECT: Aspect.SIMPLE, AttributeType.VALENCY: Valency.DIVALENT},
     ),
     [
         ExpansionSpec(
-            POSType.Be,
+            DefaultEnglishPOSType.Be,
             {
                 AttributeType.ASPECT: INHERIT,
                 AttributeType.TENSE: INHERIT,
@@ -25,7 +25,7 @@ vp2__passive_simple = GrammarRule(
             },
         ),
         ExpansionSpec(
-            POSType.Verb,
+            DefaultEnglishPOSType.Verb,
             {
                 AttributeType.VALENCY: INHERIT,
                 AttributeType.VOICE: Voice.PASSIVE,
@@ -37,7 +37,7 @@ vp2__passive_simple = GrammarRule(
 # VP2_passive_prog
 vp2__passive_prog = GrammarRule(
     SourceSpec(
-        POSType.VP_Passive,
+        DefaultEnglishPOSType.VP_Passive,
         {
             AttributeType.ASPECT: [Aspect.PROGRESSIVE, Aspect.PERFECT_PROGRESSIVE],
             AttributeType.VALENCY: Valency.DIVALENT,
@@ -45,7 +45,7 @@ vp2__passive_prog = GrammarRule(
     ),
     [
         ExpansionSpec(
-            POSType.Be,
+            DefaultEnglishPOSType.Be,
             {
                 AttributeType.TENSE: INHERIT,
                 AttributeType.NUMBER: INHERIT,
@@ -53,13 +53,13 @@ vp2__passive_prog = GrammarRule(
             },
         ),
         ExpansionSpec(
-            POSType.Be,
+            DefaultEnglishPOSType.Be,
             {
                 AttributeType.ASPECT: Aspect.PROGRESSIVE,
             },
         ),
         ExpansionSpec(
-            POSType.Verb,
+            DefaultEnglishPOSType.Verb,
             {
                 AttributeType.VALENCY: INHERIT,
                 AttributeType.VOICE: Voice.PASSIVE,
@@ -71,7 +71,7 @@ vp2__passive_prog = GrammarRule(
 # VP2 -> passperf
 vp2__passive_perf = GrammarRule(
     SourceSpec(
-        POSType.VP_Passive,
+        DefaultEnglishPOSType.VP_Passive,
         {
             AttributeType.ASPECT: Aspect.PERFECT,
             AttributeType.VALENCY: Valency.DIVALENT,
@@ -79,7 +79,7 @@ vp2__passive_perf = GrammarRule(
     ),
     [
         ExpansionSpec(
-            POSType.Aux_finite,
+            DefaultEnglishPOSType.Aux_finite,
             {
                 AttributeType.TENSE: INHERIT,
                 AttributeType.NUMBER: INHERIT,
@@ -87,13 +87,13 @@ vp2__passive_perf = GrammarRule(
             },
         ),
         ExpansionSpec(
-            POSType.Be,
+            DefaultEnglishPOSType.Be,
             {
                 AttributeType.ASPECT: INHERIT,
             },
         ),
         ExpansionSpec(
-            POSType.Verb,
+            DefaultEnglishPOSType.Verb,
             {
                 AttributeType.VALENCY: INHERIT,
                 AttributeType.VOICE: Voice.PASSIVE,
@@ -105,12 +105,12 @@ vp2__passive_perf = GrammarRule(
 # VP3_passive w/ NP.obj
 vp3__passive_simple = GrammarRule(
     SourceSpec(
-        POSType.VP_Passive,
+        DefaultEnglishPOSType.VP_Passive,
         {AttributeType.ASPECT: Aspect.SIMPLE, AttributeType.VALENCY: Valency.TRIVALENT},
     ),
     [
         ExpansionSpec(
-            POSType.Be,
+            DefaultEnglishPOSType.Be,
             {
                 AttributeType.ASPECT: INHERIT,
                 AttributeType.TENSE: INHERIT,
@@ -119,14 +119,14 @@ vp3__passive_simple = GrammarRule(
             },
         ),
         ExpansionSpec(
-            POSType.Verb,
+            DefaultEnglishPOSType.Verb,
             {
                 AttributeType.VALENCY: INHERIT,
                 AttributeType.VOICE: Voice.PASSIVE,
             },
         ),
         ExpansionSpec(
-            POSType.NP,
+            DefaultEnglishPOSType.NP,
             {
                 AttributeType.CASE: Case.OBJECTIVE,
             },
@@ -137,7 +137,7 @@ vp3__passive_simple = GrammarRule(
 # VP_passive_prog w/ NP.obj
 vp3__passive_prog = GrammarRule(
     SourceSpec(
-        POSType.VP_Passive,
+        DefaultEnglishPOSType.VP_Passive,
         {
             AttributeType.ASPECT: [Aspect.PROGRESSIVE, Aspect.PERFECT_PROGRESSIVE],
             AttributeType.VALENCY: Valency.TRIVALENT,
@@ -145,7 +145,7 @@ vp3__passive_prog = GrammarRule(
     ),
     [
         ExpansionSpec(
-            POSType.Be,
+            DefaultEnglishPOSType.Be,
             {
                 AttributeType.TENSE: INHERIT,
                 AttributeType.NUMBER: INHERIT,
@@ -153,20 +153,20 @@ vp3__passive_prog = GrammarRule(
             },
         ),
         ExpansionSpec(
-            POSType.Be,
+            DefaultEnglishPOSType.Be,
             {
                 AttributeType.ASPECT: Aspect.PROGRESSIVE,
             },
         ),
         ExpansionSpec(
-            POSType.Verb,
+            DefaultEnglishPOSType.Verb,
             {
                 AttributeType.VALENCY: INHERIT,
                 AttributeType.VOICE: Voice.PASSIVE,
             },
         ),
         ExpansionSpec(
-            POSType.NP,
+            DefaultEnglishPOSType.NP,
             {
                 AttributeType.CASE: Case.OBJECTIVE,
             },
@@ -177,7 +177,7 @@ vp3__passive_prog = GrammarRule(
 #
 vp3__passive_perf = GrammarRule(
     SourceSpec(
-        POSType.VP_Passive,
+        DefaultEnglishPOSType.VP_Passive,
         {
             AttributeType.ASPECT: Aspect.PERFECT,
             AttributeType.VALENCY: Valency.TRIVALENT,
@@ -185,7 +185,7 @@ vp3__passive_perf = GrammarRule(
     ),
     [
         ExpansionSpec(
-            POSType.Aux_finite,
+            DefaultEnglishPOSType.Aux_finite,
             {
                 AttributeType.TENSE: INHERIT,
                 AttributeType.NUMBER: INHERIT,
@@ -193,20 +193,20 @@ vp3__passive_perf = GrammarRule(
             },
         ),
         ExpansionSpec(
-            POSType.Be,
+            DefaultEnglishPOSType.Be,
             {
                 AttributeType.ASPECT: INHERIT,
             },
         ),
         ExpansionSpec(
-            POSType.Verb,
+            DefaultEnglishPOSType.Verb,
             {
                 AttributeType.VALENCY: INHERIT,
                 AttributeType.VOICE: Voice.PASSIVE,
             },
         ),
         ExpansionSpec(
-            POSType.NP,
+            DefaultEnglishPOSType.NP,
             {
                 AttributeType.CASE: Case.OBJECTIVE,
             },

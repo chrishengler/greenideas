@@ -3,18 +3,18 @@ from greenideas.attributes.case import Case
 from greenideas.attributes.npform import NPForm
 from greenideas.attributes.person import Person
 from greenideas.attributes.valency import Valency
-from greenideas.parts_of_speech.pos_types import POSType
+from greenideas.parts_of_speech.default_english_pos_types import DefaultEnglishPOSType
 from greenideas.rules.expansion_spec import INHERIT, ExpansionSpec
 from greenideas.rules.grammar_rule import GrammarRule
 from greenideas.rules.source_spec import SourceSpec
 
 # VPAfterModal -> Adv VAfterModal
 vpAfterModal__adv_vAfterModal = GrammarRule(
-    SourceSpec(POSType.VP_AfterModal),
+    SourceSpec(DefaultEnglishPOSType.VP_AfterModal),
     [
-        ExpansionSpec(POSType.Adv),
+        ExpansionSpec(DefaultEnglishPOSType.Adv),
         ExpansionSpec(
-            POSType.VP_AfterModal,
+            DefaultEnglishPOSType.VP_AfterModal,
             {
                 AttributeType.ASPECT: INHERIT,
             },
@@ -25,25 +25,25 @@ vpAfterModal__adv_vAfterModal = GrammarRule(
 
 # VPAfterModal -> VAfterModal AdvP
 vpAfterModal__vAfterModal_advP = GrammarRule(
-    SourceSpec(POSType.VP_AfterModal),
+    SourceSpec(DefaultEnglishPOSType.VP_AfterModal),
     [
         ExpansionSpec(
-            POSType.VP_AfterModal,
+            DefaultEnglishPOSType.VP_AfterModal,
             {
                 AttributeType.ASPECT: INHERIT,
             },
         ),
-        ExpansionSpec(POSType.AdvP),
+        ExpansionSpec(DefaultEnglishPOSType.AdvP),
     ],
     weight=0.2,
 )
 
 # VPAfterModal -> VAfterModal_1
 vpAfterModal__vAfterModal = GrammarRule(
-    SourceSpec(POSType.VP_AfterModal),
+    SourceSpec(DefaultEnglishPOSType.VP_AfterModal),
     [
         ExpansionSpec(
-            POSType.Verb_AfterModal,
+            DefaultEnglishPOSType.Verb_AfterModal,
             {
                 AttributeType.ASPECT: INHERIT,
             },
@@ -53,10 +53,10 @@ vpAfterModal__vAfterModal = GrammarRule(
 
 # VPAfterModal -> VAfterModal_1
 vpAfterModal__vAfterModal = GrammarRule(
-    SourceSpec(POSType.VP_AfterModal),
+    SourceSpec(DefaultEnglishPOSType.VP_AfterModal),
     [
         ExpansionSpec(
-            POSType.Verb_AfterModal,
+            DefaultEnglishPOSType.Verb_AfterModal,
             {AttributeType.ASPECT: INHERIT, AttributeType.VALENCY: Valency.MONOVALENT},
         ),
     ],
@@ -64,14 +64,14 @@ vpAfterModal__vAfterModal = GrammarRule(
 
 # VPAfterModal -> VAfterModal_2
 vpAfterModal__vAfterModal2 = GrammarRule(
-    SourceSpec(POSType.VP_AfterModal),
+    SourceSpec(DefaultEnglishPOSType.VP_AfterModal),
     [
         ExpansionSpec(
-            POSType.Verb_AfterModal,
+            DefaultEnglishPOSType.Verb_AfterModal,
             {AttributeType.ASPECT: INHERIT, AttributeType.VALENCY: Valency.DIVALENT},
         ),
         ExpansionSpec(
-            POSType.NP,
+            DefaultEnglishPOSType.NP,
             {
                 AttributeType.CASE: Case.OBJECTIVE,
             },
@@ -81,21 +81,21 @@ vpAfterModal__vAfterModal2 = GrammarRule(
 
 # VPAfterModal -> VAfterModal_3 NP.Obj NP.Obj
 vpAfterModal__vAfterModal3 = GrammarRule(
-    SourceSpec(POSType.VP_AfterModal),
+    SourceSpec(DefaultEnglishPOSType.VP_AfterModal),
     [
         ExpansionSpec(
-            POSType.Verb_AfterModal,
+            DefaultEnglishPOSType.Verb_AfterModal,
             {AttributeType.ASPECT: INHERIT, AttributeType.VALENCY: Valency.TRIVALENT},
         ),
         ExpansionSpec(
-            POSType.NP,
+            DefaultEnglishPOSType.NP,
             {
                 AttributeType.NPFORM: NPForm.PRONOMINAL,
                 AttributeType.CASE: Case.OBJECTIVE,
             },
         ),
         ExpansionSpec(
-            POSType.NP,
+            DefaultEnglishPOSType.NP,
             {
                 AttributeType.NPFORM: NPForm.LEXICAL,
                 AttributeType.CASE: Case.OBJECTIVE,

@@ -2,13 +2,17 @@ from typing import Any, Optional
 
 from greenideas.attributes.attribute_type import AttributeType
 from greenideas.exceptions import InvalidGrammarRule
-from greenideas.parts_of_speech.pos_type_attributes import POSTYPE_ATTRIBUTE_MAP
-from greenideas.parts_of_speech.pos_types import POSType
+from greenideas.parts_of_speech.default_english_pos_attributes import (
+    POSTYPE_ATTRIBUTE_MAP,
+)
+from greenideas.parts_of_speech.pos_type_base import POSType
 
 
 class SourceSpec:
     def __init__(
-        self, pos_type: POSType, attribute_constraints: dict[AttributeType, Any] = None
+        self,
+        pos_type: POSType,
+        attribute_constraints: dict[AttributeType, Any] = None,
     ):
         self.pos_type = pos_type
         self.attribute_constraints = attribute_constraints or {}

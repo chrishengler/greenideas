@@ -1,52 +1,52 @@
 from greenideas.attributes.attribute_type import AttributeType
-from greenideas.parts_of_speech.pos_types import POSType
+from greenideas.parts_of_speech.default_english_pos_types import DefaultEnglishPOSType
 
 POSTYPE_ATTRIBUTE_MAP = {
-    POSType.S: {
+    DefaultEnglishPOSType.S: {
         AttributeType.ANIMACY,
         AttributeType.NUMBER,
         AttributeType.PERSON,
         AttributeType.TENSE,
         AttributeType.VOICE,
     },
-    POSType.AdjP: set(),
-    POSType.AdvP: set(),
-    POSType.AuxP: {
+    DefaultEnglishPOSType.AdjP: set(),
+    DefaultEnglishPOSType.AdvP: set(),
+    DefaultEnglishPOSType.AuxP: {
         AttributeType.ASPECT,
         AttributeType.NUMBER,
         AttributeType.PERSON,
         AttributeType.TENSE,
     },
-    POSType.Be: {
+    DefaultEnglishPOSType.Be: {
         AttributeType.ASPECT,
         AttributeType.NUMBER,
         AttributeType.PERSON,
         AttributeType.TENSE,
     },
-    POSType.ModalP: {
+    DefaultEnglishPOSType.ModalP: {
         AttributeType.ASPECT,
         AttributeType.TENSE,
     },
-    POSType.NP: {
+    DefaultEnglishPOSType.NP: {
         AttributeType.ANIMACY,
         AttributeType.CASE,
         AttributeType.NPFORM,
         AttributeType.NUMBER,
         AttributeType.PERSON,
     },
-    POSType.NP_NoDet: {
+    DefaultEnglishPOSType.NP_NoDet: {
         AttributeType.ANIMACY,
         AttributeType.CASE,
         AttributeType.NUMBER,
         AttributeType.PERSON,
     },
-    POSType.PP: {},
-    POSType.RelClause: {
+    DefaultEnglishPOSType.PP: {},
+    DefaultEnglishPOSType.RelClause: {
         AttributeType.ANIMACY,
         AttributeType.NUMBER,
         AttributeType.PERSON,
     },
-    POSType.VP: {
+    DefaultEnglishPOSType.VP: {
         AttributeType.ANIMACY,
         AttributeType.ASPECT,
         AttributeType.NUMBER,
@@ -55,61 +55,61 @@ POSTYPE_ATTRIBUTE_MAP = {
         AttributeType.VALENCY,
         AttributeType.VOICE,
     },
-    POSType.VP_AfterModal: {
+    DefaultEnglishPOSType.VP_AfterModal: {
         AttributeType.ASPECT,
     },
-    POSType.VP_Bare: {
+    DefaultEnglishPOSType.VP_Bare: {
         AttributeType.VALENCY,
     },
-    POSType.VP_Passive: {
+    DefaultEnglishPOSType.VP_Passive: {
         AttributeType.ASPECT,
         AttributeType.NUMBER,
         AttributeType.PERSON,
         AttributeType.TENSE,
         AttributeType.VALENCY,
     },
-    POSType.Adj: set(),
-    POSType.Adv: set(),
-    POSType.Aux_do: {
+    DefaultEnglishPOSType.Adj: set(),
+    DefaultEnglishPOSType.Adv: set(),
+    DefaultEnglishPOSType.Aux_do: {
         AttributeType.TENSE,
         AttributeType.NUMBER,
         AttributeType.PERSON,
         AttributeType.ASPECT,
     },
-    POSType.Aux_finite: {
+    DefaultEnglishPOSType.Aux_finite: {
         AttributeType.TENSE,
         AttributeType.NUMBER,
         AttributeType.PERSON,
         AttributeType.ASPECT,
     },
-    POSType.CoordConj: set(),
-    POSType.Det: {
+    DefaultEnglishPOSType.CoordConj: set(),
+    DefaultEnglishPOSType.Det: {
         AttributeType.CASE,
         AttributeType.NUMBER,
     },
-    POSType.Deg: set(),
-    POSType.Modal: {
+    DefaultEnglishPOSType.Deg: set(),
+    DefaultEnglishPOSType.Modal: {
         AttributeType.ASPECT,
         AttributeType.TENSE,
     },
-    POSType.Noun: {
+    DefaultEnglishPOSType.Noun: {
         AttributeType.ANIMACY,
         AttributeType.CASE,
         AttributeType.NUMBER,
     },
-    POSType.Prep: set(),
-    POSType.Pron: {
+    DefaultEnglishPOSType.Prep: set(),
+    DefaultEnglishPOSType.Pron: {
         AttributeType.ANIMACY,
         AttributeType.CASE,
         AttributeType.NUMBER,
         AttributeType.PERSON,
     },
-    POSType.RelativePron: {
+    DefaultEnglishPOSType.RelativePron: {
         AttributeType.ANIMACY,
     },
-    POSType.SimpleConj: set(),
-    POSType.Subordinator: set(),
-    POSType.Verb: {
+    DefaultEnglishPOSType.SimpleConj: set(),
+    DefaultEnglishPOSType.Subordinator: set(),
+    DefaultEnglishPOSType.Verb: {
         AttributeType.ANIMACY,
         AttributeType.ASPECT,
         AttributeType.NUMBER,
@@ -118,15 +118,15 @@ POSTYPE_ATTRIBUTE_MAP = {
         AttributeType.VALENCY,
         AttributeType.VOICE,
     },
-    POSType.Verb_AfterModal: {
+    DefaultEnglishPOSType.Verb_AfterModal: {
         AttributeType.ASPECT,
         AttributeType.VALENCY,
     },
-    POSType.Verb_Bare: {AttributeType.VALENCY},
+    DefaultEnglishPOSType.Verb_Bare: {AttributeType.VALENCY},
 }
 
 
-def relevant_attributes(pos_type: POSType) -> set[AttributeType]:
+def relevant_attributes(pos_type: DefaultEnglishPOSType) -> set[AttributeType]:
     if pos_type not in POSTYPE_ATTRIBUTE_MAP:
         raise ValueError(f"No relevant attributes specified for POSType: {pos_type}")
     return POSTYPE_ATTRIBUTE_MAP[pos_type]

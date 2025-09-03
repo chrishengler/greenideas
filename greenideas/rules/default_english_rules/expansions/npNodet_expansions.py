@@ -1,15 +1,15 @@
 from greenideas.attributes.attribute_type import AttributeType
-from greenideas.parts_of_speech.pos_types import POSType
+from greenideas.parts_of_speech.default_english_pos_types import DefaultEnglishPOSType
 from greenideas.rules.expansion_spec import INHERIT, ExpansionSpec
 from greenideas.rules.grammar_rule import GrammarRule
 from greenideas.rules.source_spec import SourceSpec
 
 # NP_NoDet -> N
 npNodet__n = GrammarRule(
-    SourceSpec(POSType.NP_NoDet),
+    SourceSpec(DefaultEnglishPOSType.NP_NoDet),
     [
         ExpansionSpec(
-            POSType.Noun,
+            DefaultEnglishPOSType.Noun,
             {
                 AttributeType.ANIMACY: INHERIT,
                 AttributeType.CASE: INHERIT,
@@ -21,11 +21,11 @@ npNodet__n = GrammarRule(
 
 # NP_NoDet -> AdjP NP_NoDet
 np_nodet__adjp_np_nodet = GrammarRule(
-    SourceSpec(POSType.NP_NoDet),
+    SourceSpec(DefaultEnglishPOSType.NP_NoDet),
     [
-        ExpansionSpec(POSType.AdjP),
+        ExpansionSpec(DefaultEnglishPOSType.AdjP),
         ExpansionSpec(
-            POSType.NP_NoDet,
+            DefaultEnglishPOSType.NP_NoDet,
             {
                 AttributeType.ANIMACY: INHERIT,
                 AttributeType.CASE: INHERIT,
@@ -38,11 +38,11 @@ np_nodet__adjp_np_nodet = GrammarRule(
 
 # NP_NoDet -> AdjP N
 npNodet__adjp_n = GrammarRule(
-    SourceSpec(POSType.NP_NoDet),
+    SourceSpec(DefaultEnglishPOSType.NP_NoDet),
     [
-        ExpansionSpec(POSType.AdjP),
+        ExpansionSpec(DefaultEnglishPOSType.AdjP),
         ExpansionSpec(
-            POSType.Noun,
+            DefaultEnglishPOSType.Noun,
             {
                 AttributeType.ANIMACY: INHERIT,
                 AttributeType.CASE: INHERIT,
@@ -55,10 +55,10 @@ npNodet__adjp_n = GrammarRule(
 
 # NP_NoDet -> N RelClause
 npNodet__n_relclause = GrammarRule(
-    SourceSpec(POSType.NP_NoDet),
+    SourceSpec(DefaultEnglishPOSType.NP_NoDet),
     [
         ExpansionSpec(
-            POSType.Noun,
+            DefaultEnglishPOSType.Noun,
             {
                 AttributeType.ANIMACY: INHERIT,
                 AttributeType.CASE: INHERIT,
@@ -66,7 +66,7 @@ npNodet__n_relclause = GrammarRule(
             },
         ),
         ExpansionSpec(
-            POSType.RelClause,
+            DefaultEnglishPOSType.RelClause,
             {
                 AttributeType.ANIMACY: INHERIT,
                 AttributeType.NUMBER: INHERIT,

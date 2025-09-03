@@ -4,15 +4,15 @@ from greenideas.attributes.case import Case
 from greenideas.attributes.number import Number
 from greenideas.attributes.person import Person
 from greenideas.exceptions import TwaddleConversionError
+from greenideas.parts_of_speech.default_english_pos_types import DefaultEnglishPOSType
 from greenideas.parts_of_speech.pos_node import POSNode
-from greenideas.parts_of_speech.pos_types import POSType
 from greenideas.twaddle.twaddle_tag import build_twaddle_tag
 
 
 class PronFormattingHandler:
     @staticmethod
     def format(node: POSNode) -> str:
-        if node.type != POSType.Pron:
+        if node.type != DefaultEnglishPOSType.Pron:
             raise TwaddleConversionError(
                 f"Tried to use PronFormattingHandler on {node.type}"
             )

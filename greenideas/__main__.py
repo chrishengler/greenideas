@@ -6,7 +6,7 @@ from importlib.resources import files
 from twaddle.runner import TwaddleRunner
 
 from greenideas.grammar_engine import GrammarEngine
-from greenideas.parts_of_speech.pos_types import POSType
+from greenideas.parts_of_speech.default_english_pos_types import DefaultEnglishPOSType
 from greenideas.rules.default_english_rules.default_rules import default_rules
 from greenideas.twaddle.default_formatters.default_formatting_handlers import (
     default_formatting_handlers,
@@ -24,7 +24,7 @@ def main():
 
     engine = GrammarEngine()
     engine.add_ruleset(default_rules)
-    tree = engine.generate_tree(POSType.S)
+    tree = engine.generate_tree(DefaultEnglishPOSType.S)
     print(tree)
 
     formatter = TwaddleFormatter()

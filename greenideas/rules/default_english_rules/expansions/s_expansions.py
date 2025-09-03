@@ -5,16 +5,16 @@ from greenideas.attributes.case import Case
 from greenideas.attributes.npform import NPForm
 from greenideas.attributes.person import Person
 from greenideas.attributes.voice import Voice
-from greenideas.parts_of_speech.pos_types import POSType
+from greenideas.parts_of_speech.default_english_pos_types import DefaultEnglishPOSType
 from greenideas.rules.expansion_spec import INHERIT, ExpansionSpec
 from greenideas.rules.grammar_rule import GrammarRule
 from greenideas.rules.source_spec import SourceSpec
 
 s__np_vp = GrammarRule(
-    SourceSpec(POSType.S),
+    SourceSpec(DefaultEnglishPOSType.S),
     [
         ExpansionSpec(
-            POSType.NP,
+            DefaultEnglishPOSType.NP,
             {
                 AttributeType.ANIMACY: INHERIT,
                 AttributeType.CASE: Case.NOMINATIVE,
@@ -23,7 +23,7 @@ s__np_vp = GrammarRule(
             },
         ),
         ExpansionSpec(
-            POSType.VP,
+            DefaultEnglishPOSType.VP,
             {
                 AttributeType.ANIMACY: INHERIT,
                 AttributeType.ASPECT: Aspect.SIMPLE,
@@ -38,14 +38,14 @@ s__np_vp = GrammarRule(
 # S -> NP AuxP
 s__np_auxp = GrammarRule(
     SourceSpec(
-        POSType.S,
+        DefaultEnglishPOSType.S,
         {
             AttributeType.VOICE: Voice.ACTIVE,
         },
     ),
     [
         ExpansionSpec(
-            POSType.NP,
+            DefaultEnglishPOSType.NP,
             {
                 AttributeType.ANIMACY: INHERIT,
                 AttributeType.NUMBER: INHERIT,
@@ -54,7 +54,7 @@ s__np_auxp = GrammarRule(
             },
         ),
         ExpansionSpec(
-            POSType.AuxP,
+            DefaultEnglishPOSType.AuxP,
             {
                 AttributeType.NUMBER: INHERIT,
                 AttributeType.PERSON: INHERIT,
@@ -66,10 +66,10 @@ s__np_auxp = GrammarRule(
 
 # S -> NP ModalP
 s__np_modalp = GrammarRule(
-    SourceSpec(POSType.S),
+    SourceSpec(DefaultEnglishPOSType.S),
     [
         ExpansionSpec(
-            POSType.NP,
+            DefaultEnglishPOSType.NP,
             {
                 AttributeType.ANIMACY: INHERIT,
                 AttributeType.NUMBER: INHERIT,
@@ -78,7 +78,7 @@ s__np_modalp = GrammarRule(
             },
         ),
         ExpansionSpec(
-            POSType.ModalP,
+            DefaultEnglishPOSType.ModalP,
             {
                 AttributeType.TENSE: INHERIT,
             },
@@ -88,32 +88,32 @@ s__np_modalp = GrammarRule(
 
 # S -> S Conj S
 s__s_conj_s = GrammarRule(
-    SourceSpec(POSType.S),
+    SourceSpec(DefaultEnglishPOSType.S),
     [
-        ExpansionSpec(POSType.S),
-        ExpansionSpec(POSType.CoordConj),
-        ExpansionSpec(POSType.S),
+        ExpansionSpec(DefaultEnglishPOSType.S),
+        ExpansionSpec(DefaultEnglishPOSType.CoordConj),
+        ExpansionSpec(DefaultEnglishPOSType.S),
     ],
     weight=0.2,
     ignore_after_depth=2,
 )
 
 s__s_sub_s = GrammarRule(
-    SourceSpec(POSType.S),
+    SourceSpec(DefaultEnglishPOSType.S),
     [
-        ExpansionSpec(POSType.S),
-        ExpansionSpec(POSType.Subordinator),
-        ExpansionSpec(POSType.S),
+        ExpansionSpec(DefaultEnglishPOSType.S),
+        ExpansionSpec(DefaultEnglishPOSType.Subordinator),
+        ExpansionSpec(DefaultEnglishPOSType.S),
     ],
     weight=0.2,
     ignore_after_depth=2,
 )
 
 s__np_be_adjp = GrammarRule(
-    SourceSpec(POSType.S),
+    SourceSpec(DefaultEnglishPOSType.S),
     [
         ExpansionSpec(
-            POSType.NP,
+            DefaultEnglishPOSType.NP,
             {
                 AttributeType.CASE: Case.NOMINATIVE,
                 AttributeType.NUMBER: INHERIT,
@@ -121,7 +121,7 @@ s__np_be_adjp = GrammarRule(
             },
         ),
         ExpansionSpec(
-            POSType.Be,
+            DefaultEnglishPOSType.Be,
             {
                 AttributeType.ASPECT: Aspect.SIMPLE,
                 AttributeType.NUMBER: INHERIT,
@@ -129,15 +129,15 @@ s__np_be_adjp = GrammarRule(
                 AttributeType.TENSE: INHERIT,
             },
         ),
-        ExpansionSpec(POSType.AdjP),
+        ExpansionSpec(DefaultEnglishPOSType.AdjP),
     ],
 )
 
 s__np_be_np = GrammarRule(
-    SourceSpec(POSType.S),
+    SourceSpec(DefaultEnglishPOSType.S),
     [
         ExpansionSpec(
-            POSType.NP,
+            DefaultEnglishPOSType.NP,
             {
                 AttributeType.CASE: Case.NOMINATIVE,
                 AttributeType.NUMBER: INHERIT,
@@ -145,7 +145,7 @@ s__np_be_np = GrammarRule(
             },
         ),
         ExpansionSpec(
-            POSType.Be,
+            DefaultEnglishPOSType.Be,
             {
                 AttributeType.ASPECT: Aspect.SIMPLE,
                 AttributeType.NUMBER: INHERIT,
@@ -154,7 +154,7 @@ s__np_be_np = GrammarRule(
             },
         ),
         ExpansionSpec(
-            POSType.NP,
+            DefaultEnglishPOSType.NP,
             {
                 AttributeType.CASE: Case.NOMINATIVE,
                 AttributeType.NPFORM: NPForm.LEXICAL,
@@ -167,10 +167,10 @@ s__np_be_np = GrammarRule(
 )
 
 s__np_be_pp = GrammarRule(
-    SourceSpec(POSType.S),
+    SourceSpec(DefaultEnglishPOSType.S),
     [
         ExpansionSpec(
-            POSType.NP,
+            DefaultEnglishPOSType.NP,
             {
                 AttributeType.CASE: Case.NOMINATIVE,
                 AttributeType.NUMBER: INHERIT,
@@ -178,7 +178,7 @@ s__np_be_pp = GrammarRule(
             },
         ),
         ExpansionSpec(
-            POSType.Be,
+            DefaultEnglishPOSType.Be,
             {
                 AttributeType.ASPECT: Aspect.SIMPLE,
                 AttributeType.NUMBER: INHERIT,
@@ -186,7 +186,7 @@ s__np_be_pp = GrammarRule(
                 AttributeType.TENSE: INHERIT,
             },
         ),
-        ExpansionSpec(POSType.PP),
+        ExpansionSpec(DefaultEnglishPOSType.PP),
     ],
 )
 

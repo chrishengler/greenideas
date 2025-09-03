@@ -1,18 +1,38 @@
-from greenideas.rules.default_english_rules.adjP_expansions import adjP_expansions
-from greenideas.rules.default_english_rules.advP_expansions import advP_expansions
-from greenideas.rules.default_english_rules.auxP_expansions import auxP_expansions
-from greenideas.rules.default_english_rules.modalP_expansions import modalP_expansions
-from greenideas.rules.default_english_rules.np_expansions import np_expansions
-from greenideas.rules.default_english_rules.npNodet_expansions import npNodet_expansions
-from greenideas.rules.default_english_rules.pp_expansions import pp_expansions
-from greenideas.rules.default_english_rules.relClause_expansions import relC_expansions
-from greenideas.rules.default_english_rules.s_expansions import s_expansions
-from greenideas.rules.default_english_rules.vp_expansions import vp_expansions
-from greenideas.rules.default_english_rules.vpAfterModal_expansions import (
+from greenideas.rules.default_english_rules.expansions.adjP_expansions import (
+    adjP_expansions,
+)
+from greenideas.rules.default_english_rules.expansions.advP_expansions import (
+    advP_expansions,
+)
+from greenideas.rules.default_english_rules.expansions.auxP_expansions import (
+    auxP_expansions,
+)
+from greenideas.rules.default_english_rules.expansions.modalP_expansions import (
+    modalP_expansions,
+)
+from greenideas.rules.default_english_rules.expansions.np_expansions import (
+    np_expansions,
+)
+from greenideas.rules.default_english_rules.expansions.npNodet_expansions import (
+    npNodet_expansions,
+)
+from greenideas.rules.default_english_rules.expansions.pp_expansions import (
+    pp_expansions,
+)
+from greenideas.rules.default_english_rules.expansions.relClause_expansions import (
+    relC_expansions,
+)
+from greenideas.rules.default_english_rules.expansions.s_expansions import s_expansions
+from greenideas.rules.default_english_rules.expansions.vp_expansions import (
+    vp_expansions,
+)
+from greenideas.rules.default_english_rules.expansions.vpAfterModal_expansions import (
     vpAfterModal_expansions,
 )
-from greenideas.rules.default_english_rules.vpBare_expansions import vpBare_expansions
-from greenideas.rules.default_english_rules.vpPassive_expansions import (
+from greenideas.rules.default_english_rules.expansions.vpBare_expansions import (
+    vpBare_expansions,
+)
+from greenideas.rules.default_english_rules.expansions.vpPassive_expansions import (
     vp_passive_expansions,
 )
 from greenideas.rules.grammar_ruleset import GrammarRuleset

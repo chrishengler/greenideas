@@ -1,5 +1,5 @@
 from greenideas.parts_of_speech.pos_node import POSNode
-from greenideas.parts_of_speech.pos_types import POSType
+from greenideas.parts_of_speech.pos_type_base import POSType
 from greenideas.rules.grammar_rule import GrammarRule
 
 

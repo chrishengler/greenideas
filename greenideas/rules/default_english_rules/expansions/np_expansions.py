@@ -3,14 +3,14 @@ from greenideas.attributes.attribute_type import AttributeType
 from greenideas.attributes.npform import NPForm
 from greenideas.attributes.number import Number
 from greenideas.attributes.person import Person
-from greenideas.parts_of_speech.pos_types import POSType
+from greenideas.parts_of_speech.default_english_pos_types import DefaultEnglishPOSType
 from greenideas.rules.expansion_spec import INHERIT, ExpansionSpec
 from greenideas.rules.grammar_rule import GrammarRule
 from greenideas.rules.source_spec import SourceSpec
 
 np__det_npNodet = GrammarRule(
     SourceSpec(
-        POSType.NP,
+        DefaultEnglishPOSType.NP,
         {
             AttributeType.NPFORM: [NPForm.FREE, NPForm.LEXICAL],
             AttributeType.PERSON: Person.THIRD,
@@ -18,14 +18,14 @@ np__det_npNodet = GrammarRule(
     ),
     [
         ExpansionSpec(
-            POSType.Det,
+            DefaultEnglishPOSType.Det,
             {
                 AttributeType.CASE: INHERIT,
                 AttributeType.NUMBER: INHERIT,
             },
         ),
         ExpansionSpec(
-            POSType.NP_NoDet,
+            DefaultEnglishPOSType.NP_NoDet,
             {
                 AttributeType.ANIMACY: INHERIT,
                 AttributeType.CASE: INHERIT,
@@ -39,7 +39,7 @@ np__det_npNodet = GrammarRule(
 # NP_Pl -> NPNoDet
 npPl__npNoDet = GrammarRule(
     SourceSpec(
-        POSType.NP,
+        DefaultEnglishPOSType.NP,
         {
             AttributeType.NUMBER: Number.PLURAL,
             AttributeType.NPFORM: [NPForm.FREE, NPForm.LEXICAL],
@@ -47,7 +47,7 @@ npPl__npNoDet = GrammarRule(
     ),
     [
         ExpansionSpec(
-            POSType.NP_NoDet,
+            DefaultEnglishPOSType.NP_NoDet,
             {
                 AttributeType.ANIMACY: INHERIT,
                 AttributeType.CASE: INHERIT,
@@ -60,10 +60,13 @@ npPl__npNoDet = GrammarRule(
 
 # NP -> Pron
 np__pron = GrammarRule(
-    SourceSpec(POSType.NP, {AttributeType.NPFORM: [NPForm.FREE, NPForm.PRONOMINAL]}),
+    SourceSpec(
+        DefaultEnglishPOSType.NP,
+        {AttributeType.NPFORM: [NPForm.FREE, NPForm.PRONOMINAL]},
+    ),
     [
         ExpansionSpec(
-            POSType.Pron,
+            DefaultEnglishPOSType.Pron,
             {
                 AttributeType.ANIMACY: INHERIT,
                 AttributeType.NUMBER: INHERIT,

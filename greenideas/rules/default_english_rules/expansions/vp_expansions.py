@@ -4,17 +4,17 @@ from greenideas.attributes.npform import NPForm
 from greenideas.attributes.person import Person
 from greenideas.attributes.valency import Valency
 from greenideas.attributes.voice import Voice
-from greenideas.parts_of_speech.pos_types import POSType
+from greenideas.parts_of_speech.default_english_pos_types import DefaultEnglishPOSType
 from greenideas.rules.expansion_spec import INHERIT, ExpansionSpec
 from greenideas.rules.grammar_rule import GrammarRule
 from greenideas.rules.source_spec import SourceSpec
 
 # VP -> VP AdvP
 vp__vp_advp = GrammarRule(
-    SourceSpec(POSType.VP),
+    SourceSpec(DefaultEnglishPOSType.VP),
     [
         ExpansionSpec(
-            POSType.VP,
+            DefaultEnglishPOSType.VP,
             {
                 AttributeType.ASPECT: INHERIT,
                 AttributeType.NUMBER: INHERIT,
@@ -24,7 +24,7 @@ vp__vp_advp = GrammarRule(
                 AttributeType.VOICE: INHERIT,
             },
         ),
-        ExpansionSpec(POSType.AdvP),
+        ExpansionSpec(DefaultEnglishPOSType.AdvP),
     ],
     weight=0.2,
 )
@@ -32,7 +32,7 @@ vp__vp_advp = GrammarRule(
 # VP1 -> V1
 vp1__v = GrammarRule(
     SourceSpec(
-        POSType.VP,
+        DefaultEnglishPOSType.VP,
         {
             AttributeType.VALENCY: Valency.MONOVALENT,
             AttributeType.VOICE: Voice.ACTIVE,
@@ -40,7 +40,7 @@ vp1__v = GrammarRule(
     ),
     [
         ExpansionSpec(
-            POSType.Verb,
+            DefaultEnglishPOSType.Verb,
             {
                 AttributeType.ASPECT: INHERIT,
                 AttributeType.NUMBER: INHERIT,
@@ -56,7 +56,7 @@ vp1__v = GrammarRule(
 # VP2 -> V NP.Obj
 vp2__v_npAcc = GrammarRule(
     SourceSpec(
-        POSType.VP,
+        DefaultEnglishPOSType.VP,
         {
             AttributeType.VALENCY: Valency.DIVALENT,
             AttributeType.VOICE: Voice.ACTIVE,
@@ -64,7 +64,7 @@ vp2__v_npAcc = GrammarRule(
     ),
     [
         ExpansionSpec(
-            POSType.Verb,
+            DefaultEnglishPOSType.Verb,
             {
                 AttributeType.ASPECT: INHERIT,
                 AttributeType.NUMBER: INHERIT,
@@ -75,7 +75,7 @@ vp2__v_npAcc = GrammarRule(
             },
         ),
         ExpansionSpec(
-            POSType.NP,
+            DefaultEnglishPOSType.NP,
             {
                 AttributeType.CASE: Case.OBJECTIVE,
             },
@@ -86,12 +86,12 @@ vp2__v_npAcc = GrammarRule(
 # VP3 -> V NP.Obj NP.Obj
 vp3__v_npAcc_npNom = GrammarRule(
     SourceSpec(
-        POSType.VP,
+        DefaultEnglishPOSType.VP,
         {AttributeType.VALENCY: Valency.TRIVALENT, AttributeType.VOICE: Voice.ACTIVE},
     ),
     [
         ExpansionSpec(
-            POSType.Verb,
+            DefaultEnglishPOSType.Verb,
             {
                 AttributeType.ASPECT: INHERIT,
                 AttributeType.NUMBER: INHERIT,
@@ -102,14 +102,14 @@ vp3__v_npAcc_npNom = GrammarRule(
             },
         ),
         ExpansionSpec(
-            POSType.NP,
+            DefaultEnglishPOSType.NP,
             {
                 AttributeType.NPFORM: NPForm.PRONOMINAL,
                 AttributeType.CASE: Case.OBJECTIVE,
             },
         ),
         ExpansionSpec(
-            POSType.NP,
+            DefaultEnglishPOSType.NP,
             {
                 AttributeType.NPFORM: NPForm.LEXICAL,
                 AttributeType.CASE: Case.OBJECTIVE,
@@ -122,10 +122,10 @@ vp3__v_npAcc_npNom = GrammarRule(
 
 # VP -> VP PP
 vp__vp_pp = GrammarRule(
-    SourceSpec(POSType.VP),
+    SourceSpec(DefaultEnglishPOSType.VP),
     [
         ExpansionSpec(
-            POSType.VP,
+            DefaultEnglishPOSType.VP,
             {
                 AttributeType.ASPECT: INHERIT,
                 AttributeType.NUMBER: INHERIT,
@@ -135,17 +135,17 @@ vp__vp_pp = GrammarRule(
                 AttributeType.VOICE: INHERIT,
             },
         ),
-        ExpansionSpec(POSType.PP),
+        ExpansionSpec(DefaultEnglishPOSType.PP),
     ],
     weight=0.2,
 )
 
 # VP -> VP Conj VP
 vp__vp_conj_vp = GrammarRule(
-    SourceSpec(POSType.VP),
+    SourceSpec(DefaultEnglishPOSType.VP),
     [
         ExpansionSpec(
-            POSType.VP,
+            DefaultEnglishPOSType.VP,
             {
                 AttributeType.ASPECT: INHERIT,
                 AttributeType.NUMBER: INHERIT,
@@ -155,9 +155,9 @@ vp__vp_conj_vp = GrammarRule(
                 AttributeType.VOICE: INHERIT,
             },
         ),
-        ExpansionSpec(POSType.SimpleConj),
+        ExpansionSpec(DefaultEnglishPOSType.SimpleConj),
         ExpansionSpec(
-            POSType.VP,
+            DefaultEnglishPOSType.VP,
             {
                 AttributeType.ASPECT: INHERIT,
                 AttributeType.NUMBER: INHERIT,
@@ -173,10 +173,10 @@ vp__vp_conj_vp = GrammarRule(
 
 # vp_passive -> VP_Passive
 vp_pass__vpPass = GrammarRule(
-    SourceSpec(POSType.VP, {AttributeType.VOICE: Voice.PASSIVE}),
+    SourceSpec(DefaultEnglishPOSType.VP, {AttributeType.VOICE: Voice.PASSIVE}),
     [
         ExpansionSpec(
-            POSType.VP_Passive,
+            DefaultEnglishPOSType.VP_Passive,
             {
                 AttributeType.ASPECT: INHERIT,
                 AttributeType.NUMBER: INHERIT,
