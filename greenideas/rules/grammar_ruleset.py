@@ -68,4 +68,4 @@ class GrammarRuleset:
 
     def add_rules(self, rules: list[GrammarRule]):
         for rule in rules:
-            self.add(rule)
+            self.add_rule(rule)
