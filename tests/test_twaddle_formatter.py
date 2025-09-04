@@ -1,7 +1,9 @@
 import unittest
 
-from greenideas.attributes.attribute_type import AttributeType
 from greenideas.parts_of_speech.pos_node import POSNode
+from greenideas.rules.default_english_rules.attributes.default_english_attribute_type import (
+    DefaultEnglishAttributeType,
+)
 from greenideas.rules.default_english_rules.attributes.number import Number
 from greenideas.rules.default_english_rules.attributes.person import Person
 from greenideas.rules.default_english_rules.attributes.tense import Tense
@@ -25,19 +27,19 @@ class TestTwaddleFormatter(unittest.TestCase):
     def test_convert_tree_valid(self):
         det = POSNode(
             type=DefaultEnglishPOSType.Det,
-            attributes={AttributeType.NUMBER: Number.SINGULAR},
+            attributes={DefaultEnglishAttributeType.NUMBER: Number.SINGULAR},
         )
         noun = POSNode(
             type=DefaultEnglishPOSType.Noun,
-            attributes={AttributeType.NUMBER: Number.SINGULAR},
+            attributes={DefaultEnglishAttributeType.NUMBER: Number.SINGULAR},
         )
         verb = POSNode(
             type=DefaultEnglishPOSType.Verb,
             attributes={
-                AttributeType.NUMBER: Number.SINGULAR,
-                AttributeType.PERSON: Person.THIRD,
-                AttributeType.TENSE: Tense.PRESENT,
-                AttributeType.VALENCY: Valency.MONOVALENT,
+                DefaultEnglishAttributeType.NUMBER: Number.SINGULAR,
+                DefaultEnglishAttributeType.PERSON: Person.THIRD,
+                DefaultEnglishAttributeType.TENSE: Tense.PRESENT,
+                DefaultEnglishAttributeType.VALENCY: Valency.MONOVALENT,
             },
         )
         noun_phrase = POSNode(type=DefaultEnglishPOSType.NP, children=[det, noun])
@@ -52,19 +54,19 @@ class TestTwaddleFormatter(unittest.TestCase):
     def test_format_as_sentence(self):
         det = POSNode(
             type=DefaultEnglishPOSType.Det,
-            attributes={AttributeType.NUMBER: Number.SINGULAR},
+            attributes={DefaultEnglishAttributeType.NUMBER: Number.SINGULAR},
         )
         noun = POSNode(
             type=DefaultEnglishPOSType.Noun,
-            attributes={AttributeType.NUMBER: Number.SINGULAR},
+            attributes={DefaultEnglishAttributeType.NUMBER: Number.SINGULAR},
         )
         verb = POSNode(
             type=DefaultEnglishPOSType.Verb,
             attributes={
-                AttributeType.NUMBER: Number.SINGULAR,
-                AttributeType.PERSON: Person.THIRD,
-                AttributeType.TENSE: Tense.PRESENT,
-                AttributeType.VALENCY: Valency.MONOVALENT,
+                DefaultEnglishAttributeType.NUMBER: Number.SINGULAR,
+                DefaultEnglishAttributeType.PERSON: Person.THIRD,
+                DefaultEnglishAttributeType.TENSE: Tense.PRESENT,
+                DefaultEnglishAttributeType.VALENCY: Valency.MONOVALENT,
             },
         )
         noun_phrase = POSNode(type=DefaultEnglishPOSType.NP, children=[det, noun])

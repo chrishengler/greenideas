@@ -1,10 +1,12 @@
 import unittest
 
-from greenideas.attributes.attribute_type import AttributeType
 from greenideas.exceptions import RuleNotFoundError
 from greenideas.grammar_engine import GrammarEngine
 from greenideas.parts_of_speech.pos_node import POSNode
 from greenideas.rules.default_english_rules.attributes.case import Case
+from greenideas.rules.default_english_rules.attributes.default_english_attribute_type import (
+    DefaultEnglishAttributeType,
+)
 from greenideas.rules.default_english_rules.parts_of_speech.default_english_pos_attributes import (
     relevant_attributes,
 )
@@ -26,11 +28,17 @@ class TestGrammarEngine(unittest.TestCase):
             [
                 ExpansionSpec(
                     DefaultEnglishPOSType.NP,
-                    {AttributeType.NUMBER: INHERIT, AttributeType.PERSON: INHERIT},
+                    {
+                        DefaultEnglishAttributeType.NUMBER: INHERIT,
+                        DefaultEnglishAttributeType.PERSON: INHERIT,
+                    },
                 ),
                 ExpansionSpec(
                     DefaultEnglishPOSType.VP,
-                    {AttributeType.NUMBER: INHERIT, AttributeType.PERSON: INHERIT},
+                    {
+                        DefaultEnglishAttributeType.NUMBER: INHERIT,
+                        DefaultEnglishAttributeType.PERSON: INHERIT,
+                    },
                 ),
             ],
         )
@@ -39,11 +47,17 @@ class TestGrammarEngine(unittest.TestCase):
             [
                 ExpansionSpec(
                     DefaultEnglishPOSType.Det,
-                    {AttributeType.NUMBER: INHERIT, AttributeType.CASE: INHERIT},
+                    {
+                        DefaultEnglishAttributeType.NUMBER: INHERIT,
+                        DefaultEnglishAttributeType.CASE: INHERIT,
+                    },
                 ),
                 ExpansionSpec(
                     DefaultEnglishPOSType.Noun,
-                    {AttributeType.NUMBER: INHERIT, AttributeType.CASE: INHERIT},
+                    {
+                        DefaultEnglishAttributeType.NUMBER: INHERIT,
+                        DefaultEnglishAttributeType.CASE: INHERIT,
+                    },
                 ),
             ],
         )
@@ -52,13 +66,13 @@ class TestGrammarEngine(unittest.TestCase):
             [
                 ExpansionSpec(
                     DefaultEnglishPOSType.Verb,
-                    {AttributeType.NUMBER: INHERIT},
+                    {DefaultEnglishAttributeType.NUMBER: INHERIT},
                 ),
                 ExpansionSpec(
                     DefaultEnglishPOSType.NP,
                     {
-                        AttributeType.NUMBER: INHERIT,
-                        AttributeType.CASE: Case.OBJECTIVE,
+                        DefaultEnglishAttributeType.NUMBER: INHERIT,
+                        DefaultEnglishAttributeType.CASE: Case.OBJECTIVE,
                     },
                 ),
             ],
@@ -98,11 +112,15 @@ class TestGrammarEngine(unittest.TestCase):
             SourceSpec(DefaultEnglishPOSType.S),
             [
                 ExpansionSpec(
-                    DefaultEnglishPOSType.NP, {AttributeType.CASE: Case.GENITIVE}
+                    DefaultEnglishPOSType.NP,
+                    {DefaultEnglishAttributeType.CASE: Case.GENITIVE},
                 ),
                 ExpansionSpec(
                     DefaultEnglishPOSType.NP,
-                    {AttributeType.NUMBER: INHERIT, AttributeType.PERSON: INHERIT},
+                    {
+                        DefaultEnglishAttributeType.NUMBER: INHERIT,
+                        DefaultEnglishAttributeType.PERSON: INHERIT,
+                    },
                 ),
             ],
         )
@@ -110,15 +128,16 @@ class TestGrammarEngine(unittest.TestCase):
         tree = self.engine.generate_tree(DefaultEnglishPOSType.S)
         child1, child2 = tree.children
         self.assertEqual(
-            child1.attributes._values.get(AttributeType.CASE), Case.GENITIVE
+            child1.attributes._values.get(DefaultEnglishAttributeType.CASE),
+            Case.GENITIVE,
         )
         self.assertEqual(
-            child2.attributes.get(AttributeType.NUMBER),
-            tree.attributes.get(AttributeType.NUMBER),
+            child2.attributes.get(DefaultEnglishAttributeType.NUMBER),
+            tree.attributes.get(DefaultEnglishAttributeType.NUMBER),
         )
         self.assertEqual(
-            child2.attributes.get(AttributeType.PERSON),
-            tree.attributes.get(AttributeType.PERSON),
+            child2.attributes.get(DefaultEnglishAttributeType.PERSON),
+            tree.attributes.get(DefaultEnglishAttributeType.PERSON),
         )
 
     def test_expand_to_tree_returns_posnode_with_posnode_children(self):
