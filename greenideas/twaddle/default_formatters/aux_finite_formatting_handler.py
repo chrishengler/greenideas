@@ -1,10 +1,12 @@
-from greenideas.attributes.attribute_type import AttributeType
-from greenideas.attributes.number import Number
-from greenideas.attributes.person import Person
-from greenideas.attributes.tense import Tense
 from greenideas.exceptions import TwaddleConversionError
 from greenideas.parts_of_speech.default_english_pos_types import DefaultEnglishPOSType
 from greenideas.parts_of_speech.pos_node import POSNode
+from greenideas.rules.default_english_rules.attributes.default_english_attribute_type import (
+    DefaultEnglishAttributeType,
+)
+from greenideas.rules.default_english_rules.attributes.number import Number
+from greenideas.rules.default_english_rules.attributes.person import Person
+from greenideas.rules.default_english_rules.attributes.tense import Tense
 from greenideas.twaddle.twaddle_tag import build_twaddle_tag
 
 
@@ -17,9 +19,9 @@ class AuxFiniteFormattingHandler:
             )
         name = "aux"
         form = None
-        number = node.attributes.get(AttributeType.NUMBER)
-        person = node.attributes.get(AttributeType.PERSON)
-        tense = node.attributes.get(AttributeType.TENSE)
+        number = node.attributes.get(DefaultEnglishAttributeType.NUMBER)
+        person = node.attributes.get(DefaultEnglishAttributeType.PERSON)
+        tense = node.attributes.get(DefaultEnglishAttributeType.TENSE)
         if tense == Tense.PAST:
             form = "past"
         elif person == Person.THIRD and number == Number.SINGULAR:

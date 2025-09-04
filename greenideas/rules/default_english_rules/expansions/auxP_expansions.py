@@ -1,7 +1,9 @@
-from greenideas.attributes.aspect import Aspect
-from greenideas.attributes.attribute_type import AttributeType
-from greenideas.attributes.voice import Voice
 from greenideas.parts_of_speech.default_english_pos_types import DefaultEnglishPOSType
+from greenideas.rules.default_english_rules.attributes.aspect import Aspect
+from greenideas.rules.default_english_rules.attributes.default_english_attribute_type import (
+    DefaultEnglishAttributeType,
+)
+from greenideas.rules.default_english_rules.attributes.voice import Voice
 from greenideas.rules.expansion_spec import INHERIT, ExpansionSpec
 from greenideas.rules.grammar_rule import GrammarRule
 from greenideas.rules.source_spec import SourceSpec
@@ -12,7 +14,7 @@ auxp__auxFinite_vpParticiple = GrammarRule(
     SourceSpec(
         DefaultEnglishPOSType.AuxP,
         {
-            AttributeType.ASPECT: [
+            DefaultEnglishAttributeType.ASPECT: [
                 Aspect.PERFECT,
             ]
         },
@@ -21,19 +23,19 @@ auxp__auxFinite_vpParticiple = GrammarRule(
         ExpansionSpec(
             DefaultEnglishPOSType.Aux_finite,
             {
-                AttributeType.ASPECT: INHERIT,
-                AttributeType.NUMBER: INHERIT,
-                AttributeType.TENSE: INHERIT,
-                AttributeType.PERSON: INHERIT,
+                DefaultEnglishAttributeType.ASPECT: INHERIT,
+                DefaultEnglishAttributeType.NUMBER: INHERIT,
+                DefaultEnglishAttributeType.TENSE: INHERIT,
+                DefaultEnglishAttributeType.PERSON: INHERIT,
             },
         ),
         ExpansionSpec(
             DefaultEnglishPOSType.VP,
             {
-                AttributeType.ASPECT: INHERIT,
-                AttributeType.NUMBER: INHERIT,
-                AttributeType.TENSE: INHERIT,
-                AttributeType.PERSON: INHERIT,
+                DefaultEnglishAttributeType.ASPECT: INHERIT,
+                DefaultEnglishAttributeType.NUMBER: INHERIT,
+                DefaultEnglishAttributeType.TENSE: INHERIT,
+                DefaultEnglishAttributeType.PERSON: INHERIT,
             },
         ),
     ],
@@ -43,36 +45,36 @@ auxPerfprog__auxFinite_vpParticiple = GrammarRule(
     SourceSpec(
         DefaultEnglishPOSType.AuxP,
         {
-            AttributeType.ASPECT: Aspect.PERFECT_PROGRESSIVE,
+            DefaultEnglishAttributeType.ASPECT: Aspect.PERFECT_PROGRESSIVE,
         },
     ),
     [
         ExpansionSpec(
             DefaultEnglishPOSType.Aux_finite,
             {
-                AttributeType.ASPECT: Aspect.PERFECT,
-                AttributeType.NUMBER: INHERIT,
-                AttributeType.TENSE: INHERIT,
-                AttributeType.PERSON: INHERIT,
+                DefaultEnglishAttributeType.ASPECT: Aspect.PERFECT,
+                DefaultEnglishAttributeType.NUMBER: INHERIT,
+                DefaultEnglishAttributeType.TENSE: INHERIT,
+                DefaultEnglishAttributeType.PERSON: INHERIT,
             },
         ),
         ExpansionSpec(
             DefaultEnglishPOSType.Be,
             {
-                AttributeType.ASPECT: Aspect.PERFECT,
-                AttributeType.NUMBER: INHERIT,
-                AttributeType.TENSE: INHERIT,
-                AttributeType.PERSON: INHERIT,
+                DefaultEnglishAttributeType.ASPECT: Aspect.PERFECT,
+                DefaultEnglishAttributeType.NUMBER: INHERIT,
+                DefaultEnglishAttributeType.TENSE: INHERIT,
+                DefaultEnglishAttributeType.PERSON: INHERIT,
             },
         ),
         ExpansionSpec(
             DefaultEnglishPOSType.VP,
             {
-                AttributeType.ASPECT: INHERIT,
-                AttributeType.NUMBER: INHERIT,
-                AttributeType.TENSE: INHERIT,
-                AttributeType.PERSON: INHERIT,
-                AttributeType.VOICE: Voice.ACTIVE,
+                DefaultEnglishAttributeType.ASPECT: INHERIT,
+                DefaultEnglishAttributeType.NUMBER: INHERIT,
+                DefaultEnglishAttributeType.TENSE: INHERIT,
+                DefaultEnglishAttributeType.PERSON: INHERIT,
+                DefaultEnglishAttributeType.VOICE: Voice.ACTIVE,
             },
         ),
     ],
@@ -83,27 +85,27 @@ auxpProg__auxFinite_vpGerund = GrammarRule(
     SourceSpec(
         DefaultEnglishPOSType.AuxP,
         {
-            AttributeType.ASPECT: [Aspect.PROGRESSIVE],
+            DefaultEnglishAttributeType.ASPECT: [Aspect.PROGRESSIVE],
         },
     ),
     [
         ExpansionSpec(
             DefaultEnglishPOSType.Be,
             {
-                AttributeType.ASPECT: Aspect.SIMPLE,
-                AttributeType.NUMBER: INHERIT,
-                AttributeType.TENSE: INHERIT,
-                AttributeType.PERSON: INHERIT,
+                DefaultEnglishAttributeType.ASPECT: Aspect.SIMPLE,
+                DefaultEnglishAttributeType.NUMBER: INHERIT,
+                DefaultEnglishAttributeType.TENSE: INHERIT,
+                DefaultEnglishAttributeType.PERSON: INHERIT,
             },
         ),
         ExpansionSpec(
             DefaultEnglishPOSType.VP,
             {
-                AttributeType.ASPECT: INHERIT,
-                AttributeType.NUMBER: INHERIT,
-                AttributeType.TENSE: INHERIT,
-                AttributeType.PERSON: INHERIT,
-                AttributeType.VOICE: Voice.ACTIVE,
+                DefaultEnglishAttributeType.ASPECT: INHERIT,
+                DefaultEnglishAttributeType.NUMBER: INHERIT,
+                DefaultEnglishAttributeType.TENSE: INHERIT,
+                DefaultEnglishAttributeType.PERSON: INHERIT,
+                DefaultEnglishAttributeType.VOICE: Voice.ACTIVE,
             },
         ),
     ],
@@ -111,15 +113,17 @@ auxpProg__auxFinite_vpGerund = GrammarRule(
 
 # AuxP -> Aux_do V_Bare
 auxp__auxDo_vpBare = GrammarRule(
-    SourceSpec(DefaultEnglishPOSType.AuxP, {AttributeType.ASPECT: Aspect.SIMPLE}),
+    SourceSpec(
+        DefaultEnglishPOSType.AuxP, {DefaultEnglishAttributeType.ASPECT: Aspect.SIMPLE}
+    ),
     [
         ExpansionSpec(
             DefaultEnglishPOSType.Aux_do,
             {
-                AttributeType.ASPECT: INHERIT,
-                AttributeType.NUMBER: INHERIT,
-                AttributeType.TENSE: INHERIT,
-                AttributeType.PERSON: INHERIT,
+                DefaultEnglishAttributeType.ASPECT: INHERIT,
+                DefaultEnglishAttributeType.NUMBER: INHERIT,
+                DefaultEnglishAttributeType.TENSE: INHERIT,
+                DefaultEnglishAttributeType.PERSON: INHERIT,
             },
         ),
         ExpansionSpec(DefaultEnglishPOSType.VP_Bare),

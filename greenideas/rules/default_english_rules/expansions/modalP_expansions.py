@@ -1,5 +1,7 @@
-from greenideas.attributes.attribute_type import AttributeType
 from greenideas.parts_of_speech.default_english_pos_types import DefaultEnglishPOSType
+from greenideas.rules.default_english_rules.attributes.default_english_attribute_type import (
+    DefaultEnglishAttributeType,
+)
 from greenideas.rules.expansion_spec import INHERIT, ExpansionSpec
 from greenideas.rules.grammar_rule import GrammarRule
 from greenideas.rules.source_spec import SourceSpec
@@ -11,14 +13,14 @@ modalP__modal_vAfterModal = GrammarRule(
         ExpansionSpec(
             DefaultEnglishPOSType.Modal,
             {
-                AttributeType.TENSE: INHERIT,
-                AttributeType.ASPECT: INHERIT,
+                DefaultEnglishAttributeType.TENSE: INHERIT,
+                DefaultEnglishAttributeType.ASPECT: INHERIT,
             },
         ),
         ExpansionSpec(
             DefaultEnglishPOSType.VP_AfterModal,
             {
-                AttributeType.ASPECT: INHERIT,
+                DefaultEnglishAttributeType.ASPECT: INHERIT,
             },
         ),
     ],

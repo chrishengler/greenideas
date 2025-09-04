@@ -1,7 +1,6 @@
 import unittest
 
 from greenideas.attributes.attribute_type import AttributeType
-from greenideas.attributes.case import Case
 from greenideas.exceptions import RuleNotFoundError
 from greenideas.grammar_engine import GrammarEngine
 from greenideas.parts_of_speech.default_english_pos_attributes import (
@@ -9,6 +8,7 @@ from greenideas.parts_of_speech.default_english_pos_attributes import (
 )
 from greenideas.parts_of_speech.default_english_pos_types import DefaultEnglishPOSType
 from greenideas.parts_of_speech.pos_node import POSNode
+from greenideas.rules.default_english_rules.attributes.case import Case
 from greenideas.rules.expansion_spec import INHERIT, ExpansionSpec
 from greenideas.rules.grammar_rule import GrammarRule
 from greenideas.rules.source_spec import SourceSpec

@@ -1,9 +1,11 @@
-from greenideas.attributes.attribute_type import AttributeType
-from greenideas.attributes.case import Case
-from greenideas.attributes.npform import NPForm
-from greenideas.attributes.person import Person
-from greenideas.attributes.valency import Valency
 from greenideas.parts_of_speech.default_english_pos_types import DefaultEnglishPOSType
+from greenideas.rules.default_english_rules.attributes.case import Case
+from greenideas.rules.default_english_rules.attributes.default_english_attribute_type import (
+    DefaultEnglishAttributeType,
+)
+from greenideas.rules.default_english_rules.attributes.npform import NPForm
+from greenideas.rules.default_english_rules.attributes.person import Person
+from greenideas.rules.default_english_rules.attributes.valency import Valency
 from greenideas.rules.expansion_spec import INHERIT, ExpansionSpec
 from greenideas.rules.grammar_rule import GrammarRule
 from greenideas.rules.source_spec import SourceSpec
@@ -16,7 +18,7 @@ vpAfterModal__adv_vAfterModal = GrammarRule(
         ExpansionSpec(
             DefaultEnglishPOSType.VP_AfterModal,
             {
-                AttributeType.ASPECT: INHERIT,
+                DefaultEnglishAttributeType.ASPECT: INHERIT,
             },
         ),
     ],
@@ -30,7 +32,7 @@ vpAfterModal__vAfterModal_advP = GrammarRule(
         ExpansionSpec(
             DefaultEnglishPOSType.VP_AfterModal,
             {
-                AttributeType.ASPECT: INHERIT,
+                DefaultEnglishAttributeType.ASPECT: INHERIT,
             },
         ),
         ExpansionSpec(DefaultEnglishPOSType.AdvP),
@@ -45,7 +47,7 @@ vpAfterModal__vAfterModal = GrammarRule(
         ExpansionSpec(
             DefaultEnglishPOSType.Verb_AfterModal,
             {
-                AttributeType.ASPECT: INHERIT,
+                DefaultEnglishAttributeType.ASPECT: INHERIT,
             },
         ),
     ],
@@ -57,7 +59,10 @@ vpAfterModal__vAfterModal = GrammarRule(
     [
         ExpansionSpec(
             DefaultEnglishPOSType.Verb_AfterModal,
-            {AttributeType.ASPECT: INHERIT, AttributeType.VALENCY: Valency.MONOVALENT},
+            {
+                DefaultEnglishAttributeType.ASPECT: INHERIT,
+                DefaultEnglishAttributeType.VALENCY: Valency.MONOVALENT,
+            },
         ),
     ],
 )
@@ -68,12 +73,15 @@ vpAfterModal__vAfterModal2 = GrammarRule(
     [
         ExpansionSpec(
             DefaultEnglishPOSType.Verb_AfterModal,
-            {AttributeType.ASPECT: INHERIT, AttributeType.VALENCY: Valency.DIVALENT},
+            {
+                DefaultEnglishAttributeType.ASPECT: INHERIT,
+                DefaultEnglishAttributeType.VALENCY: Valency.DIVALENT,
+            },
         ),
         ExpansionSpec(
             DefaultEnglishPOSType.NP,
             {
-                AttributeType.CASE: Case.OBJECTIVE,
+                DefaultEnglishAttributeType.CASE: Case.OBJECTIVE,
             },
         ),
     ],
@@ -85,21 +93,24 @@ vpAfterModal__vAfterModal3 = GrammarRule(
     [
         ExpansionSpec(
             DefaultEnglishPOSType.Verb_AfterModal,
-            {AttributeType.ASPECT: INHERIT, AttributeType.VALENCY: Valency.TRIVALENT},
-        ),
-        ExpansionSpec(
-            DefaultEnglishPOSType.NP,
             {
-                AttributeType.NPFORM: NPForm.PRONOMINAL,
-                AttributeType.CASE: Case.OBJECTIVE,
+                DefaultEnglishAttributeType.ASPECT: INHERIT,
+                DefaultEnglishAttributeType.VALENCY: Valency.TRIVALENT,
             },
         ),
         ExpansionSpec(
             DefaultEnglishPOSType.NP,
             {
-                AttributeType.NPFORM: NPForm.LEXICAL,
-                AttributeType.CASE: Case.OBJECTIVE,
-                AttributeType.PERSON: Person.THIRD,
+                DefaultEnglishAttributeType.NPFORM: NPForm.PRONOMINAL,
+                DefaultEnglishAttributeType.CASE: Case.OBJECTIVE,
+            },
+        ),
+        ExpansionSpec(
+            DefaultEnglishPOSType.NP,
+            {
+                DefaultEnglishAttributeType.NPFORM: NPForm.LEXICAL,
+                DefaultEnglishAttributeType.CASE: Case.OBJECTIVE,
+                DefaultEnglishAttributeType.PERSON: Person.THIRD,
             },
         ),
     ],

@@ -1,9 +1,9 @@
 from unittest import TestCase
 
 from greenideas.attributes.attribute_type import AttributeType
-from greenideas.attributes.number import Number
 from greenideas.parts_of_speech.default_english_pos_types import DefaultEnglishPOSType
 from greenideas.parts_of_speech.pos_node import POSNode
+from greenideas.rules.default_english_rules.attributes.number import Number
 from greenideas.rules.expansion_spec import ExpansionSpec
 from greenideas.rules.grammar_rule import GrammarRule
 from greenideas.rules.source_spec import SourceSpec

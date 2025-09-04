@@ -1,13 +1,13 @@
 import unittest
 
 from greenideas.attributes.attribute_type import AttributeType
-from greenideas.attributes.case import Case
-from greenideas.attributes.number import Number
-from greenideas.attributes.person import Person
-from greenideas.attributes.tense import Tense
-from greenideas.attributes.valency import Valency
 from greenideas.parts_of_speech.default_english_pos_types import DefaultEnglishPOSType
 from greenideas.parts_of_speech.pos_node import POSNode
+from greenideas.rules.default_english_rules.attributes.case import Case
+from greenideas.rules.default_english_rules.attributes.number import Number
+from greenideas.rules.default_english_rules.attributes.person import Person
+from greenideas.rules.default_english_rules.attributes.tense import Tense
+from greenideas.rules.default_english_rules.attributes.valency import Valency
 from greenideas.twaddle.default_formatters.default_formatting_handlers import (
     default_formatting_handlers,
 )

@@ -1,13 +1,15 @@
-from greenideas.attributes.aspect import Aspect
-from greenideas.attributes.attribute_type import AttributeType
-from greenideas.attributes.number import Number
-from greenideas.attributes.person import Person
-from greenideas.attributes.tense import Tense
-from greenideas.attributes.valency import Valency
-from greenideas.attributes.voice import Voice
 from greenideas.exceptions import TwaddleConversionError
 from greenideas.parts_of_speech.default_english_pos_types import DefaultEnglishPOSType
 from greenideas.parts_of_speech.pos_node import POSNode
+from greenideas.rules.default_english_rules.attributes.aspect import Aspect
+from greenideas.rules.default_english_rules.attributes.default_english_attribute_type import (
+    DefaultEnglishAttributeType,
+)
+from greenideas.rules.default_english_rules.attributes.number import Number
+from greenideas.rules.default_english_rules.attributes.person import Person
+from greenideas.rules.default_english_rules.attributes.tense import Tense
+from greenideas.rules.default_english_rules.attributes.valency import Valency
+from greenideas.rules.default_english_rules.attributes.voice import Voice
 from greenideas.twaddle.twaddle_tag import build_twaddle_tag
 
 
@@ -20,12 +22,12 @@ class VerbFormattingHandler:
             )
         name = "verb"
         form = None
-        number = node.attributes.get(AttributeType.NUMBER)
-        person = node.attributes.get(AttributeType.PERSON)
-        tense = node.attributes.get(AttributeType.TENSE)
-        aspect = node.attributes.get(AttributeType.ASPECT)
-        valency = node.attributes.get(AttributeType.VALENCY)
-        voice = node.attributes.get(AttributeType.VOICE)
+        number = node.attributes.get(DefaultEnglishAttributeType.NUMBER)
+        person = node.attributes.get(DefaultEnglishAttributeType.PERSON)
+        tense = node.attributes.get(DefaultEnglishAttributeType.TENSE)
+        aspect = node.attributes.get(DefaultEnglishAttributeType.ASPECT)
+        valency = node.attributes.get(DefaultEnglishAttributeType.VALENCY)
+        voice = node.attributes.get(DefaultEnglishAttributeType.VOICE)
 
         match valency:
             case Valency.MONOVALENT:

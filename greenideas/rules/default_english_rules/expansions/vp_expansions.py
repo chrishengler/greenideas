@@ -1,10 +1,12 @@
-from greenideas.attributes.attribute_type import AttributeType
-from greenideas.attributes.case import Case
-from greenideas.attributes.npform import NPForm
-from greenideas.attributes.person import Person
-from greenideas.attributes.valency import Valency
-from greenideas.attributes.voice import Voice
 from greenideas.parts_of_speech.default_english_pos_types import DefaultEnglishPOSType
+from greenideas.rules.default_english_rules.attributes.case import Case
+from greenideas.rules.default_english_rules.attributes.default_english_attribute_type import (
+    DefaultEnglishAttributeType,
+)
+from greenideas.rules.default_english_rules.attributes.npform import NPForm
+from greenideas.rules.default_english_rules.attributes.person import Person
+from greenideas.rules.default_english_rules.attributes.valency import Valency
+from greenideas.rules.default_english_rules.attributes.voice import Voice
 from greenideas.rules.expansion_spec import INHERIT, ExpansionSpec
 from greenideas.rules.grammar_rule import GrammarRule
 from greenideas.rules.source_spec import SourceSpec
@@ -16,12 +18,12 @@ vp__vp_advp = GrammarRule(
         ExpansionSpec(
             DefaultEnglishPOSType.VP,
             {
-                AttributeType.ASPECT: INHERIT,
-                AttributeType.NUMBER: INHERIT,
-                AttributeType.TENSE: INHERIT,
-                AttributeType.PERSON: INHERIT,
-                AttributeType.VALENCY: INHERIT,
-                AttributeType.VOICE: INHERIT,
+                DefaultEnglishAttributeType.ASPECT: INHERIT,
+                DefaultEnglishAttributeType.NUMBER: INHERIT,
+                DefaultEnglishAttributeType.TENSE: INHERIT,
+                DefaultEnglishAttributeType.PERSON: INHERIT,
+                DefaultEnglishAttributeType.VALENCY: INHERIT,
+                DefaultEnglishAttributeType.VOICE: INHERIT,
             },
         ),
         ExpansionSpec(DefaultEnglishPOSType.AdvP),
@@ -34,20 +36,20 @@ vp1__v = GrammarRule(
     SourceSpec(
         DefaultEnglishPOSType.VP,
         {
-            AttributeType.VALENCY: Valency.MONOVALENT,
-            AttributeType.VOICE: Voice.ACTIVE,
+            DefaultEnglishAttributeType.VALENCY: Valency.MONOVALENT,
+            DefaultEnglishAttributeType.VOICE: Voice.ACTIVE,
         },
     ),
     [
         ExpansionSpec(
             DefaultEnglishPOSType.Verb,
             {
-                AttributeType.ASPECT: INHERIT,
-                AttributeType.NUMBER: INHERIT,
-                AttributeType.TENSE: INHERIT,
-                AttributeType.PERSON: INHERIT,
-                AttributeType.VALENCY: INHERIT,
-                AttributeType.VOICE: INHERIT,
+                DefaultEnglishAttributeType.ASPECT: INHERIT,
+                DefaultEnglishAttributeType.NUMBER: INHERIT,
+                DefaultEnglishAttributeType.TENSE: INHERIT,
+                DefaultEnglishAttributeType.PERSON: INHERIT,
+                DefaultEnglishAttributeType.VALENCY: INHERIT,
+                DefaultEnglishAttributeType.VOICE: INHERIT,
             },
         ),
     ],
@@ -58,26 +60,26 @@ vp2__v_npAcc = GrammarRule(
     SourceSpec(
         DefaultEnglishPOSType.VP,
         {
-            AttributeType.VALENCY: Valency.DIVALENT,
-            AttributeType.VOICE: Voice.ACTIVE,
+            DefaultEnglishAttributeType.VALENCY: Valency.DIVALENT,
+            DefaultEnglishAttributeType.VOICE: Voice.ACTIVE,
         },
     ),
     [
         ExpansionSpec(
             DefaultEnglishPOSType.Verb,
             {
-                AttributeType.ASPECT: INHERIT,
-                AttributeType.NUMBER: INHERIT,
-                AttributeType.TENSE: INHERIT,
-                AttributeType.PERSON: INHERIT,
-                AttributeType.VALENCY: INHERIT,
-                AttributeType.VOICE: INHERIT,
+                DefaultEnglishAttributeType.ASPECT: INHERIT,
+                DefaultEnglishAttributeType.NUMBER: INHERIT,
+                DefaultEnglishAttributeType.TENSE: INHERIT,
+                DefaultEnglishAttributeType.PERSON: INHERIT,
+                DefaultEnglishAttributeType.VALENCY: INHERIT,
+                DefaultEnglishAttributeType.VOICE: INHERIT,
             },
         ),
         ExpansionSpec(
             DefaultEnglishPOSType.NP,
             {
-                AttributeType.CASE: Case.OBJECTIVE,
+                DefaultEnglishAttributeType.CASE: Case.OBJECTIVE,
             },
         ),
     ],
@@ -87,33 +89,36 @@ vp2__v_npAcc = GrammarRule(
 vp3__v_npAcc_npNom = GrammarRule(
     SourceSpec(
         DefaultEnglishPOSType.VP,
-        {AttributeType.VALENCY: Valency.TRIVALENT, AttributeType.VOICE: Voice.ACTIVE},
+        {
+            DefaultEnglishAttributeType.VALENCY: Valency.TRIVALENT,
+            DefaultEnglishAttributeType.VOICE: Voice.ACTIVE,
+        },
     ),
     [
         ExpansionSpec(
             DefaultEnglishPOSType.Verb,
             {
-                AttributeType.ASPECT: INHERIT,
-                AttributeType.NUMBER: INHERIT,
-                AttributeType.TENSE: INHERIT,
-                AttributeType.PERSON: INHERIT,
-                AttributeType.VALENCY: INHERIT,
-                AttributeType.VOICE: INHERIT,
+                DefaultEnglishAttributeType.ASPECT: INHERIT,
+                DefaultEnglishAttributeType.NUMBER: INHERIT,
+                DefaultEnglishAttributeType.TENSE: INHERIT,
+                DefaultEnglishAttributeType.PERSON: INHERIT,
+                DefaultEnglishAttributeType.VALENCY: INHERIT,
+                DefaultEnglishAttributeType.VOICE: INHERIT,
             },
         ),
         ExpansionSpec(
             DefaultEnglishPOSType.NP,
             {
-                AttributeType.NPFORM: NPForm.PRONOMINAL,
-                AttributeType.CASE: Case.OBJECTIVE,
+                DefaultEnglishAttributeType.NPFORM: NPForm.PRONOMINAL,
+                DefaultEnglishAttributeType.CASE: Case.OBJECTIVE,
             },
         ),
         ExpansionSpec(
             DefaultEnglishPOSType.NP,
             {
-                AttributeType.NPFORM: NPForm.LEXICAL,
-                AttributeType.CASE: Case.OBJECTIVE,
-                AttributeType.PERSON: Person.THIRD,
+                DefaultEnglishAttributeType.NPFORM: NPForm.LEXICAL,
+                DefaultEnglishAttributeType.CASE: Case.OBJECTIVE,
+                DefaultEnglishAttributeType.PERSON: Person.THIRD,
             },
         ),
     ],
@@ -127,12 +132,12 @@ vp__vp_pp = GrammarRule(
         ExpansionSpec(
             DefaultEnglishPOSType.VP,
             {
-                AttributeType.ASPECT: INHERIT,
-                AttributeType.NUMBER: INHERIT,
-                AttributeType.TENSE: INHERIT,
-                AttributeType.PERSON: INHERIT,
-                AttributeType.VALENCY: INHERIT,
-                AttributeType.VOICE: INHERIT,
+                DefaultEnglishAttributeType.ASPECT: INHERIT,
+                DefaultEnglishAttributeType.NUMBER: INHERIT,
+                DefaultEnglishAttributeType.TENSE: INHERIT,
+                DefaultEnglishAttributeType.PERSON: INHERIT,
+                DefaultEnglishAttributeType.VALENCY: INHERIT,
+                DefaultEnglishAttributeType.VOICE: INHERIT,
             },
         ),
         ExpansionSpec(DefaultEnglishPOSType.PP),
@@ -147,23 +152,23 @@ vp__vp_conj_vp = GrammarRule(
         ExpansionSpec(
             DefaultEnglishPOSType.VP,
             {
-                AttributeType.ASPECT: INHERIT,
-                AttributeType.NUMBER: INHERIT,
-                AttributeType.TENSE: INHERIT,
-                AttributeType.PERSON: INHERIT,
-                AttributeType.VALENCY: INHERIT,
-                AttributeType.VOICE: INHERIT,
+                DefaultEnglishAttributeType.ASPECT: INHERIT,
+                DefaultEnglishAttributeType.NUMBER: INHERIT,
+                DefaultEnglishAttributeType.TENSE: INHERIT,
+                DefaultEnglishAttributeType.PERSON: INHERIT,
+                DefaultEnglishAttributeType.VALENCY: INHERIT,
+                DefaultEnglishAttributeType.VOICE: INHERIT,
             },
         ),
         ExpansionSpec(DefaultEnglishPOSType.SimpleConj),
         ExpansionSpec(
             DefaultEnglishPOSType.VP,
             {
-                AttributeType.ASPECT: INHERIT,
-                AttributeType.NUMBER: INHERIT,
-                AttributeType.TENSE: INHERIT,
-                AttributeType.PERSON: INHERIT,
-                AttributeType.VOICE: INHERIT,
+                DefaultEnglishAttributeType.ASPECT: INHERIT,
+                DefaultEnglishAttributeType.NUMBER: INHERIT,
+                DefaultEnglishAttributeType.TENSE: INHERIT,
+                DefaultEnglishAttributeType.PERSON: INHERIT,
+                DefaultEnglishAttributeType.VOICE: INHERIT,
             },
         ),
     ],
@@ -173,16 +178,21 @@ vp__vp_conj_vp = GrammarRule(
 
 # vp_passive -> VP_Passive
 vp_pass__vpPass = GrammarRule(
-    SourceSpec(DefaultEnglishPOSType.VP, {AttributeType.VOICE: Voice.PASSIVE}),
+    SourceSpec(
+        DefaultEnglishPOSType.VP, {DefaultEnglishAttributeType.VOICE: Voice.PASSIVE}
+    ),
     [
         ExpansionSpec(
             DefaultEnglishPOSType.VP_Passive,
             {
-                AttributeType.ASPECT: INHERIT,
-                AttributeType.NUMBER: INHERIT,
-                AttributeType.TENSE: INHERIT,
-                AttributeType.PERSON: INHERIT,
-                AttributeType.VALENCY: [Valency.DIVALENT, Valency.TRIVALENT],
+                DefaultEnglishAttributeType.ASPECT: INHERIT,
+                DefaultEnglishAttributeType.NUMBER: INHERIT,
+                DefaultEnglishAttributeType.TENSE: INHERIT,
+                DefaultEnglishAttributeType.PERSON: INHERIT,
+                DefaultEnglishAttributeType.VALENCY: [
+                    Valency.DIVALENT,
+                    Valency.TRIVALENT,
+                ],
             },
         )
     ],
