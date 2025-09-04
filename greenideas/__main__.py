@@ -24,8 +24,7 @@ def main():
         dictionary_path = sys.argv[1]
     twaddle_runner = TwaddleRunner(dictionary_path)
 
-    engine = GrammarEngine()
-    engine.add_ruleset(default_rules)
+    engine = GrammarEngine(default_rules)
     tree = engine.generate_tree(DefaultEnglishPOSType.S)
     print(tree)
 

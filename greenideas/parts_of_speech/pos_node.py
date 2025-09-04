@@ -2,14 +2,12 @@ from dataclasses import dataclass, field
 from typing import List, Self
 
 from greenideas.attributes.attribute_set import AttributeSet
-from greenideas.rules.default_english_rules.parts_of_speech.default_english_pos_types import (
-    DefaultEnglishPOSType,
-)
+from greenideas.parts_of_speech.pos_type_base import POSType
 
 
 @dataclass
 class POSNode:
-    type: DefaultEnglishPOSType
+    type: POSType
     children: List[Self] = field(default_factory=list)
     attributes: AttributeSet = field(default_factory=AttributeSet)
     depth: int = 0

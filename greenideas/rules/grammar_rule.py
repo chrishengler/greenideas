@@ -1,11 +1,5 @@
-from greenideas.attributes.attribute_type import AttributeType
-from greenideas.exceptions import InvalidGrammarRule
 from greenideas.parts_of_speech.pos_node import POSNode
-from greenideas.parts_of_speech.pos_type_base import POSType
-from greenideas.rules.default_english_rules.parts_of_speech.default_english_pos_attributes import (
-    relevant_attributes,
-)
-from greenideas.rules.expansion_spec import INHERIT, ExpansionSpec
+from greenideas.rules.expansion_spec import ExpansionSpec
 
 
 class GrammarRule:
@@ -22,18 +16,6 @@ class GrammarRule:
         self.expansion = expansion
         self.weight = weight
         self.ignore_after_depth = ignore_after_depth
-
-    def validate_attribute_constraint(
-        self, pos_type: POSType, attr: AttributeType, value
-    ) -> bool:
-        if value == INHERIT and attr not in relevant_attributes(pos_type):
-            raise InvalidGrammarRule(
-                f"Rule {str(self)} requires inheriting {attr} from {pos_type} "
-                f"but {attr} is not a relevant attribute for {pos_type}"
-            )
-
-    def get_child_spec(self, idx: int) -> ExpansionSpec:
-        return self.expansion[idx]
 
     def __repr__(self):
         sep = "\n\n"

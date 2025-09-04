@@ -6,17 +6,16 @@ from greenideas.parts_of_speech.pos_node import POSNode
 from greenideas.rules.default_english_rules.parts_of_speech.default_english_pos_types import (
     DefaultEnglishPOSType,
 )
+from greenideas.rules.grammar_ruleset import GrammarRuleset
 from greenideas.twaddle.twaddle_formatter import TwaddleFormatter
 
 
-def test_grammar_engine_initialization():
-    engine = GrammarEngine()
-    assert engine is not None
-
-
 def test_tree_generation_failure():
-    engine = GrammarEngine()
-    engine.rules = {}
+    def dummy_pos_relevance(POSType):
+        return []
+
+    empty_ruleset = GrammarRuleset(dummy_pos_relevance)
+    engine = GrammarEngine(empty_ruleset)
     with pytest.raises(RuleNotFoundError):
         engine.generate_tree(DefaultEnglishPOSType.S)
 
