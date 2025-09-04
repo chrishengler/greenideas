@@ -1,7 +1,9 @@
-from greenideas.parts_of_speech.default_english_pos_types import DefaultEnglishPOSType
 from greenideas.rules.default_english_rules.attributes.aspect import Aspect
 from greenideas.rules.default_english_rules.attributes.default_english_attribute_type import (
     DefaultEnglishAttributeType,
+)
+from greenideas.rules.default_english_rules.parts_of_speech.default_english_pos_types import (
+    DefaultEnglishPOSType,
 )
 from greenideas.rules.expansion_spec import INHERIT, ExpansionSpec
 from greenideas.rules.grammar_rule import GrammarRule

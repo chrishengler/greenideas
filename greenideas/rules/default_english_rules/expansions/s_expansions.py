@@ -1,5 +1,4 @@
 # S -> NP VP
-from greenideas.parts_of_speech.default_english_pos_types import DefaultEnglishPOSType
 from greenideas.rules.default_english_rules.attributes.aspect import Aspect
 from greenideas.rules.default_english_rules.attributes.case import Case
 from greenideas.rules.default_english_rules.attributes.default_english_attribute_type import (
@@ -8,6 +7,9 @@ from greenideas.rules.default_english_rules.attributes.default_english_attribute
 from greenideas.rules.default_english_rules.attributes.npform import NPForm
 from greenideas.rules.default_english_rules.attributes.person import Person
 from greenideas.rules.default_english_rules.attributes.voice import Voice
+from greenideas.rules.default_english_rules.parts_of_speech.default_english_pos_types import (
+    DefaultEnglishPOSType,
+)
 from greenideas.rules.expansion_spec import INHERIT, ExpansionSpec
 from greenideas.rules.grammar_rule import GrammarRule
 from greenideas.rules.source_spec import SourceSpec

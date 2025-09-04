@@ -35,9 +35,12 @@ from greenideas.rules.default_english_rules.expansions.vpBare_expansions import 
 from greenideas.rules.default_english_rules.expansions.vpPassive_expansions import (
     vp_passive_expansions,
 )
+from greenideas.rules.default_english_rules.parts_of_speech.default_english_pos_attributes import (
+    relevant_attributes,
+)
 from greenideas.rules.grammar_ruleset import GrammarRuleset
 
-default_rules = GrammarRuleset()
+default_rules = GrammarRuleset(pos_attribute_relevance=relevant_attributes)
 
 
 default_rules.add_rules(s_expansions)

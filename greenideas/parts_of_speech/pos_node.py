@@ -2,7 +2,9 @@ from dataclasses import dataclass, field
 from typing import List, Self
 
 from greenideas.attributes.attribute_set import AttributeSet
-from greenideas.parts_of_speech.default_english_pos_types import DefaultEnglishPOSType
+from greenideas.rules.default_english_rules.parts_of_speech.default_english_pos_types import (
+    DefaultEnglishPOSType,
+)
 
 
 @dataclass

@@ -1,10 +1,10 @@
 from greenideas.attributes.attribute_type import AttributeType
 from greenideas.exceptions import InvalidGrammarRule
-from greenideas.parts_of_speech.default_english_pos_attributes import (
-    relevant_attributes,
-)
 from greenideas.parts_of_speech.pos_node import POSNode
 from greenideas.parts_of_speech.pos_type_base import POSType
+from greenideas.rules.default_english_rules.parts_of_speech.default_english_pos_attributes import (
+    relevant_attributes,
+)
 from greenideas.rules.expansion_spec import INHERIT, ExpansionSpec
 
 

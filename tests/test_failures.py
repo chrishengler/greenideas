@@ -2,8 +2,10 @@ import pytest
 
 from greenideas.exceptions import RuleNotFoundError, TwaddleConversionError
 from greenideas.grammar_engine import GrammarEngine
-from greenideas.parts_of_speech.default_english_pos_types import DefaultEnglishPOSType
 from greenideas.parts_of_speech.pos_node import POSNode
+from greenideas.rules.default_english_rules.parts_of_speech.default_english_pos_types import (
+    DefaultEnglishPOSType,
+)
 from greenideas.twaddle.twaddle_formatter import TwaddleFormatter
 
 

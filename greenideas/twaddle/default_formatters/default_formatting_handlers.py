@@ -1,4 +1,6 @@
-from greenideas.parts_of_speech.default_english_pos_types import DefaultEnglishPOSType
+from greenideas.rules.default_english_rules.parts_of_speech.default_english_pos_types import (
+    DefaultEnglishPOSType,
+)
 from greenideas.twaddle.default_formatters.adj_formatting_handler import (
     AdjFormattingHandler,
 )

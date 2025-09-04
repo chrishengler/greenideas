@@ -1,11 +1,13 @@
 from greenideas.exceptions import TwaddleConversionError
-from greenideas.parts_of_speech.default_english_pos_types import DefaultEnglishPOSType
 from greenideas.parts_of_speech.pos_node import POSNode
 from greenideas.rules.default_english_rules.attributes.aspect import Aspect
 from greenideas.rules.default_english_rules.attributes.default_english_attribute_type import (
     DefaultEnglishAttributeType,
 )
 from greenideas.rules.default_english_rules.attributes.tense import Tense
+from greenideas.rules.default_english_rules.parts_of_speech.default_english_pos_types import (
+    DefaultEnglishPOSType,
+)
 from greenideas.twaddle.twaddle_tag import build_twaddle_tag
 
 
