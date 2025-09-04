@@ -2,7 +2,7 @@ import logging
 
 from greenideas.exceptions import TwaddleConversionError
 from greenideas.parts_of_speech.pos_node import POSNode
-from greenideas.parts_of_speech.pos_types import POSType
+from greenideas.parts_of_speech.pos_type_base import POSType
 from greenideas.twaddle.twaddle_formatting_handler import TwaddleFormattingHandler
 
 logger = logging.getLogger(__file__)

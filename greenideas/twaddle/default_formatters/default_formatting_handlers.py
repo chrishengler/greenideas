@@ -1,4 +1,6 @@
-from greenideas.parts_of_speech.pos_types import POSType
+from greenideas.rules.default_english_rules.parts_of_speech.default_english_pos_types import (
+    DefaultEnglishPOSType,
+)
 from greenideas.twaddle.default_formatters.adj_formatting_handler import (
     AdjFormattingHandler,
 )
@@ -55,23 +57,23 @@ from greenideas.twaddle.default_formatters.verb_formatting_handler import (
 )
 from greenideas.twaddle.twaddle_formatting_handler import TwaddleFormattingHandler
 
-default_formatting_handlers: dict[POSType, TwaddleFormattingHandler] = {
-    POSType.Adj: AdjFormattingHandler,
-    POSType.Adv: AdvFormattingHandler,
-    POSType.Aux_do: AuxDoFormattingHandler,
-    POSType.Aux_finite: AuxFiniteFormattingHandler,
-    POSType.Be: BeFormattingHandler,
-    POSType.CoordConj: CoordconjFormattingHandler,
-    POSType.Deg: DegFormattingHandler,
-    POSType.Det: DetFormattingHandler,
-    POSType.Modal: ModalFormattingHandler,
-    POSType.Noun: NounFormattingHandler,
-    POSType.Prep: PrepFormattingHandler,
-    POSType.Pron: PronFormattingHandler,
-    POSType.RelativePron: RelativePronounFormattingHandler,
-    POSType.SimpleConj: SimpleConjFormattingHandler,
-    POSType.Subordinator: SubordinatorFormattingHandler,
-    POSType.Verb: VerbFormattingHandler,
-    POSType.Verb_AfterModal: VerbAfterModalFormattingHandler,
-    POSType.Verb_Bare: VerbBareFormattingHandler,
+default_formatting_handlers: dict[DefaultEnglishPOSType, TwaddleFormattingHandler] = {
+    DefaultEnglishPOSType.Adj: AdjFormattingHandler,
+    DefaultEnglishPOSType.Adv: AdvFormattingHandler,
+    DefaultEnglishPOSType.Aux_do: AuxDoFormattingHandler,
+    DefaultEnglishPOSType.Aux_finite: AuxFiniteFormattingHandler,
+    DefaultEnglishPOSType.Be: BeFormattingHandler,
+    DefaultEnglishPOSType.CoordConj: CoordconjFormattingHandler,
+    DefaultEnglishPOSType.Deg: DegFormattingHandler,
+    DefaultEnglishPOSType.Det: DetFormattingHandler,
+    DefaultEnglishPOSType.Modal: ModalFormattingHandler,
+    DefaultEnglishPOSType.Noun: NounFormattingHandler,
+    DefaultEnglishPOSType.Prep: PrepFormattingHandler,
+    DefaultEnglishPOSType.Pron: PronFormattingHandler,
+    DefaultEnglishPOSType.RelativePron: RelativePronounFormattingHandler,
+    DefaultEnglishPOSType.SimpleConj: SimpleConjFormattingHandler,
+    DefaultEnglishPOSType.Subordinator: SubordinatorFormattingHandler,
+    DefaultEnglishPOSType.Verb: VerbFormattingHandler,
+    DefaultEnglishPOSType.Verb_AfterModal: VerbAfterModalFormattingHandler,
+    DefaultEnglishPOSType.Verb_Bare: VerbBareFormattingHandler,
 }

@@ -2,7 +2,7 @@ from dataclasses import dataclass, field
 from typing import List, Self
 
 from greenideas.attributes.attribute_set import AttributeSet
-from greenideas.parts_of_speech.pos_types import POSType
+from greenideas.parts_of_speech.pos_type_base import POSType
 
 
 @dataclass

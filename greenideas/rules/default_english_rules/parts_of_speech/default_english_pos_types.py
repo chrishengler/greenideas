@@ -1,7 +1,9 @@
-from enum import Enum, auto
+from enum import auto
+
+from greenideas.parts_of_speech.pos_type_base import POSType
 
 
-class POSType(Enum):
+class DefaultEnglishPOSType(POSType):
     S = auto()
 
     AdjP = auto()
