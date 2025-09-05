@@ -33,6 +33,8 @@ class TwaddleFormatter:
         if not isinstance(tree, POSNode):
             raise TwaddleConversionError("Input must be a POSNode")
         twaddle_string = ""
+        if tree.pre_punctuation:
+            twaddle_string = tree.pre_punctuation + twaddle_string
 
         if not tree.children:
             twaddle_string += self.format_node(tree, prepend_space)
@@ -40,12 +42,14 @@ class TwaddleFormatter:
             for child in tree.children:
                 twaddle_string += self.format(child, prepend_space)
                 prepend_space = child.space_follows
+        if tree.post_punctuation:
+            twaddle_string += tree.post_punctuation
         return twaddle_string
 
     def format_as_sentence(self, tree: POSNode) -> str:
         if not isinstance(tree, POSNode):
             raise TwaddleConversionError("Input must be a POSNode")
         twaddle_string = self.format(tree)
-        result = f"[case:sentence]{twaddle_string}."
+        result = f"[case:sentence]{twaddle_string}"
         logger.info(result)
         return result
