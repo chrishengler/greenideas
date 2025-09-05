@@ -7,7 +7,7 @@ from greenideas.rules.source_spec import SourceSpec
 
 u__s = GrammarRule(
     SourceSpec(DefaultEnglishPOSType.Utterance),
-    [ExpansionSpec(DefaultEnglishPOSType.S)],
+    [ExpansionSpec(DefaultEnglishPOSType.S, post_punctuation=".")],
 )
 
 u_expansions = [u__s]
