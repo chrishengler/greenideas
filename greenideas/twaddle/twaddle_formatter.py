@@ -17,24 +17,29 @@ class TwaddleFormatter:
     ):
         self.formatting_handlers[pos] = handler
 
-    def format_node(self, node: POSNode) -> str:
+    def format_node(self, node: POSNode, prepend_space: bool = False) -> str:
         handler = self.formatting_handlers.get(node.type)
         if handler is None:
             raise TwaddleConversionError(
                 f"No formatting handler registered for type {node.type}\n"
                 f"Node has attributes: {node.attributes}"
             )
-        return handler.format(node)
+        tag = handler.format(node)
+        if prepend_space:
+            tag = " " + tag
+        return tag
 
-    def format(self, tree: POSNode) -> str:
+    def format(self, tree: POSNode, prepend_space: bool = False) -> str:
         if not isinstance(tree, POSNode):
             raise TwaddleConversionError("Input must be a POSNode")
         twaddle_string = ""
+
         if not tree.children:
-            twaddle_string = self.format_node(tree)
+            twaddle_string += self.format_node(tree, prepend_space)
         else:
-            child_tags = [self.format(child) for child in tree.children]
-            twaddle_string = " ".join(filter(None, [twaddle_string, *child_tags]))
+            for child in tree.children:
+                twaddle_string += self.format(child, prepend_space)
+                prepend_space = child.space_follows
         return twaddle_string
 
     def format_as_sentence(self, tree: POSNode) -> str:

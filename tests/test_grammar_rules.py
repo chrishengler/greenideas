@@ -24,6 +24,7 @@ class TestGrammarRule(TestCase):
                 ExpansionSpec(
                     DefaultEnglishPOSType.Det,
                     {DefaultEnglishAttributeType.NUMBER: Number.SINGULAR},
+                    space_follows=False,
                 ),
                 ExpansionSpec(
                     DefaultEnglishPOSType.Det,

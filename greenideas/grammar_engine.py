@@ -42,6 +42,7 @@ class GrammarEngine:
         for _, spec in enumerate(rule.expansion):
             if isinstance(spec, ExpansionSpec):
                 child = POSNode(type=spec.pos_type, depth=node.depth + 1)
+                child.space_follows = spec.space_follows
                 for attr_type, constraint in spec.attribute_constraints.items():
                     if constraint is not None:
                         if constraint == INHERIT:

@@ -17,9 +17,11 @@ class ExpansionSpec:
         self,
         pos_type: POSType,
         attribute_constraints: dict[AttributeType, Any] = None,
+        space_follows: bool = True,
     ):
         self.pos_type = pos_type
         self.attribute_constraints = attribute_constraints or {}
+        self.space_follows = space_follows
 
     def get_constraint(self, attr_type: AttributeType) -> Optional[dict]:
         return self.attribute_constraints.get(attr_type, None)

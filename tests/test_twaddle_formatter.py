@@ -80,6 +80,30 @@ class TestTwaddleFormatter(unittest.TestCase):
         result = self.formatter.format_as_sentence(sentence)
         self.assertEqual(result, expected_template)
 
+    def test_format_with_and_without_spacing(self):
+        det = POSNode(
+            type=DefaultEnglishPOSType.Det,
+            attributes={DefaultEnglishAttributeType.NUMBER: Number.SINGULAR},
+        )
+        noun = POSNode(
+            type=DefaultEnglishPOSType.Noun,
+            attributes={DefaultEnglishAttributeType.NUMBER: Number.SINGULAR},
+            space_follows=False,
+        )
+        verb = POSNode(
+            type=DefaultEnglishPOSType.Verb,
+            attributes={
+                DefaultEnglishAttributeType.NUMBER: Number.SINGULAR,
+                DefaultEnglishAttributeType.PERSON: Person.THIRD,
+                DefaultEnglishAttributeType.TENSE: Tense.PRESENT,
+                DefaultEnglishAttributeType.VALENCY: Valency.MONOVALENT,
+            },
+        )
+        sentence = POSNode(type=DefaultEnglishPOSType.S, children=[det, noun, verb])
+        expected_template = "[case:sentence]<det.sg> <noun.sg><verb-monovalent.s>."
+        result = self.formatter.format_as_sentence(sentence)
+        self.assertEqual(result, expected_template)
+
 
 if __name__ == "__main__":
     unittest.main()

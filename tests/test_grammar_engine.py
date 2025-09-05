@@ -50,6 +50,14 @@ class TestGrammarEngine(unittest.TestCase):
                 ),
             ],
         )
+
+        self.s_no_spaces = GrammarRule(
+            SourceSpec(DefaultEnglishPOSType.S),
+            [
+                ExpansionSpec(DefaultEnglishPOSType.NP, space_follows=False),
+                ExpansionSpec(DefaultEnglishPOSType.VP, space_follows=True),
+            ],
+        )
         self.np_rule = GrammarRule(
             SourceSpec(DefaultEnglishPOSType.NP),
             [
@@ -172,6 +180,16 @@ class TestGrammarEngine(unittest.TestCase):
         # No rules added
         with self.assertRaises(RuleNotFoundError):
             self.engine.generate_tree(DefaultEnglishPOSType.S)
+
+    def test_spacing_rules_followed(self):
+        self.ruleset.add_rule(self.s_no_spaces)
+        tree = self.engine.generate_tree(DefaultEnglishPOSType.S)
+        self.assertIsInstance(tree, POSNode)
+        self.assertEqual(tree.type, DefaultEnglishPOSType.S)
+        self.assertEqual(tree.children[0].type, DefaultEnglishPOSType.NP)
+        self.assertEqual(tree.children[0].space_follows, False)
+        self.assertEqual(tree.children[1].type, DefaultEnglishPOSType.VP)
+        self.assertEqual(tree.children[1].space_follows, True)
 
 
 if __name__ == "__main__":
