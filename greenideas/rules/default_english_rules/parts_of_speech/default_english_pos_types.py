@@ -4,6 +4,8 @@ from greenideas.parts_of_speech.pos_type_base import POSType
 
 
 class DefaultEnglishPOSType(POSType):
+    Utterance = auto()
+
     S = auto()
 
     AdjP = auto()

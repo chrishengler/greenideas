@@ -23,6 +23,9 @@ from greenideas.rules.default_english_rules.expansions.relClause_expansions impo
     relC_expansions,
 )
 from greenideas.rules.default_english_rules.expansions.s_expansions import s_expansions
+from greenideas.rules.default_english_rules.expansions.utterance_expansions import (
+    u_expansions,
+)
 from greenideas.rules.default_english_rules.expansions.vp_expansions import (
     vp_expansions,
 )
@@ -43,6 +46,7 @@ from greenideas.rules.grammar_ruleset import GrammarRuleset
 default_rules = GrammarRuleset(pos_attribute_relevance=relevant_attributes)
 
 
+default_rules.add_rules(u_expansions)
 default_rules.add_rules(s_expansions)
 default_rules.add_rules(adjP_expansions)
 default_rules.add_rules(advP_expansions)

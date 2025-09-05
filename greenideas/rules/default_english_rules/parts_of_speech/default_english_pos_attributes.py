@@ -6,6 +6,7 @@ from greenideas.rules.default_english_rules.parts_of_speech.default_english_pos_
 )
 
 POSTYPE_ATTRIBUTE_MAP = {
+    DefaultEnglishPOSType.Utterance: set(),
     DefaultEnglishPOSType.S: {
         DefaultEnglishAttributeType.ANIMACY,
         DefaultEnglishAttributeType.NUMBER,
