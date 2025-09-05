@@ -72,7 +72,9 @@ class TestTwaddleFormatter(unittest.TestCase):
         noun_phrase = POSNode(type=DefaultEnglishPOSType.NP, children=[det, noun])
         verb_phrase = POSNode(type=DefaultEnglishPOSType.VP, children=[verb, det, noun])
         sentence = POSNode(
-            type=DefaultEnglishPOSType.S, children=[noun_phrase, verb_phrase]
+            type=DefaultEnglishPOSType.S,
+            children=[noun_phrase, verb_phrase],
+            post_punctuation=".",
         )
         expected_template = (
             "[case:sentence]<det.sg> <noun.sg> <verb-monovalent.s> <det.sg> <noun.sg>."
@@ -100,7 +102,79 @@ class TestTwaddleFormatter(unittest.TestCase):
             },
         )
         sentence = POSNode(type=DefaultEnglishPOSType.S, children=[det, noun, verb])
-        expected_template = "[case:sentence]<det.sg> <noun.sg><verb-monovalent.s>."
+        expected_template = "[case:sentence]<det.sg> <noun.sg><verb-monovalent.s>"
+        result = self.formatter.format_as_sentence(sentence)
+        self.assertEqual(result, expected_template)
+
+    def test_format_single_node_with_punctuation(self):
+        node = POSNode(
+            type=DefaultEnglishPOSType.Noun,
+            attributes={DefaultEnglishAttributeType.NUMBER: Number.PLURAL},
+            pre_punctuation="...",
+            post_punctuation="!",
+        )
+        expected_template = "[case:sentence]...<noun.pl>!"
+        result = self.formatter.format_as_sentence(node)
+        self.assertEqual(result, expected_template)
+
+    def test_with_spacing_and_punctuation(self):
+        det = POSNode(
+            type=DefaultEnglishPOSType.Det,
+            attributes={DefaultEnglishAttributeType.NUMBER: Number.SINGULAR},
+            pre_punctuation="!",
+        )
+        noun = POSNode(
+            type=DefaultEnglishPOSType.Noun,
+            attributes={DefaultEnglishAttributeType.NUMBER: Number.SINGULAR},
+        )
+        verb = POSNode(
+            type=DefaultEnglishPOSType.Verb,
+            attributes={
+                DefaultEnglishAttributeType.NUMBER: Number.SINGULAR,
+                DefaultEnglishAttributeType.PERSON: Person.THIRD,
+                DefaultEnglishAttributeType.TENSE: Tense.PRESENT,
+                DefaultEnglishAttributeType.VALENCY: Valency.MONOVALENT,
+            },
+            pre_punctuation=",",
+            post_punctuation="!",
+        )
+        sentence = POSNode(type=DefaultEnglishPOSType.S, children=[det, noun, verb])
+        expected_template = "[case:sentence]!<det.sg> <noun.sg>, <verb-monovalent.s>!"
+        result = self.formatter.format_as_sentence(sentence)
+        self.assertEqual(result, expected_template)
+
+    def test_punctuation_and_spacing_defined_on_intermediate_nodes(self):
+        det = POSNode(
+            type=DefaultEnglishPOSType.Det,
+            attributes={DefaultEnglishAttributeType.NUMBER: Number.SINGULAR},
+        )
+        noun = POSNode(
+            type=DefaultEnglishPOSType.Noun,
+            attributes={DefaultEnglishAttributeType.NUMBER: Number.SINGULAR},
+        )
+        verb = POSNode(
+            type=DefaultEnglishPOSType.Verb,
+            attributes={
+                DefaultEnglishAttributeType.NUMBER: Number.SINGULAR,
+                DefaultEnglishAttributeType.PERSON: Person.THIRD,
+                DefaultEnglishAttributeType.TENSE: Tense.PRESENT,
+                DefaultEnglishAttributeType.VALENCY: Valency.MONOVALENT,
+            },
+        )
+        noun_phrase = POSNode(
+            type=DefaultEnglishPOSType.NP, children=[det, noun], pre_punctuation="!"
+        )
+        verb_phrase = POSNode(
+            type=DefaultEnglishPOSType.VP,
+            children=[verb, det, noun],
+            pre_punctuation=",",
+            post_punctuation="?",
+        )
+        sentence = POSNode(
+            type=DefaultEnglishPOSType.S,
+            children=[noun_phrase, verb_phrase],
+        )
+        expected_template = "[case:sentence]!<det.sg> <noun.sg>, <verb-monovalent.s> <det.sg> <noun.sg>?"
         result = self.formatter.format_as_sentence(sentence)
         self.assertEqual(result, expected_template)
 

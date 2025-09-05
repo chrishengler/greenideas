@@ -191,6 +191,28 @@ class TestGrammarEngine(unittest.TestCase):
         self.assertEqual(tree.children[1].type, DefaultEnglishPOSType.VP)
         self.assertEqual(tree.children[1].space_follows, True)
 
+    def test_punctuation_rules(self):
+        s_noun_comma_noun_bang = GrammarRule(
+            SourceSpec(DefaultEnglishPOSType.S),
+            [
+                ExpansionSpec(
+                    DefaultEnglishPOSType.Noun,
+                    pre_punctuation="...",
+                    post_punctuation=",",
+                ),
+                ExpansionSpec(DefaultEnglishPOSType.Noun, post_punctuation="!"),
+            ],
+        )
+        self.ruleset.add_rule(s_noun_comma_noun_bang)
+        tree = self.engine.generate_tree(DefaultEnglishPOSType.S)
+        self.assertIsInstance(tree, POSNode)
+        self.assertEqual(tree.children[0].type, DefaultEnglishPOSType.Noun)
+        self.assertEqual(tree.children[0].pre_punctuation, "...")
+        self.assertEqual(tree.children[0].post_punctuation, ",")
+        self.assertEqual(tree.children[1].type, DefaultEnglishPOSType.Noun)
+        self.assertEqual(tree.children[1].post_punctuation, "!")
+        self.ruleset.add_rule
+
 
 if __name__ == "__main__":
     unittest.main()
