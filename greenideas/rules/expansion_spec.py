@@ -18,10 +18,14 @@ class ExpansionSpec:
         pos_type: POSType,
         attribute_constraints: dict[AttributeType, Any] = None,
         space_follows: bool = True,
+        pre_punctuation: Optional[str] = None,
+        post_punctuation: Optional[str] = None,
     ):
         self.pos_type = pos_type
         self.attribute_constraints = attribute_constraints or {}
         self.space_follows = space_follows
+        self.pre_punctuation = pre_punctuation
+        self.post_punctuation = post_punctuation
 
     def get_constraint(self, attr_type: AttributeType) -> Optional[dict]:
         return self.attribute_constraints.get(attr_type, None)

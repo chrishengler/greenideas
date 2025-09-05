@@ -72,10 +72,12 @@ class TestTwaddleFormatter(unittest.TestCase):
         noun_phrase = POSNode(type=DefaultEnglishPOSType.NP, children=[det, noun])
         verb_phrase = POSNode(type=DefaultEnglishPOSType.VP, children=[verb, det, noun])
         sentence = POSNode(
-            type=DefaultEnglishPOSType.S, children=[noun_phrase, verb_phrase]
+            type=DefaultEnglishPOSType.S,
+            children=[noun_phrase, verb_phrase],
+            post_punctuation=".",
         )
         expected_template = (
-            "[case:sentence]<det.sg> <noun.sg> <verb-monovalent.s> <det.sg> <noun.sg>."
+            "[case:sentence]<det.sg> <noun.sg> <verb-monovalent.s> <det.sg> <noun.sg>"
         )
         result = self.formatter.format_as_sentence(sentence)
         self.assertEqual(result, expected_template)
@@ -100,8 +102,19 @@ class TestTwaddleFormatter(unittest.TestCase):
             },
         )
         sentence = POSNode(type=DefaultEnglishPOSType.S, children=[det, noun, verb])
-        expected_template = "[case:sentence]<det.sg> <noun.sg><verb-monovalent.s>."
+        expected_template = "[case:sentence]<det.sg> <noun.sg><verb-monovalent.s>"
         result = self.formatter.format_as_sentence(sentence)
+        self.assertEqual(result, expected_template)
+
+    def test_format_single_node_with_punctuation(self):
+        node = POSNode(
+            type=DefaultEnglishPOSType.Noun,
+            attributes={DefaultEnglishAttributeType.NUMBER: Number.PLURAL},
+            pre_punctuation="...",
+            post_punctuation="!",
+        )
+        expected_template = "[case:sentence]...<noun.pl>!"
+        result = self.formatter.format_as_sentence(node)
         self.assertEqual(result, expected_template)
 
 
