@@ -143,6 +143,41 @@ class TestTwaddleFormatter(unittest.TestCase):
         result = self.formatter.format_as_sentence(sentence)
         self.assertEqual(result, expected_template)
 
+    def test_punctuation_and_spacing_defined_on_intermediate_nodes(self):
+        det = POSNode(
+            type=DefaultEnglishPOSType.Det,
+            attributes={DefaultEnglishAttributeType.NUMBER: Number.SINGULAR},
+        )
+        noun = POSNode(
+            type=DefaultEnglishPOSType.Noun,
+            attributes={DefaultEnglishAttributeType.NUMBER: Number.SINGULAR},
+        )
+        verb = POSNode(
+            type=DefaultEnglishPOSType.Verb,
+            attributes={
+                DefaultEnglishAttributeType.NUMBER: Number.SINGULAR,
+                DefaultEnglishAttributeType.PERSON: Person.THIRD,
+                DefaultEnglishAttributeType.TENSE: Tense.PRESENT,
+                DefaultEnglishAttributeType.VALENCY: Valency.MONOVALENT,
+            },
+        )
+        noun_phrase = POSNode(
+            type=DefaultEnglishPOSType.NP, children=[det, noun], pre_punctuation="!"
+        )
+        verb_phrase = POSNode(
+            type=DefaultEnglishPOSType.VP,
+            children=[verb, det, noun],
+            pre_punctuation=",",
+            post_punctuation="?",
+        )
+        sentence = POSNode(
+            type=DefaultEnglishPOSType.S,
+            children=[noun_phrase, verb_phrase],
+        )
+        expected_template = "[case:sentence]!<det.sg> <noun.sg>, <verb-monovalent.s> <det.sg> <noun.sg>?"
+        result = self.formatter.format_as_sentence(sentence)
+        self.assertEqual(result, expected_template)
+
 
 if __name__ == "__main__":
     unittest.main()
