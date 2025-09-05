@@ -94,7 +94,7 @@ s__np_modalp = GrammarRule(
 s__s_conj_s = GrammarRule(
     SourceSpec(DefaultEnglishPOSType.S),
     [
-        ExpansionSpec(DefaultEnglishPOSType.S),
+        ExpansionSpec(DefaultEnglishPOSType.S, post_punctuation=","),
         ExpansionSpec(DefaultEnglishPOSType.CoordConj),
         ExpansionSpec(DefaultEnglishPOSType.S),
     ],

@@ -25,7 +25,7 @@ def main():
     twaddle_runner = TwaddleRunner(dictionary_path)
 
     engine = GrammarEngine(default_rules)
-    tree = engine.generate_tree(DefaultEnglishPOSType.S)
+    tree = engine.generate_tree(DefaultEnglishPOSType.Utterance)
     print(tree)
 
     formatter = TwaddleFormatter()

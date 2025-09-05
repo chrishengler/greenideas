@@ -76,14 +76,44 @@ npNodet__n_relclause = GrammarRule(
                 DefaultEnglishAttributeType.NUMBER: INHERIT,
                 DefaultEnglishAttributeType.PERSON: INHERIT,
             },
+            pre_punctuation=",",
+            post_punctuation=",",
         ),
     ],
     weight=0.2,
 )
+
+# NP_NoDet -> N, RelClause,
+npNodet__n_relclause_commas = GrammarRule(
+    SourceSpec(DefaultEnglishPOSType.NP_NoDet),
+    [
+        ExpansionSpec(
+            DefaultEnglishPOSType.Noun,
+            {
+                DefaultEnglishAttributeType.ANIMACY: INHERIT,
+                DefaultEnglishAttributeType.CASE: INHERIT,
+                DefaultEnglishAttributeType.NUMBER: INHERIT,
+            },
+        ),
+        ExpansionSpec(
+            DefaultEnglishPOSType.RelClause,
+            {
+                DefaultEnglishAttributeType.ANIMACY: INHERIT,
+                DefaultEnglishAttributeType.NUMBER: INHERIT,
+                DefaultEnglishAttributeType.PERSON: INHERIT,
+            },
+            pre_punctuation=",",
+            post_punctuation=",",
+        ),
+    ],
+    weight=0.2,
+)
+
 
 npNodet_expansions = [
     npNodet__n,
     np_nodet__adjp_np_nodet,
     npNodet__adjp_n,
     npNodet__n_relclause,
+    npNodet__n_relclause_commas,
 ]
