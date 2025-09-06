@@ -58,7 +58,7 @@ npNodet__adjp_n = GrammarRule(
 )
 
 # NP_NoDet -> N RelClause
-npNodet__n_relclause = GrammarRule(
+npNodet__n_relclause_no_commas = GrammarRule(
     SourceSpec(DefaultEnglishPOSType.NP_NoDet),
     [
         ExpansionSpec(
@@ -76,8 +76,6 @@ npNodet__n_relclause = GrammarRule(
                 DefaultEnglishAttributeType.NUMBER: INHERIT,
                 DefaultEnglishAttributeType.PERSON: INHERIT,
             },
-            pre_punctuation=",",
-            post_punctuation=",",
         ),
     ],
     weight=0.2,
@@ -114,6 +112,6 @@ npNodet_expansions = [
     npNodet__n,
     np_nodet__adjp_np_nodet,
     npNodet__adjp_n,
-    npNodet__n_relclause,
+    npNodet__n_relclause_no_commas,
     npNodet__n_relclause_commas,
 ]

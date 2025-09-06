@@ -54,9 +54,13 @@ class TwaddleFormatter:
             twaddle_string += self.format_node(node, context)
         else:
             for child in node.children:
+                if context.queued_punctuation:
+                    twaddle_string += context.queued_punctuation
+                    context.queued_punctuation = None
                 twaddle_string += self.format(child, context).value
                 context.needs_space = child.space_follows
-                context.queued_punctuation = child.post_punctuation
+                if child.post_punctuation:
+                    context.queued_punctuation = child.post_punctuation
         if node.post_punctuation:
             context.queued_punctuation = node.post_punctuation
         return FormattingContext(
