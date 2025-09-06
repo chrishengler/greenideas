@@ -1,6 +1,7 @@
 import unittest
 
 from greenideas.parts_of_speech.pos_node import POSNode
+from greenideas.rules.default_english_rules.attributes.animacy import Animacy
 from greenideas.rules.default_english_rules.attributes.default_english_attribute_type import (
     DefaultEnglishAttributeType,
 )
@@ -48,7 +49,7 @@ class TestTwaddleFormatter(unittest.TestCase):
             type=DefaultEnglishPOSType.S, children=[noun_phrase, verb_phrase]
         )
         expected_template = "<det.sg> <noun.sg> <verb-monovalent.s> <det.sg> <noun.sg>"
-        result = self.formatter.format(sentence)
+        result = self.formatter.format(sentence).value
         self.assertEqual(result, expected_template)
 
     def test_format_as_sentence(self):
@@ -117,6 +118,22 @@ class TestTwaddleFormatter(unittest.TestCase):
         result = self.formatter.format_as_sentence(node)
         self.assertEqual(result, expected_template)
 
+    def test_terminal_punctuation_not_top_level(self):
+        verb = POSNode(
+            type=DefaultEnglishPOSType.Verb,
+            attributes={
+                DefaultEnglishAttributeType.NUMBER: Number.SINGULAR,
+                DefaultEnglishAttributeType.PERSON: Person.THIRD,
+                DefaultEnglishAttributeType.TENSE: Tense.PRESENT,
+                DefaultEnglishAttributeType.VALENCY: Valency.MONOVALENT,
+            },
+            post_punctuation="!",
+        )
+        sentence = POSNode(type=DefaultEnglishPOSType.S, children=[verb])
+        expected_template = "[case:sentence]<verb-monovalent.s>!"
+        result = self.formatter.format_as_sentence(sentence)
+        self.assertEqual(result, expected_template)
+
     def test_with_spacing_and_punctuation(self):
         det = POSNode(
             type=DefaultEnglishPOSType.Det,
@@ -141,6 +158,64 @@ class TestTwaddleFormatter(unittest.TestCase):
         sentence = POSNode(type=DefaultEnglishPOSType.S, children=[det, noun, verb])
         expected_template = "[case:sentence]!<det.sg> <noun.sg>, <verb-monovalent.s>!"
         result = self.formatter.format_as_sentence(sentence)
+        self.assertEqual(result, expected_template)
+
+    def test_parent_node_post_punctuation(self):
+        det = POSNode(
+            type=DefaultEnglishPOSType.Det,
+            attributes={DefaultEnglishAttributeType.NUMBER: Number.SINGULAR},
+        )
+        noun = POSNode(
+            type=DefaultEnglishPOSType.Noun,
+            attributes={DefaultEnglishAttributeType.NUMBER: Number.SINGULAR},
+        )
+        verb = POSNode(
+            type=DefaultEnglishPOSType.Verb,
+            attributes={
+                DefaultEnglishAttributeType.NUMBER: Number.SINGULAR,
+                DefaultEnglishAttributeType.PERSON: Person.THIRD,
+                DefaultEnglishAttributeType.TENSE: Tense.PRESENT,
+                DefaultEnglishAttributeType.VALENCY: Valency.MONOVALENT,
+            },
+        )
+        rel_pron = POSNode(
+            type=DefaultEnglishPOSType.RelativePron,
+            attributes={DefaultEnglishAttributeType.ANIMACY: Animacy.ANIMATE},
+        )
+        rel_clause_verb = POSNode(
+            type=DefaultEnglishPOSType.Verb,
+            attributes={
+                DefaultEnglishAttributeType.NUMBER: Number.SINGULAR,
+                DefaultEnglishAttributeType.PERSON: Person.THIRD,
+                DefaultEnglishAttributeType.TENSE: Tense.PAST,
+                DefaultEnglishAttributeType.VALENCY: Valency.MONOVALENT,
+            },
+        )
+        rel_clause = POSNode(
+            type=DefaultEnglishPOSType.RelClause,
+            children=[rel_pron, rel_clause_verb],
+            pre_punctuation=",",
+            post_punctuation=",",
+        )
+        noun_phrase_with_rel_clause = POSNode(
+            type=DefaultEnglishPOSType.NP, children=[det, noun, rel_clause]
+        )
+        noun_phrase = POSNode(type=DefaultEnglishPOSType.NP, children=[det, noun])
+        verb_phrase = POSNode(
+            type=DefaultEnglishPOSType.VP,
+            children=[verb, noun_phrase],
+        )
+
+        sentence = POSNode(
+            type=DefaultEnglishPOSType.S,
+            children=[noun_phrase_with_rel_clause, verb_phrase],
+            post_punctuation=".",
+        )
+        result = self.formatter.format_as_sentence(sentence)
+        expected_template = (
+            "[case:sentence]<det.sg> <noun.sg>, <rel-animate> <verb-monovalent.past>, "
+            "<verb-monovalent.s> <det.sg> <noun.sg>."
+        )
         self.assertEqual(result, expected_template)
 
     def test_punctuation_and_spacing_defined_on_intermediate_nodes(self):
@@ -176,6 +251,64 @@ class TestTwaddleFormatter(unittest.TestCase):
         )
         expected_template = "[case:sentence]!<det.sg> <noun.sg>, <verb-monovalent.s> <det.sg> <noun.sg>?"
         result = self.formatter.format_as_sentence(sentence)
+        self.assertEqual(result, expected_template)
+
+    def test_post_punctuation_pileup(self):
+        det = POSNode(
+            type=DefaultEnglishPOSType.Det,
+            attributes={DefaultEnglishAttributeType.NUMBER: Number.SINGULAR},
+        )
+        noun = POSNode(
+            type=DefaultEnglishPOSType.Noun,
+            attributes={DefaultEnglishAttributeType.NUMBER: Number.SINGULAR},
+        )
+        verb = POSNode(
+            type=DefaultEnglishPOSType.Verb,
+            attributes={
+                DefaultEnglishAttributeType.NUMBER: Number.SINGULAR,
+                DefaultEnglishAttributeType.PERSON: Person.THIRD,
+                DefaultEnglishAttributeType.TENSE: Tense.PRESENT,
+                DefaultEnglishAttributeType.VALENCY: Valency.MONOVALENT,
+            },
+        )
+        rel_pron = POSNode(
+            type=DefaultEnglishPOSType.RelativePron,
+            attributes={DefaultEnglishAttributeType.ANIMACY: Animacy.ANIMATE},
+        )
+        rel_clause_verb = POSNode(
+            type=DefaultEnglishPOSType.Verb,
+            attributes={
+                DefaultEnglishAttributeType.NUMBER: Number.SINGULAR,
+                DefaultEnglishAttributeType.PERSON: Person.THIRD,
+                DefaultEnglishAttributeType.TENSE: Tense.PAST,
+                DefaultEnglishAttributeType.VALENCY: Valency.MONOVALENT,
+            },
+        )
+        rel_clause = POSNode(
+            type=DefaultEnglishPOSType.RelClause,
+            children=[rel_pron, rel_clause_verb],
+            pre_punctuation=",",
+            post_punctuation=",",
+        )
+        noun_phrase = POSNode(type=DefaultEnglishPOSType.NP, children=[det, noun])
+        noun_phrase_with_rel_clause = POSNode(
+            type=DefaultEnglishPOSType.NP, children=[det, noun, rel_clause]
+        )
+        verb_phrase = POSNode(
+            type=DefaultEnglishPOSType.VP,
+            children=[verb, noun_phrase_with_rel_clause],
+        )
+
+        sentence = POSNode(
+            type=DefaultEnglishPOSType.S,
+            children=[noun_phrase, verb_phrase],
+            post_punctuation=".",
+        )
+        result = self.formatter.format_as_sentence(sentence)
+        expected_template = (
+            "[case:sentence]<det.sg> <noun.sg> <verb-monovalent.s> <det.sg> "
+            "<noun.sg>, <rel-animate> <verb-monovalent.past>."
+        )
         self.assertEqual(result, expected_template)
 
 
