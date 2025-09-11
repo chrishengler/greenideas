@@ -17,6 +17,15 @@ u__s = GrammarRule(
     [ExpansionSpec(DefaultEnglishPOSType.S, post_punctuation=".")],
 )
 
+u__sbang = GrammarRule(
+    SourceSpec(
+        DefaultEnglishPOSType.Utterance,
+        {DefaultEnglishAttributeType.MOOD: Mood.DECLARATIVE},
+    ),
+    [ExpansionSpec(DefaultEnglishPOSType.S, post_punctuation="!")],
+    weight=0.05,
+)
+
 u__q = GrammarRule(
     SourceSpec(
         DefaultEnglishPOSType.Utterance,
@@ -25,6 +34,17 @@ u__q = GrammarRule(
         },
     ),
     [ExpansionSpec(DefaultEnglishPOSType.Q, post_punctuation="?")],
+)
+
+u__qbang = GrammarRule(
+    SourceSpec(
+        DefaultEnglishPOSType.Utterance,
+        {
+            DefaultEnglishAttributeType.MOOD: Mood.INTERROGATIVE,
+        },
+    ),
+    [ExpansionSpec(DefaultEnglishPOSType.Q, post_punctuation="?!")],
+    weight=0.2,
 )
 
 u__s_conj_q = GrammarRule(
@@ -39,7 +59,7 @@ u__s_conj_q = GrammarRule(
         ExpansionSpec(DefaultEnglishPOSType.SimpleConj),
         ExpansionSpec(DefaultEnglishPOSType.Q, post_punctuation="?"),
     ],
-    weight=0.2,
+    weight=0.1,
 )
 
-u_expansions = [u__s, u__q, u__s_conj_q]
+u_expansions = [u__s, u__sbang, u__q, u__s_conj_q, u__qbang]
