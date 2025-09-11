@@ -6,9 +6,17 @@ from greenideas.rules.default_english_rules.parts_of_speech.default_english_pos_
 )
 
 POSTYPE_ATTRIBUTE_MAP = {
-    DefaultEnglishPOSType.Utterance: set(),
+    DefaultEnglishPOSType.Utterance: {DefaultEnglishAttributeType.MOOD},
     DefaultEnglishPOSType.S: {
         DefaultEnglishAttributeType.ANIMACY,
+        DefaultEnglishAttributeType.NUMBER,
+        DefaultEnglishAttributeType.PERSON,
+        DefaultEnglishAttributeType.TENSE,
+        DefaultEnglishAttributeType.VOICE,
+    },
+    DefaultEnglishPOSType.Q: {
+        DefaultEnglishAttributeType.ANIMACY,
+        DefaultEnglishAttributeType.ASPECT,
         DefaultEnglishAttributeType.NUMBER,
         DefaultEnglishAttributeType.PERSON,
         DefaultEnglishAttributeType.TENSE,
@@ -126,6 +134,12 @@ POSTYPE_ATTRIBUTE_MAP = {
     DefaultEnglishPOSType.Verb_AfterModal: {
         DefaultEnglishAttributeType.ASPECT,
         DefaultEnglishAttributeType.VALENCY,
+    },
+    DefaultEnglishPOSType.VP_AfterFrontedAux: {
+        DefaultEnglishAttributeType.ASPECT,
+        DefaultEnglishAttributeType.TENSE,
+        DefaultEnglishAttributeType.VALENCY,
+        DefaultEnglishAttributeType.VOICE,
     },
     DefaultEnglishPOSType.Verb_Bare: {DefaultEnglishAttributeType.VALENCY},
 }

@@ -4,6 +4,7 @@ from greenideas.attributes.attribute_type import AttributeType
 from greenideas.rules.default_english_rules.attributes.animacy import Animacy
 from greenideas.rules.default_english_rules.attributes.aspect import Aspect
 from greenideas.rules.default_english_rules.attributes.case import Case
+from greenideas.rules.default_english_rules.attributes.mood import Mood
 from greenideas.rules.default_english_rules.attributes.npform import NPForm
 from greenideas.rules.default_english_rules.attributes.number import Number
 from greenideas.rules.default_english_rules.attributes.person import Person
@@ -16,6 +17,7 @@ class DefaultEnglishAttributeType(AttributeType):
     ASPECT = ("aspect", Aspect)
     ANIMACY = ("animacy", Animacy)
     CASE = ("case", Case)
+    MOOD = ("mood", Mood)
     NPFORM = ("NPform", NPForm)
     NUMBER = ("number", Number)
     PERSON = ("person", Person)
