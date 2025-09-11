@@ -3,6 +3,8 @@ from greenideas.rules.default_english_rules.attributes.case import Case
 from greenideas.rules.default_english_rules.attributes.default_english_attribute_type import (
     DefaultEnglishAttributeType,
 )
+from greenideas.rules.default_english_rules.attributes.npform import NPForm
+from greenideas.rules.default_english_rules.attributes.person import Person
 from greenideas.rules.default_english_rules.attributes.tense import Tense
 from greenideas.rules.default_english_rules.attributes.voice import Voice
 from greenideas.rules.default_english_rules.parts_of_speech.default_english_pos_types import (
@@ -153,9 +155,67 @@ qSimplePast__be_np_vpAfterAF = GrammarRule(
     ],
 )
 
+q__be_np_adjp = GrammarRule(
+    SourceSpec(DefaultEnglishPOSType.Q),
+    [
+        ExpansionSpec(
+            DefaultEnglishPOSType.Be,
+            {
+                DefaultEnglishAttributeType.ASPECT: Aspect.SIMPLE,
+                DefaultEnglishAttributeType.NUMBER: INHERIT,
+                DefaultEnglishAttributeType.PERSON: INHERIT,
+                DefaultEnglishAttributeType.TENSE: INHERIT,
+            },
+        ),
+        ExpansionSpec(
+            DefaultEnglishPOSType.NP,
+            {
+                DefaultEnglishAttributeType.CASE: Case.NOMINATIVE,
+                DefaultEnglishAttributeType.NUMBER: INHERIT,
+                DefaultEnglishAttributeType.PERSON: INHERIT,
+            },
+        ),
+        ExpansionSpec(DefaultEnglishPOSType.AdjP),
+    ],
+)
+
+q__be_np_np = GrammarRule(
+    SourceSpec(DefaultEnglishPOSType.Q),
+    [
+        ExpansionSpec(
+            DefaultEnglishPOSType.Be,
+            {
+                DefaultEnglishAttributeType.ASPECT: Aspect.SIMPLE,
+                DefaultEnglishAttributeType.NUMBER: INHERIT,
+                DefaultEnglishAttributeType.PERSON: INHERIT,
+                DefaultEnglishAttributeType.TENSE: INHERIT,
+            },
+        ),
+        ExpansionSpec(
+            DefaultEnglishPOSType.NP,
+            {
+                DefaultEnglishAttributeType.CASE: Case.NOMINATIVE,
+                DefaultEnglishAttributeType.NUMBER: INHERIT,
+                DefaultEnglishAttributeType.PERSON: INHERIT,
+            },
+        ),
+        ExpansionSpec(
+            DefaultEnglishPOSType.NP,
+            {
+                DefaultEnglishAttributeType.CASE: Case.NOMINATIVE,
+                DefaultEnglishAttributeType.NPFORM: NPForm.LEXICAL,
+                DefaultEnglishAttributeType.NUMBER: INHERIT,
+                DefaultEnglishAttributeType.PERSON: Person.THIRD,
+            },
+        ),
+    ],
+)
+
 question_expansions = [
     q__auxDo_np_vp,
     q__auxFinite_np_vp,
     qProg__be_np_vp,
     qSimplePast__be_np_vpAfterAF,
+    q__be_np_adjp,
+    q__be_np_np,
 ]
