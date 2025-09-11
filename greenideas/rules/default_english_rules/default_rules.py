@@ -19,6 +19,9 @@ from greenideas.rules.default_english_rules.expansions.npNodet_expansions import
 from greenideas.rules.default_english_rules.expansions.pp_expansions import (
     pp_expansions,
 )
+from greenideas.rules.default_english_rules.expansions.q_expansions import (
+    question_expansions,
+)
 from greenideas.rules.default_english_rules.expansions.relClause_expansions import (
     relC_expansions,
 )
@@ -28,6 +31,9 @@ from greenideas.rules.default_english_rules.expansions.utterance_expansions impo
 )
 from greenideas.rules.default_english_rules.expansions.vp_expansions import (
     vp_expansions,
+)
+from greenideas.rules.default_english_rules.expansions.vpAfterFrontedAux_expansions import (
+    vpAfterFA_expansions,
 )
 from greenideas.rules.default_english_rules.expansions.vpAfterModal_expansions import (
     vpAfterModal_expansions,
@@ -55,8 +61,10 @@ default_rules.add_rules(modalP_expansions)
 default_rules.add_rules(np_expansions)
 default_rules.add_rules(npNodet_expansions)
 default_rules.add_rules(pp_expansions)
+default_rules.add_rules(question_expansions)
 default_rules.add_rules(relC_expansions)
 default_rules.add_rules(vp_expansions)
+default_rules.add_rules(vpAfterFA_expansions)
 default_rules.add_rules(vpAfterModal_expansions)
 default_rules.add_rules(vpBare_expansions)
 default_rules.add_rules(vp_passive_expansions)

@@ -7,6 +7,7 @@ class DefaultEnglishPOSType(POSType):
     Utterance = auto()
 
     S = auto()
+    Q = auto()
 
     AdjP = auto()
     AdvP = auto()
@@ -17,6 +18,7 @@ class DefaultEnglishPOSType(POSType):
     PP = auto()
     RelClause = auto()
     VP = auto()
+    VP_AfterFrontedAux = auto()
     VP_AfterModal = auto()
     VP_Bare = auto()
     VP_Passive = auto()
