@@ -136,7 +136,7 @@ POSTYPE_ATTRIBUTE_MAP = {
         DefaultEnglishAttributeType.ASPECT,
         DefaultEnglishAttributeType.VALENCY,
     },
-    DefaultEnglishPOSType.VP_AfterFrontedAux: {
+    DefaultEnglishPOSType.VP_ExistingAux: {
         DefaultEnglishAttributeType.ASPECT,
         DefaultEnglishAttributeType.TENSE,
         DefaultEnglishAttributeType.VALENCY,

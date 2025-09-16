@@ -18,7 +18,7 @@ class DefaultEnglishPOSType(POSType):
     PP = auto()
     RelClause = auto()
     VP = auto()
-    VP_AfterFrontedAux = auto()
+    VP_ExistingAux = auto()
     VP_AfterModal = auto()
     VP_Bare = auto()
     VP_Passive = auto()

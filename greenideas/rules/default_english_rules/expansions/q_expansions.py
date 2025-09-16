@@ -74,7 +74,7 @@ q__auxFinite_np_vp = GrammarRule(
             },
         ),
         ExpansionSpec(
-            DefaultEnglishPOSType.VP_AfterFrontedAux,
+            DefaultEnglishPOSType.VP_ExistingAux,
             {
                 DefaultEnglishAttributeType.ASPECT: INHERIT,
                 DefaultEnglishAttributeType.TENSE: INHERIT,
@@ -109,7 +109,7 @@ qProg__be_np_vp = GrammarRule(
             },
         ),
         ExpansionSpec(
-            DefaultEnglishPOSType.VP_AfterFrontedAux,
+            DefaultEnglishPOSType.VP_ExistingAux,
             {
                 DefaultEnglishAttributeType.ASPECT: INHERIT,
                 DefaultEnglishAttributeType.TENSE: INHERIT,
@@ -146,7 +146,7 @@ qSimplePast__be_np_vpAfterAF = GrammarRule(
             },
         ),
         ExpansionSpec(
-            DefaultEnglishPOSType.VP_AfterFrontedAux,
+            DefaultEnglishPOSType.VP_ExistingAux,
             {
                 DefaultEnglishAttributeType.ASPECT: INHERIT,
                 DefaultEnglishAttributeType.TENSE: INHERIT,

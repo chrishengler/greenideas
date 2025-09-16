@@ -31,7 +31,7 @@ auxp__auxFinite_vpParticiple = GrammarRule(
             },
         ),
         ExpansionSpec(
-            DefaultEnglishPOSType.VP_AfterFrontedAux,
+            DefaultEnglishPOSType.VP_ExistingAux,
             {
                 DefaultEnglishAttributeType.ASPECT: INHERIT,
                 DefaultEnglishAttributeType.TENSE: INHERIT,
