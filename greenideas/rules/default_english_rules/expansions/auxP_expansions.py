@@ -10,8 +10,7 @@ from greenideas.rules.expansion_spec import INHERIT, ExpansionSpec
 from greenideas.rules.grammar_rule import GrammarRule
 from greenideas.rules.source_spec import SourceSpec
 
-# VP -> Aux_finite VP.participle
-# placeholder, need to add additional attributes before implementing this correctly
+# VP -> Aux_finite VP
 auxp__auxFinite_vpParticiple = GrammarRule(
     SourceSpec(
         DefaultEnglishPOSType.AuxP,
@@ -32,15 +31,15 @@ auxp__auxFinite_vpParticiple = GrammarRule(
             },
         ),
         ExpansionSpec(
-            DefaultEnglishPOSType.VP,
+            DefaultEnglishPOSType.VP_ExistingAux,
             {
                 DefaultEnglishAttributeType.ASPECT: INHERIT,
-                DefaultEnglishAttributeType.NUMBER: INHERIT,
                 DefaultEnglishAttributeType.TENSE: INHERIT,
-                DefaultEnglishAttributeType.PERSON: INHERIT,
+                DefaultEnglishAttributeType.VOICE: INHERIT,
             },
         ),
     ],
+    weight=1000,
 )
 
 auxPerfprog__auxFinite_vpParticiple = GrammarRule(

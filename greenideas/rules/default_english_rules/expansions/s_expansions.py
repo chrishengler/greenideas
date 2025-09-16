@@ -6,7 +6,6 @@ from greenideas.rules.default_english_rules.attributes.default_english_attribute
 )
 from greenideas.rules.default_english_rules.attributes.npform import NPForm
 from greenideas.rules.default_english_rules.attributes.person import Person
-from greenideas.rules.default_english_rules.attributes.voice import Voice
 from greenideas.rules.default_english_rules.parts_of_speech.default_english_pos_types import (
     DefaultEnglishPOSType,
 )
@@ -43,9 +42,6 @@ s__np_vp = GrammarRule(
 s__np_auxp = GrammarRule(
     SourceSpec(
         DefaultEnglishPOSType.S,
-        {
-            DefaultEnglishAttributeType.VOICE: Voice.ACTIVE,
-        },
     ),
     [
         ExpansionSpec(
