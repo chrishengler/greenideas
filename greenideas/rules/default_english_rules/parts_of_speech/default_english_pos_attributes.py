@@ -29,6 +29,7 @@ POSTYPE_ATTRIBUTE_MAP = {
         DefaultEnglishAttributeType.NUMBER,
         DefaultEnglishAttributeType.PERSON,
         DefaultEnglishAttributeType.TENSE,
+        DefaultEnglishAttributeType.VOICE,
     },
     DefaultEnglishPOSType.Be: {
         DefaultEnglishAttributeType.ASPECT,

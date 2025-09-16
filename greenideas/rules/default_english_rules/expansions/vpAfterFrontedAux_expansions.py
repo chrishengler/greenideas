@@ -182,7 +182,10 @@ vpAfterFA1_pp = GrammarRule(
             {
                 DefaultEnglishAttributeType.ASPECT: Aspect.PERFECT,
                 DefaultEnglishAttributeType.TENSE: Tense.PAST,
-                DefaultEnglishAttributeType.VALENCY: INHERIT,
+                DefaultEnglishAttributeType.VALENCY: [
+                    Valency.DIVALENT,
+                    Valency.TRIVALENT,
+                ],
                 DefaultEnglishAttributeType.VOICE: Voice.ACTIVE,
             },
         ),
@@ -209,7 +212,10 @@ vpAfterFA1_progp = GrammarRule(
             DefaultEnglishPOSType.Verb,
             {
                 DefaultEnglishAttributeType.ASPECT: Aspect.PERFECT,
-                DefaultEnglishAttributeType.VALENCY: INHERIT,
+                DefaultEnglishAttributeType.VALENCY: [
+                    Valency.DIVALENT,
+                    Valency.TRIVALENT,
+                ],
                 DefaultEnglishAttributeType.VOICE: Voice.ACTIVE,
             },
         ),
@@ -240,7 +246,10 @@ vpAfterFA1_ppp = GrammarRule(
             DefaultEnglishPOSType.Verb,
             {
                 DefaultEnglishAttributeType.ASPECT: Aspect.PERFECT,
-                DefaultEnglishAttributeType.VALENCY: INHERIT,
+                DefaultEnglishAttributeType.VALENCY: [
+                    Valency.DIVALENT,
+                    Valency.TRIVALENT,
+                ],
                 DefaultEnglishAttributeType.VOICE: Voice.ACTIVE,
             },
         ),

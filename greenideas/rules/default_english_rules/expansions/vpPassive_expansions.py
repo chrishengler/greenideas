@@ -110,6 +110,7 @@ vp2__passive_perf = GrammarRule(
             },
         ),
     ],
+    weight=1000,
 )
 
 # VP3_passive w/ NP.obj
@@ -228,6 +229,7 @@ vp3__passive_perf = GrammarRule(
             },
         ),
     ],
+    weight=1000,
 )
 vp_passive_expansions = [
     vp2__passive_simple,
