@@ -16,6 +16,7 @@ Generative grammar is a linguistic theory that describes how sentences can be co
 - [Usage](usage.md)
 - [Grammar Concepts](grammar_concepts.md)
 - [API Reference](api_reference.md)
+- [Twaddle Formatting](twaddle_formatting.md)
 
 ---
 For more information, see the pages in this documentation or visit the [GitHub repository](https://github.com/chrishengler/greenideas).

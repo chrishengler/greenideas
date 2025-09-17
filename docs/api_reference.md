@@ -136,8 +136,8 @@ plural_expansion = [
     ExpansionSpec(
         pos_type=MyLanguagePOSTypes.VERB,
         attribute_constraints={MyLanguageAttributes.NUMBER: INHERIT,
-                               MyLanguageAttributes.TENSE: INHERIT}
-
+                               MyLanguageAttributes.TENSE: INHERIT},
+        post_punctuation="!",
     )
 ]
 
@@ -159,12 +159,12 @@ attribute of the original `SENTENCE` node. This expansion would thus produce
 sentences of the form `A hat falls`, `The kittens run`.
 
 The rule `plural_only_rule` defines that sentences may be expanded into a sequence of nodes with the types
-`NOUN`, `VERB` in that order. The `NUMBER` attribute is propagated through
+`NOUN`, `VERB` in that order, with an exclamation mark following the verb node. The `NUMBER` attribute is propagated through
 to both terminal nodes, and the `TENSE` attribute is propagated to the verb
-node. As such, this rule may produce sentences such as `People eat`, 
-`Balloons fly`. The `attribute_constraints` on the `SouceSpec` ensure that 
+node. As such, this rule may produce sentences such as `People eat!`, 
+`Balloons fly!`. The `attribute_constraints` on the `SouceSpec` ensure that 
 this rule is not applied when the `SENTENCE` node has `NUMBER` attribute 
-`Number.PLURAL`, avoiding the production of sentences like `Umbrella opens`, 
+`Number.PLURAL`, avoiding the production of sentences like `Umbrella opens!`, 
 with a singular noun and no determiner.
 
 The `weight` parameter of a `GrammarRule` influences the chance that the rule
@@ -192,6 +192,11 @@ The `ExpansionSpec` class defines how to create child nodes:
   - A list of values: The attribute will be randomly chosen from these values
   Constraints may only be placed on attributes defined as [relevant](api_reference.md#the-grammarruleset-class) for the expansion POS type.
   Relevant attributes with no constraints will be assigned values randomly
+- `space_follows`: Boolean indicating whether a space should follow this node (default: True)
+- `pre_punctuation`: Optional string to be inserted before the node (e.g., comma, quotation mark)
+- `post_punctuation`: Optional string to be inserted after the node (e.g., period, comma)
+
+The formatting system intelligently manages punctuation when multiple nodes end at the same position in the tree, preventing punctuation pileup and ensuring correct ordering. For example, in a relative clause that ends with both a comma and the sentence's period, the formatter will handle the interaction of these punctuation marks appropriately.
 
 ## Core Classes
 
