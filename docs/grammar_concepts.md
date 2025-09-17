@@ -20,3 +20,6 @@ GrammarRule(SourceSpec(POSType.S), [
 ```
 
 This expands a sentence (S) into a noun phrase (NP) and a verb phrase (VP), propagating number and person attributes from the parent to the children.
+
+This page is a basic summary. For a fuller explanation of how to use GreenIdeas,
+including how to define your own language, see [API Reference](api_reference.md).
