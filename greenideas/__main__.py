@@ -19,7 +19,7 @@ from greenideas.twaddle.twaddle_formatter import TwaddleFormatter
 
 def pretty_print_tree(tree: POSNode):
     indent = "\t" * tree.depth
-    print(f'{indent}-{tree.type}: "{tree.twaddle_result}"')
+    print(f'{indent}{tree.depth} - {tree.type}: "{tree.twaddle_result}"')
     for child in tree.children:
         pretty_print_tree(child)
 

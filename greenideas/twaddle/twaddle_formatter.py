@@ -87,12 +87,15 @@ class TwaddleFormatter:
             queued_punctuation=context.queued_punctuation,
         )
 
+    def get_trimmed_sentence(self, node: POSNode, runner: TwaddleRunner) -> str:
+        return runner.run_sentence(f"[paste:{id(node)}]").strip()
+
     def fill_twaddle_results(self, tree: POSNode, runner: TwaddleRunner):
         try:
             if not tree.twaddle_result:
-                tree.twaddle_result = runner.run_sentence(f"[paste:{id(tree)}]")
+                tree.twaddle_result = self.get_trimmed_sentence(tree, runner)
             for child in tree.children:
-                child.twaddle_result = runner.run_sentence(f"[paste:{id(child)}]")
+                child.twaddle_result = self.get_trimmed_sentence(child, runner)
                 self.fill_twaddle_results(child, runner)
         except TwaddleException as e:
             print(f"error: {str(e)}")
