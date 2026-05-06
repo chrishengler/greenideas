@@ -70,14 +70,14 @@ windows-terminal = ["colorama (>=0.4.6)"]
 
 [[package]]
 name = "pytest"
-version = "8.4.1"
+version = "8.4.2"
 description = "pytest: simple powerful testing with Python"
 optional = false
 python-versions = ">=3.9"
 groups = ["main"]
 files = [
-    {file = "pytest-8.4.1-py3-none-any.whl", hash = "sha256:539c70ba6fcead8e78eebbf1115e8b589e7565830d7d006a8723f19ac8a0afb7"},
-    {file = "pytest-8.4.1.tar.gz", hash = "sha256:7c67fd69174877359ed9371ec3af8a3d2b04741818c51e5e99cc1742251fa93c"},
+    {file = "pytest-8.4.2-py3-none-any.whl", hash = "sha256:872f880de3fc3a5bdc88a11b39c9710c3497a547cfa9320bc3c5e62fbf272e79"},
+    {file = "pytest-8.4.2.tar.gz", hash = "sha256:86c0d0b93306b961d58d62a4db4879f27fe25513d4b969df351abdddb3c30e01"},
 ]
 
 [package.dependencies]
@@ -92,18 +92,15 @@ dev = ["argcomplete", "attrs (>=19.2)", "hypothesis (>=3.56)", "mock", "requests
 
 [[package]]
 name = "twaddle"
-version = "1.2.2"
+version = "1.10.0"
 description = "Text generation and templating"
 optional = false
 python-versions = ">=3.11"
 groups = ["main"]
 files = [
-    {file = "twaddle-1.2.2-py3-none-any.whl", hash = "sha256:ef1e731a184f1b9713af7e8aa1ae9a45d8f3a0c2f2059f9ec4851a562e67b9ec"},
-    {file = "twaddle-1.2.2.tar.gz", hash = "sha256:2617f731dccd564b99ec7ccfc82c66458f26745ca74845a88aee61a4ac2c5db4"},
+    {file = "twaddle-1.10.0-py3-none-any.whl", hash = "sha256:4376e5b2d6fba7c8e50c2a342ee499b4c30037becfd443f1b8d52505f5a65227"},
+    {file = "twaddle-1.10.0.tar.gz", hash = "sha256:ad2d4bc1152dc534dd7ad2c179b4c7fa957577ab1472482f7476866926972d87"},
 ]
-
-[package.dependencies]
-pytest = ">=7.2.0"
 
 [metadata]
 lock-version = "2.1"
