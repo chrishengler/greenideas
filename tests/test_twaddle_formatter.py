@@ -49,7 +49,7 @@ class TestTwaddleFormatter(unittest.TestCase):
             type=DefaultEnglishPOSType.S, children=[noun_phrase, verb_phrase]
         )
         expected_template = "<det.sg> <noun.sg> <verb-monovalent.s> <det.sg> <noun.sg>"
-        result = self.formatter.format(sentence).value
+        result = self.formatter.format(sentence).display_twaddle_string
         self.assertEqual(result, expected_template)
 
     def test_format_as_sentence(self):
@@ -80,7 +80,7 @@ class TestTwaddleFormatter(unittest.TestCase):
         expected_template = (
             "[case:sentence]<det.sg> <noun.sg> <verb-monovalent.s> <det.sg> <noun.sg>."
         )
-        result = self.formatter.format_as_sentence(sentence)
+        result = self.formatter.format_as_sentence(sentence).display_twaddle_string
         self.assertEqual(result, expected_template)
 
     def test_format_with_and_without_spacing(self):
@@ -104,7 +104,7 @@ class TestTwaddleFormatter(unittest.TestCase):
         )
         sentence = POSNode(type=DefaultEnglishPOSType.S, children=[det, noun, verb])
         expected_template = "[case:sentence]<det.sg> <noun.sg><verb-monovalent.s>"
-        result = self.formatter.format_as_sentence(sentence)
+        result = self.formatter.format_as_sentence(sentence).display_twaddle_string
         self.assertEqual(result, expected_template)
 
     def test_format_single_node_with_punctuation(self):
@@ -115,7 +115,7 @@ class TestTwaddleFormatter(unittest.TestCase):
             post_punctuation="!",
         )
         expected_template = "[case:sentence]...<noun.pl>!"
-        result = self.formatter.format_as_sentence(node)
+        result = self.formatter.format_as_sentence(node).display_twaddle_string
         self.assertEqual(result, expected_template)
 
     def test_terminal_punctuation_not_top_level(self):
@@ -131,7 +131,7 @@ class TestTwaddleFormatter(unittest.TestCase):
         )
         sentence = POSNode(type=DefaultEnglishPOSType.S, children=[verb])
         expected_template = "[case:sentence]<verb-monovalent.s>!"
-        result = self.formatter.format_as_sentence(sentence)
+        result = self.formatter.format_as_sentence(sentence).display_twaddle_string
         self.assertEqual(result, expected_template)
 
     def test_with_spacing_and_punctuation(self):
@@ -157,7 +157,7 @@ class TestTwaddleFormatter(unittest.TestCase):
         )
         sentence = POSNode(type=DefaultEnglishPOSType.S, children=[det, noun, verb])
         expected_template = "[case:sentence]!<det.sg> <noun.sg>, <verb-monovalent.s>!"
-        result = self.formatter.format_as_sentence(sentence)
+        result = self.formatter.format_as_sentence(sentence).display_twaddle_string
         self.assertEqual(result, expected_template)
 
     def test_parent_node_post_punctuation(self):
@@ -211,7 +211,7 @@ class TestTwaddleFormatter(unittest.TestCase):
             children=[noun_phrase_with_rel_clause, verb_phrase],
             post_punctuation=".",
         )
-        result = self.formatter.format_as_sentence(sentence)
+        result = self.formatter.format_as_sentence(sentence).display_twaddle_string
         expected_template = (
             "[case:sentence]<det.sg> <noun.sg>, <rel-animate> <verb-monovalent.past>, "
             "<verb-monovalent.s> <det.sg> <noun.sg>."
@@ -250,7 +250,7 @@ class TestTwaddleFormatter(unittest.TestCase):
             children=[noun_phrase, verb_phrase],
         )
         expected_template = "[case:sentence]!<det.sg> <noun.sg>, <verb-monovalent.s> <det.sg> <noun.sg>?"
-        result = self.formatter.format_as_sentence(sentence)
+        result = self.formatter.format_as_sentence(sentence).display_twaddle_string
         self.assertEqual(result, expected_template)
 
     def test_post_punctuation_pileup(self):
@@ -304,7 +304,7 @@ class TestTwaddleFormatter(unittest.TestCase):
             children=[noun_phrase, verb_phrase],
             post_punctuation=".",
         )
-        result = self.formatter.format_as_sentence(sentence)
+        result = self.formatter.format_as_sentence(sentence).display_twaddle_string
         expected_template = (
             "[case:sentence]<det.sg> <noun.sg> <verb-monovalent.s> <det.sg> "
             "<noun.sg>, <rel-animate> <verb-monovalent.past>."

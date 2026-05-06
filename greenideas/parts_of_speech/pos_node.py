@@ -14,6 +14,7 @@ class POSNode:
     space_follows: bool = True
     post_punctuation: Optional[str] = None
     pre_punctuation: Optional[str] = None
+    twaddle_result: Optional[str] = None
 
     def __str__(self):
         children = (
